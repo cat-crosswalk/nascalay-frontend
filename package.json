@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "lint": "run-s lint:eslint lint:prettier",
-    "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx --cache",
     "lint:prettier": "prettier . --check",
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "yarn lint:eslint --fix",
