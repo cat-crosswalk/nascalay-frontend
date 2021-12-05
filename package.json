@@ -12,7 +12,8 @@
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "yarn lint:eslint --fix",
     "fix:prettier": "yarn lint:prettier --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "openapi-cli": "openapi-generator-cli generate -g typescript-axios -i https://raw.githubusercontent.com/21hack02win/nascalay-backend/main/docs/openapi.yml -o ./api/openapi"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -23,11 +24,13 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "axios": "^0.24.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.3.0",
+    "@openapitools/openapi-generator-cli": "^2.4.18",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
