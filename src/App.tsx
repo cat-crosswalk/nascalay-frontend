@@ -13,7 +13,7 @@ const style = css`
   background-color: blue;
 `
 
-function App() {
+const App = () => {
   return (
     <div>
       <header>Welcome to React Router!</header>
@@ -25,7 +25,7 @@ function App() {
   )
 }
 
-function Home() {
+const Home = () => {
   const count = useAppSelector((state) => state.counter.value)
   const [name, setName] = useState('')
   const dispatch = useAppDispatch()
