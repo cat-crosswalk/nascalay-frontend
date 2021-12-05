@@ -1,8 +1,8 @@
 import './App.css'
 import { Routes } from 'react-router'
 import { Route } from 'react-router-dom'
-import Hello from 'pages/Hello'
-import Index from 'pages/Index'
+import Hello from '/@/pages/Hello'
+import Index from '/@/pages/Index'
 
 const App = () => {
   return (
