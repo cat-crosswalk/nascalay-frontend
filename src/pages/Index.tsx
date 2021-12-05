@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
-import logo from 'assets/logo.svg'
+import logo from '/@/assets/logo.svg'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '/@/utils/hooks'
 import { increment } from '/@/utils/store/counter'
