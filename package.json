@@ -16,7 +16,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "!*.{md,json}": [
+    "*.{js,jsx,ts,tsx,html,css}": [
       "eslint",
       "prettier --check"
     ]
