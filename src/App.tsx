@@ -1,17 +1,49 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { css } from '@emotion/react'
+import { Routes } from 'react-router'
+import { Link, Route } from 'react-router-dom'
+import Hello from './Hello'
+import { increment } from './utils/store/counter'
+import { useAppDispatch, useAppSelector } from './utils/hooks'
 
-function App() {
-  const [count, setCount] = useState(0)
+const style = css`
+  color: red;
+  background-color: blue;
+`
+
+const App = () => {
+  return (
+    <div>
+      <header>Welcome to React Router!</header>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/hello/:name" element={<Hello />} />
+      </Routes>
+    </div>
+  )
+}
+
+const Home = () => {
+  const count = useAppSelector((state) => state.counter.value)
+  const [name, setName] = useState('')
+  const dispatch = useAppDispatch()
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
+        <p css={style}>Hello Vite + React!</p>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your Name"
+        />
+        <Link to={`/hello/${name || 'React'}`}>Go to Hello</Link>
         <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
+          <button type="button" onClick={() => dispatch(increment())}>
             count is: {count}
           </button>
         </p>
