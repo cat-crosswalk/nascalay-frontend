@@ -23,6 +23,8 @@ export default class AutoReconnectWebSocket {
   readonly protocols: string | string[] | undefined
   readonly options: Readonly<Options>
 
+  fullUrl = ''
+
   reconnecting = false
   isClose = false
 
@@ -40,6 +42,10 @@ export default class AutoReconnectWebSocket {
     return this._ws?.readyState === WebSocket.OPEN
   }
 
+  set userId(id: string) {
+    this.fullUrl = `${this.url}?user=${id}`
+  }
+
   send(message: InlineObject) {
     // TODO: WebSocketが未接続とかで送信できなかった場合の処理
     if (this.isOpen) {
@@ -55,7 +61,7 @@ export default class AutoReconnectWebSocket {
 
   _setupWs() {
     return new Promise<void>((resolve) => {
-      this._ws = new WebSocket(this.url, this.protocols)
+      this._ws = new WebSocket(this.fullUrl, this.protocols)
 
       this._ws.addEventListener(
         'open',

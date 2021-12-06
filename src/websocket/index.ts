@@ -16,7 +16,8 @@ export const ws = new AutoReconnectWebSocket(
 
 export const wsListener = ws.eventTarget
 
-export const setupWebSocket = () => {
+export const setupWebSocket = (userId: string) => {
+  ws.userId = userId
   ws.connect()
 }
 

@@ -5,6 +5,8 @@ import { Link, useParams } from 'react-router-dom'
 import api, { Room } from '/@/utils/apis/index'
 import { setupWebSocket, wsSend, wsListener, WsEvent } from '/@/websocket/index'
 
+import { useAppSelector } from '/@/store/hooks'
+
 const Hello = () => {
   const PurpleDiv = styled.div`
     color: purple;
@@ -13,7 +15,7 @@ const Hello = () => {
 
   // test *********
   // TODO: webSocketに接続するときに1回呼び出せれば良いので，どこに置くか考えておく
-  setupWebSocket()
+  setupWebSocket(useAppSelector((state) => state.user.userId))
   // **************
 
   const { name } = useParams()
