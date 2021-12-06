@@ -13,3 +13,13 @@ export const ws = new AutoReconnectWebSocket(
     minReconnectionDelay: 1000,
   }
 )
+
+export const wsListener = ws.eventTarget
+
+export const setupWebSocket = () => {
+  ws.connect()
+}
+
+export * from './send'
+export { WsEvent } from '/@/utils/apis/index'
+export type { InlineObject } from '/@/utils/apis/index'

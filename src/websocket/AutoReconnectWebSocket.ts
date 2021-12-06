@@ -1,3 +1,5 @@
+import { InlineObject } from '/@/utils/apis'
+
 export interface Options {
   maxReconnectionDelay: number
   minReconnectionDelay: number
@@ -35,11 +37,11 @@ export default class AutoReconnectWebSocket {
     return this._ws?.readyState === WebSocket.OPEN
   }
 
-  send(message: string, body: any | undefined) {
+  send(message: InlineObject) {
     // TODO anyを消す
     // TODO: WebSocketが未接続とかで送信できなかった場合の処理
     if (this.isOpen) {
-      const json = JSON.stringify({ type: message, body })
+      const json = JSON.stringify(message)
       this._ws?.send(json)
     }
   }
@@ -72,9 +74,14 @@ export default class AutoReconnectWebSocket {
 
       this._ws.addEventListener('message', (e) => {
         console.log('ws message', e)
-        this.eventTarget.dispatchEvent(
-          new CustomEvent('message', { detail: e.data })
-        )
+        try {
+          const message: InlineObject = JSON.parse(e.data)
+          this.eventTarget.dispatchEvent(
+            new CustomEvent(message.type ?? 'message', { detail: message.body })
+          )
+        } catch (e) {
+          console.warn('[WebSocket] Failed to paese: ', e)
+        }
       })
     })
   }
