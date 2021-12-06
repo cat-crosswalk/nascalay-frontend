@@ -1,3 +1,4 @@
+import { wait } from '/@/utils/timer'
 import { InlineObject } from '/@/utils/apis'
 
 export interface Options {
@@ -8,7 +9,7 @@ export interface Options {
 
 const defaultOptions: Options = {
   maxReconnectionDelay: 10000,
-  minReconnectionDelay: 1000,
+  minReconnectionDelay: 700,
   connectionTimeout: 4000,
 }
 
@@ -22,6 +23,9 @@ export default class AutoReconnectWebSocket {
   readonly url: string
   readonly protocols: string | string[] | undefined
   readonly options: Readonly<Options>
+
+  reconnecting = false
+  isClose = false
 
   constructor(
     url: string,
@@ -46,6 +50,11 @@ export default class AutoReconnectWebSocket {
     }
   }
 
+  _getDelay(count: number) {
+    const { minReconnectionDelay, maxReconnectionDelay } = this.options
+    return Math.min(minReconnectionDelay * 1.3 ** count, maxReconnectionDelay)
+  }
+
   _setupWs() {
     return new Promise<void>((resolve) => {
       this._ws = new WebSocket(this.url, this.protocols)
@@ -61,6 +70,9 @@ export default class AutoReconnectWebSocket {
 
       this._ws.addEventListener('close', () => {
         console.log('ws close')
+        if (!this.isClose) {
+          this.reconnect()
+        }
       })
 
       this._ws.addEventListener(
@@ -93,6 +105,25 @@ export default class AutoReconnectWebSocket {
   }
 
   close() {
+    this.isClose = true
     this._ws?.close()
+  }
+
+  async reconnect() {
+    if (this.reconnecting) return
+    this.reconnecting = true
+
+    let count = 0
+    while (!this.isOpen) {
+      count++
+
+      const delay = this._getDelay(count)
+      await wait(delay)
+
+      if (this.isOpen) break
+      await this._setupWs()
+    }
+
+    this.reconnecting = false
   }
 }
