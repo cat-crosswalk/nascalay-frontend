@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import api, { Room } from '/@/utils/apis/index'
@@ -32,10 +32,11 @@ const Hello = () => {
     console.log('draw start', e.detail)
   }) as EventListener)
 
-  // wsSend.~~~でwsを送信する
+  const gameStart = useCallback(() => wsSend.requestGameStart(),[])
+
   return (
     <div>
-      <button onClick={() => wsSend.requestGameStart()}>req gamestart</button>
+      <button onClick={gameStart}>req gamestart</button>
       <p>{room?.roomId}</p>
       <PurpleDiv>Hello {`${name ?? 'React'} !`}</PurpleDiv>
       <Link to="/">Go to home</Link>
