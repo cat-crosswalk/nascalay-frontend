@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { increment } from '/@/store/slice/counter'
 
+// クエリがある場合は，招待リンクを踏んだパターンとする
 const Index = () => {
   const style = css`
     color: red;
