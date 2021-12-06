@@ -14,7 +14,7 @@ const App = () => {
             box-sizing: border-box;
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
-            font-smooth: antialiased;
+            font-smooth: auto;
           }
         `}
       />
