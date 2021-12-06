@@ -13,7 +13,6 @@ const defaultOptions: Options = {
   connectionTimeout: 4000,
 }
 
-// TODO: Reconnectの処理を考えておく
 export default class AutoReconnectWebSocket {
   _ws?: WebSocket
   // SafariでEventTargetのコンストラクタ使えないのでDocumentFragmentで代用
@@ -42,7 +41,6 @@ export default class AutoReconnectWebSocket {
   }
 
   send(message: InlineObject) {
-    // TODO anyを消す
     // TODO: WebSocketが未接続とかで送信できなかった場合の処理
     if (this.isOpen) {
       const json = JSON.stringify(message)
@@ -63,13 +61,13 @@ export default class AutoReconnectWebSocket {
         'open',
         () => {
           resolve()
-          console.log('ws open')
+          console.log('[WebSocket] Open')
         },
         { once: true }
       )
 
       this._ws.addEventListener('close', () => {
-        console.log('ws close')
+        console.log('[WebSocket] Close')
         if (!this.isClose) {
           this.reconnect()
         }
@@ -79,20 +77,20 @@ export default class AutoReconnectWebSocket {
         'error',
         (e) => {
           resolve()
-          console.log('ws error', e)
+          console.log('[WebSocket] Error', e)
         },
         { once: true }
       )
 
-      this._ws.addEventListener('message', (e) => {
-        console.log('ws message', e)
+      this._ws.addEventListener('message', (event) => {
+        console.log('[WebSocket] Message', event)
         try {
-          const message: InlineObject = JSON.parse(e.data)
+          const message: InlineObject = JSON.parse(event.data)
           this.eventTarget.dispatchEvent(
             new CustomEvent(message.type ?? 'message', { detail: message.body })
           )
         } catch (e) {
-          console.warn('[WebSocket] Failed to paese: ', e)
+          console.warn('[WebSocket] Failed to parse: ', e)
         }
       })
     })
