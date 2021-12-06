@@ -3,5 +3,5 @@ node_modules
 dist
 dist-ssr
 *.local
-api/openapi
+src/utils/apis/generated/*
 .eslintcache

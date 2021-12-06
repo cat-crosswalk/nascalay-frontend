@@ -14,7 +14,7 @@
     "fix:eslint": "yarn lint:eslint --fix",
     "fix:prettier": "yarn lint:prettier --write",
     "prepare": "husky install",
-    "gen-api": "openapi-generator-cli generate -g typescript-axios -i https://raw.githubusercontent.com/21hack02win/nascalay-backend/main/docs/openapi.yml -o ./api/openapi"
+    "gen-api": "openapi-generator-cli generate -g typescript-axios -i https://raw.githubusercontent.com/21hack02win/nascalay-backend/main/docs/openapi.yml -o ./src/utils/apis/generated/"
   },
   "lint-staged": {
     "src/*.{js,jsx,ts,tsx,html,css}": [
