@@ -119,6 +119,7 @@ export default class AutoReconnectWebSocket {
 
     let count = 0
     while (!this.isOpen) {
+      console.log('[WebSocket] Reconnecting...')
       count++
 
       const delay = this._getDelay(count)
