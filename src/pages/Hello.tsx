@@ -13,8 +13,8 @@ const Hello = () => {
   const [room, setRoom] = useState<Room | null>(null)
   useEffect(() => {
     ;(async () => {
-      const res = await api.getRoom('xxxxRoomIDxxxxx')
-      setRoom(res.data)
+      const { data } = await api.getRoom('xxxxRoomIDxxxxx')
+      setRoom(data)
     })()
   }, [])
 
