@@ -25,10 +25,10 @@ const Hello = () => {
     })()
   }, [])
 
-  // これで，GameStartイベントを受け取ることができる
-  wsListener.addEventListener(WsEvent.GameStart, () => {
-    console.log('game start')
-  })
+  // これで，DrawStartイベントを受け取ることができる
+  wsListener.addEventListener(WsEvent.DrawStart, ((e: CustomEvent) => {
+    console.log('draw start', e.detail)
+  }) as EventListener)
 
   // wsSend.~~~でwsを送信する
   return (
