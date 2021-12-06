@@ -3,11 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import api, { Room } from '/@/utils/apis/index'
 
+import { ws } from '/@/websocket/index'
+
 const Hello = () => {
   const PurpleDiv = styled.div`
     color: purple;
     font-size: 10em;
   `
+
+  // test *********
+  ws.connect()
+  // **************
 
   const { name } = useParams()
   const [room, setRoom] = useState<Room | null>(null)
