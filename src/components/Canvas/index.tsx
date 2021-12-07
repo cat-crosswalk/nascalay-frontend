@@ -1,15 +1,39 @@
 import { css } from '@emotion/react'
-import React, { useCallback, useRef, useState } from 'react'
+import React, {
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
 
 type Props = {
   color: `#${string}`
   size: number
 }
+export interface Handler {
+  clear(): void
+}
 
-const Canvas: React.VFC<Props> = () => {
+const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
+  props: Props,
+  ref
+) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isMouseDown, setMouseDown] = useState(false)
   const [lastPos, setLastPos] = useState({ x: 0, y: 0 })
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      clear() {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const ctx = canvasRef.current!.getContext('2d')!
+        ctx.clearRect(0, 0, 500, 500)
+      },
+    }),
+    []
+  )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -60,4 +84,4 @@ const Canvas: React.VFC<Props> = () => {
   )
 }
 
-export default Canvas
+export default forwardRef(Canvas)
