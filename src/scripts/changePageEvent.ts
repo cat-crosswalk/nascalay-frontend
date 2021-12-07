@@ -1,8 +1,9 @@
 import { NavigateFunction } from 'react-router'
 import { wsListener, WsEvent } from '/@/websocket'
 import { AppDispatch } from '/@/store/store'
-import { setTheme } from '../store/slice/theme'
-import { setDraw } from '../store/slice/draw'
+import { setTheme } from '/@/store/slice/theme'
+import { setDraw } from '/@/store/slice/draw'
+import { setAnswer } from '/@/store/slice/answer'
 
 export const addPageEventListener = (
   navigate: NavigateFunction,
@@ -19,6 +20,7 @@ export const addPageEventListener = (
   }
 
   const startAnswer = (e: CustomEvent) => {
+    dispatch(setAnswer(e.detail))
     navigate('/answer', { replace: true })
   }
 
