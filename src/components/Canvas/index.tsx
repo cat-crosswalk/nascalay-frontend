@@ -7,9 +7,10 @@ import React, {
   useState,
 } from 'react'
 
-type Props = {
+export type Props = {
   color: `#${string}`
   penSize: number
+  penType: 'pen' | 'eraser' | 'bucket'
 }
 export interface Handler {
   clear(): void
@@ -63,21 +64,63 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     },
     [props.color, props.penSize, getPos, lastPos]
   )
+  const erase = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (e.buttons !== 1) return
+      const pos = getPos(e)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const ctx = canvasRef.current!.getContext('2d')!
+      ctx.lineCap = 'round'
+      ctx.lineWidth = props.penSize
+      ctx.strokeStyle = '#fff'
+      ctx.beginPath()
+      if (lastPos !== null) {
+        ctx.moveTo(lastPos.x, lastPos.y)
+      } else {
+        ctx.moveTo(pos.x, pos.y)
+      }
+      ctx.lineTo(pos.x, pos.y)
+      ctx.stroke()
+      ctx.closePath()
+    },
+    [props.color, props.penSize, getPos, lastPos]
+  )
+  const bucket = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (e.buttons !== 1) return
+      const pos = getPos(e)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const ctx = canvasRef.current!.getContext('2d')!
+      // TODO: 塗りつぶし実装
+      console.log('[TODO] 塗りつぶし！')
+    },
+    [getPos]
+  )
   const mouseDown = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
-      draw(e)
+      if (props.penType === 'pen') {
+        draw(e)
+      } else if (props.penType === 'eraser') {
+        erase(e)
+      } else if (props.penType === 'bucket') {
+        bucket(e)
+      }
       setLastPos(getPos(e))
     },
-    [draw, getPos]
+    [draw, erase, getPos, props.penType]
   )
   const mouseUp = useCallback(() => setLastPos(null), [])
   const mouseOut = useCallback(() => setLastPos(null), [])
   const mouseMove = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
-      draw(e)
+      if (props.penType === 'pen') {
+        draw(e)
+      } else if (props.penType === 'eraser') {
+        erase(e)
+      }
       setLastPos(getPos(e))
     },
-    [draw, getPos]
+    [draw, erase, getPos, props.penType]
   )
 
   return (
