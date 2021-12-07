@@ -20,8 +20,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   ref
 ) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [isMouseDown, setMouseDown] = useState(false)
-  const [lastPos, setLastPos] = useState({ x: 0, y: 0 })
+  const [lastPos, setLastPos] = useState<{ x: number; y: number } | null>(null)
 
   useImperativeHandle(
     ref,
@@ -43,14 +42,9 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       y: e.clientY - rect.top,
     }
   }, [])
-  const mouseDown = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
-    setLastPos(getPos(e))
-    setMouseDown(true)
-  }, [])
-  const mouseUp = useCallback(() => setMouseDown(false), [])
-  const mouseMove = useCallback(
+  const draw = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
-      if (!isMouseDown) return
+      if (e.buttons !== 1) return
       const pos = getPos(e)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const ctx = canvasRef.current!.getContext('2d')!
@@ -58,14 +52,32 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       ctx.lineWidth = props.penSize
       ctx.strokeStyle = props.color
       ctx.beginPath()
-      ctx.moveTo(lastPos.x, lastPos.y)
+      if (lastPos !== null) {
+        ctx.moveTo(lastPos.x, lastPos.y)
+      } else {
+        ctx.moveTo(pos.x, pos.y)
+      }
       ctx.lineTo(pos.x, pos.y)
       ctx.stroke()
       ctx.closePath()
-
-      setLastPos(pos)
     },
-    [isMouseDown, lastPos]
+    [props.color, props.penSize, getPos, lastPos]
+  )
+  const mouseDown = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      draw(e)
+      setLastPos(getPos(e))
+    },
+    [draw, getPos]
+  )
+  const mouseUp = useCallback(() => setLastPos(null), [])
+  const mouseOut = useCallback(() => setLastPos(null), [])
+  const mouseMove = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      draw(e)
+      setLastPos(getPos(e))
+    },
+    [draw, getPos]
   )
 
   return (
@@ -76,7 +88,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
         height="500"
         onMouseDown={mouseDown}
         onMouseUp={mouseUp}
-        onMouseOut={mouseUp}
+        onMouseOut={mouseOut}
         onMouseMove={mouseMove}
         css={css({
           border: '1px solid #000',
