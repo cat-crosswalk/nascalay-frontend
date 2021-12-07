@@ -81,20 +81,18 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   )
 
   return (
-    <div>
-      <canvas
-        ref={canvasRef}
-        width="500"
-        height="500"
-        onMouseDown={mouseDown}
-        onMouseUp={mouseUp}
-        onMouseOut={mouseOut}
-        onMouseMove={mouseMove}
-        css={css({
-          border: '1px solid #000',
-        })}
-      ></canvas>
-    </div>
+    <canvas
+      ref={canvasRef}
+      width="500"
+      height="500"
+      onMouseDown={mouseDown}
+      onMouseUp={mouseUp}
+      onMouseOut={mouseOut}
+      onMouseMove={mouseMove}
+      css={css({
+        border: '1px solid #000',
+      })}
+    ></canvas>
   )
 }
 
