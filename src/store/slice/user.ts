@@ -1,14 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface User {
-  avatar: number
-  name: string
-  userId: string
-}
+import { User }from '/@/utils/apis/generated'
 
 const initialState: User = {
   avatar: 0,
-  name: '',
+  username: '',
   userId: '',
 }
 
@@ -17,9 +12,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
-      state.avatar = action.payload.avatar
-      state.name = action.payload.name
-      state.userId = action.payload.userId
+      state = action.payload
     },
   },
 })
