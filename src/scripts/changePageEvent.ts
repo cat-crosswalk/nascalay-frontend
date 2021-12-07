@@ -1,11 +1,11 @@
 import { NavigateFunction } from 'react-router'
 import { wsListener, WsEvent } from '/@/websocket'
-import { useAppDispatch } from '/@/store/hooks'
+import { AppDispatch } from '/@/store/store'
 import { setTheme } from '../store/slice/theme'
 
 export const addPageEventListener = (
   navigate: NavigateFunction,
-  dispatch: useAppDispatch
+  dispatch: AppDispatch
 ) => {
   const startTheme = (e: CustomEvent) => {
     navigate('/theme', { replace: true })
