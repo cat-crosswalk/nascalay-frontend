@@ -4,13 +4,15 @@ import { useEffect } from 'react'
 import { Global, css } from '@emotion/react'
 import './App.css'
 import Router from '/@/router/index'
+import { useAppDispatch } from '/@/store/hooks'
 import { addPageEventListener } from '/@/scripts/changePageEvent'
 
 const App = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   useEffect(() => {
     // wsEventを監視して画面遷移する
-    addPageEventListener(navigate)
+    addPageEventListener(navigate, dispatch)
   }, [])
   return (
     <div>

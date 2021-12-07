@@ -1,10 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import counterReducer from '/@/store/slice/counter'
-import userReducer from '/@/store/slice/user'
+import counterReducer from './slice/counter'
+import userReducer from './slice/user'
+import themeReducer from './slice/theme'
 
 const reducer = combineReducers({
   user: userReducer,
   counter: counterReducer,
+  theme: themeReducer,
 })
 
 const store = configureStore({

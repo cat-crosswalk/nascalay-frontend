@@ -1,9 +1,15 @@
 import { NavigateFunction } from 'react-router'
 import { wsListener, WsEvent } from '/@/websocket'
+import { useAppDispatch } from '/@/store/hooks'
+import { setTheme } from '../store/slice/theme'
 
-export const addPageEventListener = (navigate: NavigateFunction) => {
+export const addPageEventListener = (
+  navigate: NavigateFunction,
+  dispatch: useAppDispatch
+) => {
   const startTheme = (e: CustomEvent) => {
     navigate('/theme', { replace: true })
+    dispatch(setTheme(e.detail))
   }
 
   const startDraw = (e: CustomEvent) => {
