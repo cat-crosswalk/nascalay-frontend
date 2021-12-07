@@ -32,7 +32,7 @@ const Hello = () => {
     console.log('draw start', e.detail)
   }) as EventListener)
 
-  const gameStart = useCallback(() => wsSend.requestGameStart(),[])
+  const gameStart = useCallback(() => wsSend.requestGameStart(), [])
 
   return (
     <div>
