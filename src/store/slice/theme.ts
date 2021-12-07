@@ -11,8 +11,7 @@ export const themeSlice = createSlice({
   initialState,
   reducers: {
     setTheme: (state, action: PayloadAction<GameStartEvent>) => {
-      state.odaiHint = action.payload.odaiHint
-      state.timeLimit = action.payload.timeLimit
+      state = action.payload
     },
   },
 })
