@@ -9,7 +9,7 @@ import React, {
 
 type Props = {
   color: `#${string}`
-  size: number
+  penSize: number
 }
 export interface Handler {
   clear(): void
@@ -54,7 +54,9 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       const pos = getPos(e)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const ctx = canvasRef.current!.getContext('2d')!
-      ctx.fillStyle = '#ff0000'
+      ctx.lineCap = 'round'
+      ctx.lineWidth = props.penSize
+      ctx.strokeStyle = props.color
       ctx.beginPath()
       ctx.moveTo(lastPos.x, lastPos.y)
       ctx.lineTo(pos.x, pos.y)
