@@ -2,7 +2,6 @@ import { NavigateFunction } from 'react-router'
 import { wsListener, WsEvent } from '/@/websocket'
 
 export const addPageEventListener = (navigate: NavigateFunction) => {
-
   const startTheme = (e: CustomEvent) => {
     navigate('/theme', { replace: true })
   }
@@ -15,12 +14,16 @@ export const addPageEventListener = (navigate: NavigateFunction) => {
     navigate('/answer', { replace: true })
   }
 
-  const startResult = (e: CustomEvent) => {
+  const startResult = () => {
     navigate('/result', { replace: true })
   }
 
-  const nextRoom = (e: CustomEvent) => {
+  const nextRoom = () => {
     navigate('/lobby', { replace: true })
+  }
+
+  const breakRoom = () => {
+    navigate('/', { replace: true })
   }
 
   wsListener.addEventListener(WsEvent.GameStart, startTheme as EventListener)
@@ -28,4 +31,5 @@ export const addPageEventListener = (navigate: NavigateFunction) => {
   wsListener.addEventListener(WsEvent.AnswerStart, startAnswer as EventListener)
   wsListener.addEventListener(WsEvent.ShowStart, startResult as EventListener)
   wsListener.addEventListener(WsEvent.NextRoom, nextRoom as EventListener)
+  wsListener.addEventListener(WsEvent.BreakRoom, breakRoom as EventListener)
 }
