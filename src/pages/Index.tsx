@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import logo from '/@/assets/logo.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { increment } from '/@/store/slice/counter'
 
@@ -15,11 +15,17 @@ const Index = () => {
   const [name, setName] = useState('')
   const dispatch = useAppDispatch()
 
+  const navigate = useNavigate()
+  const goRobby = useCallback(() => navigate('./lobby', { replace: false }), [])
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p css={style}>Hello Vite + React!</p>
+        <button type="button" onClick={goRobby}>
+          開始(Go Lobby)
+        </button>
         <input
           type="text"
           value={name}

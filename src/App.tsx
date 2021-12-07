@@ -1,9 +1,17 @@
 import emotionReset from 'emotion-reset'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { Global, css } from '@emotion/react'
 import './App.css'
 import Router from '/@/router/index'
+import { addPageEventListener } from '/@/scripts/changePageEvent'
 
 const App = () => {
+  const navigate = useNavigate()
+  useEffect(() => {
+    // wsEventを監視して画面遷移する
+    addPageEventListener(navigate)
+  }, [])
   return (
     <div>
       <Global
