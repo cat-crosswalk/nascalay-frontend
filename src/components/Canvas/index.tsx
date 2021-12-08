@@ -146,7 +146,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       ctx.stroke()
       ctx.closePath()
     },
-    [props.color, props.penSize, getPos, lastPos]
+    [getPos, props.penSize, lastPos]
   )
   const bucket = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
