@@ -15,6 +15,8 @@ export type Props = {
 }
 export interface Handler {
   clear(): void
+  undo(): void
+  redo(): void
 }
 
 const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
@@ -24,18 +26,76 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [lastPos, setLastPos] = useState<{ x: number; y: number } | null>(null)
 
+  const [undoList, setUndoList] = useState<Uint8ClampedArray[]>([])
+  const [redoList, setRedoList] = useState<Uint8ClampedArray[]>([])
+  const saveCanvas = useCallback(() => {
+    console.log('save')
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const canvas = canvasRef.current!
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const ctx = canvas.getContext('2d')!
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data
+    setUndoList((prev) => [...prev, data])
+    setRedoList([])
+  }, [])
+  const undo = useCallback(() => {
+    console.log('undo', undoList)
+    if (undoList.length === 0) return
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const canvas = canvasRef.current!
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const ctx = canvasRef.current!.getContext('2d')!
+    const nowData = ctx.getImageData(0, 0, canvas.width, canvas.height).data
+    const data = undoList[undoList.length - 1]
+    setUndoList((prev) => [...prev.slice(0, -1)])
+    setRedoList((prev) => [...prev, nowData])
+    console.log('undo', undoList)
+    ctx.putImageData(
+      new ImageData(new Uint8ClampedArray(data), canvas.width, canvas.height),
+      0,
+      0
+    )
+  }, [undoList])
+  const redo = useCallback(() => {
+    console.log('redo', redoList)
+    if (redoList.length === 0) return
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const canvas = canvasRef.current!
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const ctx = canvasRef.current!.getContext('2d')!
+    const nowData = ctx.getImageData(0, 0, canvas.width, canvas.height).data
+    const data = redoList[redoList.length - 1]
+    setUndoList((prev) => [...prev, nowData])
+    setRedoList((prev) => prev.slice(0, -1))
+    ctx.putImageData(
+      new ImageData(new Uint8ClampedArray(data), canvas.width, canvas.height),
+      0,
+      0
+    )
+  }, [redoList])
+  const clear = useCallback(() => {
+    saveCanvas()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const canvas = canvasRef.current!
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const ctx = canvasRef.current!.getContext('2d')!
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+  }, [saveCanvas])
+
   useImperativeHandle(
     ref,
     () => ({
       clear() {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const canvas = canvasRef.current!
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const ctx = canvasRef.current!.getContext('2d')!
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        clear()
+      },
+      undo() {
+        undo()
+      },
+      redo() {
+        redo()
       },
     }),
-    []
+    [undo, redo]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -99,6 +159,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   )
   const mouseDown = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
+      saveCanvas()
       if (props.penType === 'pen') {
         draw(e)
       } else if (props.penType === 'eraser') {
@@ -108,7 +169,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       }
       setLastPos(getPos(e))
     },
-    [draw, erase, getPos, props.penType]
+    [draw, erase, bucket, getPos, props.penType, saveCanvas]
   )
   const mouseUp = useCallback(() => setLastPos(null), [])
   const mouseOut = useCallback(() => setLastPos(null), [])
