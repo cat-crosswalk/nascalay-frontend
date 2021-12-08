@@ -95,7 +95,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
         redo()
       },
     }),
-    [undo, redo]
+    [undo, redo, clear]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
