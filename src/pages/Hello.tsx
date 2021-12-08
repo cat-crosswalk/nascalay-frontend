@@ -102,9 +102,9 @@ const Hello = () => {
 
   return (
     <>
-      { /* tabIndex つけないと div で keydown 起動しない
+      {/* tabIndex つけないと div で keydown 起動しない
            -1 をつけると tab でこの div に遷移しない
-       */ }
+       */}
       <div onKeyDown={shortcut} tabIndex={-1}>
         <MyCanvas
           ref={canvasRef}
@@ -148,9 +148,8 @@ const Hello = () => {
         </div>
         <div>
           {selectableColor.map((color) => (
-            <>
+            <React.Fragment key={`${color.name}-wrapper`}>
               <input
-                key={color.name}
                 type="radio"
                 id={color.name}
                 name="color"
@@ -159,7 +158,7 @@ const Hello = () => {
                 onChange={() => setPenColor(color.color)}
               />
               <label htmlFor={color.name}>{color.name}</label>
-            </>
+            </React.Fragment>
           ))}
         </div>
       </div>
