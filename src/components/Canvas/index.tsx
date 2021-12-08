@@ -29,7 +29,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   const [undoList, setUndoList] = useState<Uint8ClampedArray[]>([])
   const [redoList, setRedoList] = useState<Uint8ClampedArray[]>([])
   const saveCanvas = useCallback(() => {
-    console.log('save')
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -39,7 +38,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     setRedoList([])
   }, [])
   const undo = useCallback(() => {
-    console.log('undo', undoList)
     if (undoList.length === 0) return
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
@@ -49,7 +47,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     const data = undoList[undoList.length - 1]
     setUndoList((prev) => [...prev.slice(0, -1)])
     setRedoList((prev) => [...prev, nowData])
-    console.log('undo', undoList)
     ctx.putImageData(
       new ImageData(new Uint8ClampedArray(data), canvas.width, canvas.height),
       0,
@@ -57,7 +54,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     )
   }, [undoList])
   const redo = useCallback(() => {
-    console.log('redo', redoList)
     if (redoList.length === 0) return
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
