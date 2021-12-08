@@ -8,6 +8,7 @@ const Lobby = () => {
   useEffect(() => {
     // websocket接続
     setupWebSocket(userId)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
