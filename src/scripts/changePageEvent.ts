@@ -4,6 +4,7 @@ import { AppDispatch } from '/@/store/store'
 import { setTheme } from '/@/store/slice/theme'
 import { setDraw } from '/@/store/slice/draw'
 import { setAnswer } from '/@/store/slice/answer'
+import { leaveRoom } from '../store/slice/status'
 
 export const addPageEventListener = (
   navigate: NavigateFunction,
@@ -34,6 +35,7 @@ export const addPageEventListener = (
 
   const breakRoom = () => {
     closeWebSocket()
+    dispatch(leaveRoom())
     navigate('/', { replace: true })
   }
 

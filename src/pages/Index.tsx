@@ -4,6 +4,7 @@ import logo from '/@/assets/logo.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { increment } from '/@/store/slice/counter'
+import { joinRoom } from '../store/slice/status'
 
 // TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 const Index = () => {
@@ -16,10 +17,10 @@ const Index = () => {
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
-  const goRobby = useCallback(
-    () => navigate('/lobby', { replace: false }),
-    [navigate]
-  )
+  const goRobby = useCallback(() => {
+    dispatch(joinRoom())
+    navigate('/lobby', { replace: false })
+  }, [navigate, dispatch])
 
   return (
     <div className="App">
