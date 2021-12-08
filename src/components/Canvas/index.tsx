@@ -29,8 +29,10 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     () => ({
       clear() {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const canvas = canvasRef.current!
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const ctx = canvasRef.current!.getContext('2d')!
-        ctx.clearRect(0, 0, 500, 500)
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
       },
     }),
     []
