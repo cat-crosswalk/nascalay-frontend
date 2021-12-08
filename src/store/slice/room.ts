@@ -16,7 +16,7 @@ export const roomSlice = createSlice({
     setRoom: (state, action: PayloadAction<Room>) => {
       state = action.payload
     },
-  }
+  },
 })
 
 export const { setRoom } = roomSlice.actions

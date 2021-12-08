@@ -17,8 +17,8 @@ export const statusSlice = createSlice({
     },
     leaveRoom: (state) => {
       state.isJoinRoom = false
-    }
-  }
+    },
+  },
 })
 
 export const { joinRoom, leaveRoom } = statusSlice.actions
