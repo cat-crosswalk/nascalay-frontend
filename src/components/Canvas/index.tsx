@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import bucketFill from './bucketFill'
 
 export type Props = {
   color: `#${string}`
@@ -88,11 +89,9 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   const bucket = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
       if (e.buttons !== 1) return
-      const pos = getPos(e)
+      const { x, y } = getPos(e)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const ctx = canvasRef.current!.getContext('2d')!
-      // TODO: 塗りつぶし実装
-      console.log('[TODO] 塗りつぶし！')
+      bucketFill(canvasRef.current!, x, y, props.color)
     },
     [getPos]
   )
