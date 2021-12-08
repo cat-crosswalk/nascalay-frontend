@@ -16,7 +16,10 @@ const Index = () => {
   const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
-  const goRobby = useCallback(() => navigate('/lobby', { replace: false }), [])
+  const goRobby = useCallback(
+    () => navigate('/lobby', { replace: false }),
+    [navigate]
+  )
 
   return (
     <div className="App">

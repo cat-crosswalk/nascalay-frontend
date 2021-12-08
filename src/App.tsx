@@ -12,7 +12,9 @@ const App = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     // wsEventを監視して画面遷移する
+    // HACK: navigateとdispatchを渡してる実装やばそう
     addPageEventListener(navigate, dispatch)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>
