@@ -1,10 +1,16 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import counterReducer from '/@/store/slice/counter'
-import userReducer from '/@/store/slice/user'
+import counterReducer from './slice/counter'
+import userReducer from './slice/user'
+import themeReducer from './slice/theme'
+import drawReducer from './slice/draw'
+import answerReducer from './slice/answer'
 
 const reducer = combineReducers({
   user: userReducer,
   counter: counterReducer,
+  theme: themeReducer,
+  draw: drawReducer,
+  answer: answerReducer,
 })
 
 const store = configureStore({
