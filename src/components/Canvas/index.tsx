@@ -130,6 +130,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const ctx = canvasRef.current!.getContext('2d')!
       ctx.lineCap = 'round'
+      ctx.globalCompositeOperation = 'destination-out'
       ctx.lineWidth = props.penSize
       ctx.strokeStyle = '#fff'
       ctx.beginPath()
