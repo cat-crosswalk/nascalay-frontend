@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AnswerStartEvent } from '/@/utils/apis/generated'
 
 const initialState: AnswerStartEvent = {
+  timeLimit: 0,
   img: '',
 }
 

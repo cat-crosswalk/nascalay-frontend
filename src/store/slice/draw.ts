@@ -3,6 +3,10 @@ import { DrawStartEvent } from '/@/utils/apis/generated'
 
 const initialState: DrawStartEvent = {
   timeLimit: 40,
+  canvas: {
+    boardName: '',
+    areaId: 0,
+  },
   img: '',
   odai: '',
   drawPhaseNum: 0,
