@@ -17,6 +17,7 @@ export interface Handler {
   clear(): void
   undo(): void
   redo(): void
+  shortcut(e: React.KeyboardEvent): void
 }
 
 const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
@@ -77,6 +78,25 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     const ctx = canvasRef.current!.getContext('2d')!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
   }, [saveCanvas])
+  const shortcut = useCallback(
+    (e: React.KeyboardEvent) => {
+      // shift 押してる状態だと key が 大文字になるから toLowerCase してる
+      if (
+        e.key.toLowerCase() === 'z' &&
+        (e.ctrlKey || e.metaKey) &&
+        !e.shiftKey
+      ) {
+        undo()
+      } else if (
+        e.key.toLowerCase() === 'z' &&
+        (e.ctrlKey || e.metaKey) &&
+        e.shiftKey
+      ) {
+        redo()
+      }
+    },
+    [undo, redo]
+  )
 
   useImperativeHandle(
     ref,
@@ -90,8 +110,11 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       redo() {
         redo()
       },
+      shortcut(e) {
+        shortcut(e)
+      },
     }),
-    [undo, redo, clear]
+    [undo, redo, clear, shortcut]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -181,25 +204,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     },
     [draw, erase, getPos, props.penType]
   )
-  const onKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLCanvasElement>) => {
-      // shift 押してる状態だと key が 大文字になるから toLowerCase してる
-      if (
-        e.key.toLowerCase() === 'z' &&
-        (e.ctrlKey || e.metaKey) &&
-        !e.shiftKey
-      ) {
-        undo()
-      } else if (
-        e.key.toLowerCase() === 'z' &&
-        (e.ctrlKey || e.metaKey) &&
-        e.shiftKey
-      ) {
-        redo()
-      }
-    },
-    [undo, redo]
-  )
 
   return (
     <canvas
@@ -210,9 +214,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       onMouseUp={mouseUp}
       onMouseOut={mouseOut}
       onMouseMove={mouseMove}
-      onKeyDown={onKeyDown}
-      // tabIndex ないと keydown が反応しない
-      tabIndex={0}
       css={css({
         border: '1px solid #000',
       })}
