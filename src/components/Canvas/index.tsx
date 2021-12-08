@@ -180,6 +180,25 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     },
     [draw, erase, getPos, props.penType]
   )
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLCanvasElement>) => {
+      // shift 押してる状態だと key が 大文字になるから toLowerCase してる
+      if (
+        e.key.toLowerCase() === 'z' &&
+        (e.ctrlKey || e.metaKey) &&
+        !e.shiftKey
+      ) {
+        undo()
+      } else if (
+        e.key.toLowerCase() === 'z' &&
+        (e.ctrlKey || e.metaKey) &&
+        e.shiftKey
+      ) {
+        redo()
+      }
+    },
+    [undo, redo]
+  )
 
   return (
     <canvas
@@ -190,6 +209,9 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       onMouseUp={mouseUp}
       onMouseOut={mouseOut}
       onMouseMove={mouseMove}
+      onKeyDown={onKeyDown}
+      // tabIndex ないと keydown が反応しない
+      tabIndex={0}
       css={css({
         border: '1px solid #000',
       })}
