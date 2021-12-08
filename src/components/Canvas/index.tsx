@@ -134,6 +134,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       ctx.lineCap = 'round'
       ctx.lineWidth = props.penSize
       ctx.strokeStyle = props.color
+      ctx.globalCompositeOperation = 'source-over'
       ctx.beginPath()
       if (lastPos !== null) {
         ctx.moveTo(lastPos.x, lastPos.y)
@@ -155,7 +156,6 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       ctx.lineCap = 'round'
       ctx.globalCompositeOperation = 'destination-out'
       ctx.lineWidth = props.penSize
-      ctx.strokeStyle = '#fff'
       ctx.beginPath()
       if (lastPos !== null) {
         ctx.moveTo(lastPos.x, lastPos.y)
