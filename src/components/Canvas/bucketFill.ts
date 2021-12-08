@@ -5,16 +5,20 @@ type Color = {
   a: number
 }
 
+// Color の等価性を調べる関数
 const equalColor = (a: Color, b: Color) => {
   return a.r === b.r && a.g === b.g && a.b === b.b && a.a === b.a
 }
 
+// カラーコードから rgba 形式の Color オブジェクトを作る
+// valid なのは #123, #1234, #123456, #12345678 の形式
 const hexToColor = (hex: `#${string}`): Color | null => {
   if (
     /^#([A-Fa-f0-9]{3}){1,2}$/.test(hex) ||
     /^#([A-Fa-f0-9]{4}){1,2}$/.test(hex)
   ) {
     let c = hex.substring(1).split('')
+    // #12345678 の形式に統一
     if (c.length === 3) {
       c = [c[0], c[0], c[1], c[1], c[2], c[2], 'F', 'F']
     } else if (c.length === 4) {
@@ -34,6 +38,7 @@ const hexToColor = (hex: `#${string}`): Color | null => {
   }
 }
 
+// Uint8ClampedArray から Color[][] へ変換する
 const formatData = (
   data: Uint8ClampedArray,
   width: number,
@@ -55,6 +60,7 @@ const formatData = (
   }
   return result
 }
+// Color[][] を Uint8ClampedArray に変換する
 const reformatData = (
   data: Color[][],
   width: number,
