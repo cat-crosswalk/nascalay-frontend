@@ -4,6 +4,7 @@ import userReducer from './slice/user'
 import themeReducer from './slice/theme'
 import drawReducer from './slice/draw'
 import answerReducer from './slice/answer'
+import roomReducer from './slice/room'
 
 const reducer = combineReducers({
   user: userReducer,
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   theme: themeReducer,
   draw: drawReducer,
   answer: answerReducer,
+  room: roomReducer,
 })
 
 const store = configureStore({
