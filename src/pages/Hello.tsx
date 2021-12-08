@@ -84,6 +84,16 @@ const Hello = () => {
       canvasRef.current.clear()
     }
   }
+  const undo = () => {
+    if (canvasRef.current) {
+      canvasRef.current.undo()
+    }
+  }
+  const redo = () => {
+    if (canvasRef.current) {
+      canvasRef.current.redo()
+    }
+  }
 
   return (
     <div>
@@ -95,6 +105,10 @@ const Hello = () => {
       />
       <div>
         <button onClick={clearCanvas}>clear</button>
+        <button onClick={undo}>undo</button>
+        <button onClick={redo}>redo</button>
+      </div>
+      <div>
         <input
           type="radio"
           id="pen"
