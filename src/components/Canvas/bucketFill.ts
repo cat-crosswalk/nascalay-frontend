@@ -75,25 +75,63 @@ const reformatData = (
   return result
 }
 
-const queue = <T>() => {
-  let tail: T[] = []
-  let head: T[] = []
-  const push = (item: T) => {
-    tail.push(item)
+// https://nullpon.moe/dev/sample/canvas/bucketfill.html めちゃめちゃ参考にしてる
+// シードフィルアルゴリズムで塗りつぶす
+const drawToRight = (
+  data: Color[][],
+  x: number,
+  y: number,
+  color: Color,
+  widthRange: [number, number],
+  targetColor: Color
+) => {
+  let rightEnd = null
+  for (let nowX = x + 1; nowX < widthRange[1]; nowX++) {
+    const nowColor = data[y][nowX]
+    if (!equalColor(nowColor, targetColor)) break
+    data[y][nowX] = color
+    rightEnd = nowX
   }
-  const pop = (): T | null => {
-    if (head.length === 0) {
-      ;[head, tail] = [tail, head]
+  return rightEnd
+}
+const drawToLeft = (
+  data: Color[][],
+  x: number,
+  y: number,
+  color: Color,
+  widthRange: [number, number],
+  targetColor: Color
+) => {
+  let leftEnd = null
+  for (let nowX = x; nowX >= widthRange[0]; nowX--) {
+    const nowColor = data[y][nowX]
+    if (!equalColor(nowColor, targetColor)) break
+    data[y][nowX] = color
+    leftEnd = nowX
+  }
+  return leftEnd
+}
+const updateSeeds = (
+  data: Color[][],
+  xLeft: number,
+  xRight: number,
+  y: number,
+  seeds: { x: number; y: number }[],
+  targetColor: Color,
+  heightRange: [number, number]
+) => {
+  if (y < heightRange[0] || y >= heightRange[1]) return
+  let prevIsTarget = false
+  for (let nowX = xLeft; nowX <= xRight; nowX++) {
+    const nowColor = data[y][nowX]
+    if (equalColor(nowColor, targetColor)) {
+      if (!prevIsTarget) {
+        seeds.push({ x: nowX, y })
+      }
+      prevIsTarget = true
+    } else {
+      prevIsTarget = false
     }
-    return head.pop() ?? null
-  }
-  const isEmpty = () => {
-    return head.length === 0 && tail.length === 0
-  }
-  return {
-    push,
-    pop,
-    isEmpty,
   }
 }
 
@@ -122,53 +160,19 @@ const bucketFill = (
 
   const xRange = widthRange ?? [0, width]
   const yRange = heightRange ?? [0, height]
-  const q = queue<{ x: number; y: number }>()
-  q.push({ x, y })
-  const viewed: boolean[][] = new Array(height)
-    .fill(null)
-    .map(() => new Array(width).fill(false))
-  viewed[y][x] = true
-  while (!q.isEmpty()) {
+
+  const seeds = [{ x, y }]
+  while (seeds.length > 0) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const { x, y } = q.pop()!
-    console.log(x, y)
-    if (x < xRange[0] || x > xRange[1] || y < yRange[0] || y > yRange[1])
-      continue
-    if (!equalColor(formattedData[y][x], targetColor)) continue
-    formattedData[y][x] = colorObj
-    if (
-      x - 1 >= xRange[0] &&
-      !viewed[y][x - 1] &&
-      equalColor(formattedData[y][x - 1], targetColor)
-    ) {
-      q.push({ x: x - 1, y })
-      viewed[y][x - 1] = true
-    }
-    if (
-      x + 1 < xRange[1] &&
-      !viewed[y][x + 1] &&
-      equalColor(formattedData[y][x + 1], targetColor)
-    ) {
-      q.push({ x: x + 1, y })
-      viewed[y][x + 1] = true
-    }
-    if (
-      y - 1 >= yRange[0] &&
-      !viewed[y - 1][x] &&
-      equalColor(formattedData[y - 1][x], targetColor)
-    ) {
-      q.push({ x, y: y - 1 })
-      viewed[y - 1][x] = true
-    }
-    if (
-      y + 1 < yRange[1] &&
-      !viewed[y + 1][x] &&
-      equalColor(formattedData[y + 1][x], targetColor)
-    ) {
-      q.push({ x, y: y + 1 })
-      viewed[y + 1][x] = true
-    }
+    const { x, y } = seeds.pop()!
+    const leftX =
+      drawToLeft(formattedData, x, y, colorObj, xRange, targetColor) ?? x
+    const rightX =
+      drawToRight(formattedData, x, y, colorObj, xRange, targetColor) ?? x
+    updateSeeds(formattedData, leftX, rightX, y + 1, seeds, targetColor, yRange)
+    updateSeeds(formattedData, leftX, rightX, y - 1, seeds, targetColor, yRange)
   }
+
   imageData.data.set(reformatData(formattedData, width, height))
   ctx.putImageData(imageData, 0, 0)
 }
