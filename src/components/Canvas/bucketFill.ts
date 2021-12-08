@@ -118,7 +118,6 @@ const bucketFill = (
     console.error('invalid color')
     return
   }
-  console.log(colorObj, targetColor)
   if (equalColor(colorObj, targetColor)) return
 
   const xRange = widthRange ?? [0, width]
