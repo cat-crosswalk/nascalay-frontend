@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { increment } from '/@/store/slice/counter'
 
-// クエリがある場合は，招待リンクを踏んだパターンとする
+// TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 const Index = () => {
   const style = css`
     color: red;
