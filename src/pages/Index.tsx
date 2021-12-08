@@ -24,7 +24,7 @@ const Index = () => {
         <img src={logo} className="App-logo" alt="logo" />
         <p css={style}>Hello Vite + React!</p>
         <button type="button" onClick={goRobby}>
-          開始(Go Lobby)
+          参加する(Go Lobby)
         </button>
         <input
           type="text"
