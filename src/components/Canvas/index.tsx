@@ -93,7 +93,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       bucketFill(canvasRef.current!, x, y, props.color)
     },
-    [getPos]
+    [getPos, props.color]
   )
   const mouseDown = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
