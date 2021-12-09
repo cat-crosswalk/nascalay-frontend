@@ -1,5 +1,5 @@
 import { wait } from '/@/utils/timer'
-import { InlineObject } from '/@/utils/apis'
+import * as WsApi from '/@/utils/apis'
 
 export interface Options {
   maxReconnectionDelay: number
@@ -11,6 +11,32 @@ const defaultOptions: Options = {
   maxReconnectionDelay: 10000,
   minReconnectionDelay: 700,
   connectionTimeout: 4000,
+}
+
+export type WsSendMessageBody =
+  | WsApi.WsRoomSetOptionEventBody
+  | WsApi.WsOdaiSendEventBody
+  | WsApi.WsDrawSendEventBody
+  | WsApi.WsAnswerSendEventBody
+  | { [key: string]: never }
+export type WsReceiveMessageBody =
+  | WsApi.WsRoomNewMemberEventBody
+  | WsApi.WsRoomUpdateOptionEventBody
+  | WsApi.WsGameStartEventBody
+  | WsApi.WsDrawStartEventBody
+  | WsApi.WsAnswerStartEventBody
+  | WsApi.WsShowOdaiEventBody
+  | WsApi.WsShowCanvasEventBody
+  | WsApi.WsShowAnswerEventBody
+  | WsApi.WsChangeHostEventBody
+export interface WsSendMessage {
+  type: WsApi.WsEvent
+  body: WsSendMessageBody
+}
+
+export interface WsReceiveMessage {
+  type: WsApi.WsEvent
+  body: WsReceiveMessageBody
 }
 
 export default class AutoReconnectWebSocket {
@@ -46,7 +72,7 @@ export default class AutoReconnectWebSocket {
     this.fullUrl = `${this.url}?user=${id}`
   }
 
-  send(message: InlineObject) {
+  send(message: WsSendMessage) {
     // TODO: WebSocketが未接続とかで送信できなかった場合の処理
     if (this.isOpen) {
       const json = JSON.stringify(message)
@@ -91,7 +117,7 @@ export default class AutoReconnectWebSocket {
       this._ws.addEventListener('message', (event) => {
         console.log('[WebSocket] Message', event)
         try {
-          const message: InlineObject = JSON.parse(event.data)
+          const message: WsSendMessage = JSON.parse(event.data)
           this.eventTarget.dispatchEvent(
             new CustomEvent(message.type ?? 'message', { detail: message.body })
           )
