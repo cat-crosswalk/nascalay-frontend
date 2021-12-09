@@ -1,2 +1,2 @@
-export const WEBSOCKET_ENDPOINT = '/ws/test'
-export const BASE_URL = 'http://localhost:1880'
+export const WEBSOCKET_ENDPOINT = '/api/ws'
+export const BASE_URL = 'http://localhost:8080'
