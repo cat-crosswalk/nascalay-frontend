@@ -35,6 +35,7 @@ const GameSetting = () => {
       borderStyle: 'solid',
       borderWidth: '21.7px 12.5px 0 12.5px',
       borderColor: '#ff0000 transparent transparent transparent',
+      backgroundColor: 'transparent',
     },
     '& .MuiSlider-track': {
       backgroundColor: '#4356FF',
