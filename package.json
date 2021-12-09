@@ -25,6 +25,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.3",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.24.0",
     "emotion-reset": "^3.0.1",
