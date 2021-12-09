@@ -41,6 +41,9 @@ const GameSetting = () => {
                drop-shadow(0px -${sliderThumbBorderWidth} 0px #000)
                drop-shadow(${sliderThumbBorderWidth} 0px 0px #000)
                drop-shadow(-${sliderThumbBorderWidth} 0px 0px #000)`,
+      '&:hover': {
+        boxShadow: 'none',
+      }
     },
     '& .MuiSlider-track': {
       backgroundColor: '#4356FF',
