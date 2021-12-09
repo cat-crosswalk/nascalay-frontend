@@ -22,6 +22,7 @@ const GameSetting = () => {
       label: 'ながい',
     },
   ]
+  const sliderThumbBorderWidth = '2px'
   const CustomSlider = styled(Slider)({
     height: '16px',
     borderRadius: 0,
@@ -36,6 +37,10 @@ const GameSetting = () => {
       borderWidth: '21.7px 12.5px 0 12.5px',
       borderColor: '#ff0000 transparent transparent transparent',
       backgroundColor: 'transparent',
+      filter: `drop-shadow(0px ${sliderThumbBorderWidth} 0px #000)
+               drop-shadow(0px -${sliderThumbBorderWidth} 0px #000)
+               drop-shadow(${sliderThumbBorderWidth} 0px 0px #000)
+               drop-shadow(-${sliderThumbBorderWidth} 0px 0px #000)`,
     },
     '& .MuiSlider-track': {
       backgroundColor: '#4356FF',
