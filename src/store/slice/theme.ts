@@ -11,7 +11,7 @@ export const themeSlice = createSlice({
   initialState,
   reducers: {
     setTheme: (state, action: PayloadAction<WsGameStartEventBody>) => {
-      state = action.payload
+      return action.payload
     },
   },
 })

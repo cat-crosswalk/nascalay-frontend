@@ -14,7 +14,7 @@ export const roomSlice = createSlice({
   initialState,
   reducers: {
     setRoom: (state, action: PayloadAction<Room>) => {
-      state = action.payload
+      return action.payload
     },
   },
 })

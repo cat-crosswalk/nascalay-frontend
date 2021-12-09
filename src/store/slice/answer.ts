@@ -11,7 +11,7 @@ export const answerSlice = createSlice({
   initialState,
   reducers: {
     setAnswer: (state, action: PayloadAction<WsAnswerStartEventBody>) => {
-      state = action.payload
+      return action.payload
     },
   },
 })
