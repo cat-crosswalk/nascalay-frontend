@@ -8,7 +8,7 @@ const Lobby = () => {
   useEffect(() => {
     // websocket接続
     setupWebSocket(userId)
-  }, [])
+  }, [userId])
 
   return (
     <div>
