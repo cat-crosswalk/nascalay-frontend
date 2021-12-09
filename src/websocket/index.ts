@@ -23,4 +23,7 @@ export const setupWebSocket = (userId: string) => {
 
 export * from './send'
 export { WsEvent } from '/@/utils/apis/index'
-export type { WsClientReceiveMessage, WsClientSendMessage } from './AutoReconnectWebSocket'
+export type {
+  WsClientReceiveMessage,
+  WsClientSendMessage,
+} from './AutoReconnectWebSocket'

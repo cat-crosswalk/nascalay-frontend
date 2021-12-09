@@ -1,5 +1,5 @@
 import { wait } from '/@/utils/timer'
-import {WsSendMessage, WsReceiveMessage} from '/@/utils/apis'
+import { WsSendMessage, WsReceiveMessage } from '/@/utils/apis'
 
 export interface Options {
   maxReconnectionDelay: number
