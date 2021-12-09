@@ -16,20 +16,22 @@ const App = () => {
     addPageEventListener(navigate, dispatch)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  const style = css`
+    ${emotionReset}
+    *, *::after, *::before {
+      box-sizing: border-box;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-smooth: auto;
+    }
+    body {
+      background-color: #96a0c0;
+      background-image: url(/@/assets/bg.svg);
+    }
+  `
   return (
     <div>
-      <Global
-        styles={css`
-          ${emotionReset}
-
-          *, *::after, *::before {
-            box-sizing: border-box;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-font-smoothing: antialiased;
-            font-smooth: auto;
-          }
-        `}
-      />
+      <Global styles={style} />
       <header>Welcome to React Router!</header>
       <Router />
     </div>
