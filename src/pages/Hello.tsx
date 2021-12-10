@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useState, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import Icon from '@mdi/react'
+import { mdiEraser } from '@mdi/js'
 
 import api, { Room } from '/@/utils/apis/index'
 import { wsSend, wsListener, WsEvent } from '/@/websocket/index'
@@ -129,7 +131,7 @@ const Hello = () => {
             checked={penType === 'eraser'}
             onChange={() => setPenType('eraser')}
           />
-          <label htmlFor="eraser">eraser</label>
+          <label htmlFor="eraser"><Icon path={mdiEraser} size={1} /></label>
           <input
             type="radio"
             id="bucket"
