@@ -8,6 +8,8 @@ import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { wsSend } from '/@/websocket'
 
+import FlatButton from '/@/components/FlatButton'
+
 const GameSetting = () => {
   const [time, setTime] = useState(1)
   const handleChange = (event: Event, newValue: number | number[]) => {
@@ -67,7 +69,7 @@ const GameSetting = () => {
       </div>
       {isHost && (
         <div css={startButtonStyle}>
-          <button onClick={requestGameStart}>スタート</button>
+          <FlatButton text="スタート" onClick={requestGameStart} color="blue" />
         </div>
       )}
     </div>
