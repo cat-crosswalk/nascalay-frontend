@@ -16,6 +16,7 @@ import { wsSend } from '/@/websocket'
 import FlatButton from '/@/components/FlatButton'
 
 const GameSetting = () => {
+  // ゲーム設定
   const [time, setTime] = useState(1)
   const handleChange = (event: Event, newValue: number | number[]) => {
     // TODO ゲーム設定を送信する

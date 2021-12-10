@@ -1,14 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
+import { useAppSelector, useAppDispatch } from '/@/store/hooks'
 
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
-import { useAppSelector } from '/@/store/hooks'
-
+import { WsEvent, wsListener } from '/@/websocket'
 import Member from './member'
+import { setRoom } from '/@/store/slice/room'
 
 const MemberList = () => {
   const memberList = useAppSelector((state) => state.room.members)
+  const dispatch = useAppDispatch()
+  
+  useEffect(() => {
+    const joinNewMember = (e: CustomEvent) => {
+      dispatch(setRoom(e.detail))
+    }
+    wsListener.addEventListener(WsEvent.RoomNewMember, joinNewMember as EventListener)
+
+    return () => {
+      wsListener.removeEventListener(WsEvent.RoomNewMember, joinNewMember as EventListener)
+    }
+  }, [dispatch])
   return (
     <div css={[containerStyle, card]}>
       <h2 css={titleStyle}>参加者</h2>
