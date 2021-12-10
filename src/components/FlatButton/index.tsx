@@ -14,7 +14,6 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
     <button
       onClick={props.onClick}
       css={css`
-        margin: 32px;
         position: relative;
         font-size: 32px;
         background-color: ${colorToRgb[props.color]};
