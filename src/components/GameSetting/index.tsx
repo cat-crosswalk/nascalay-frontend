@@ -40,6 +40,11 @@ const GameSetting = () => {
     wsSend.requestGameStart()
   }, [])
 
+  const handleCopy = () => {
+    inputField.current?.select()
+    document.execCommand('copy')
+  }
+
   const marks = [
     {
       value: 0,
@@ -81,7 +86,7 @@ const GameSetting = () => {
             onFocus={inputFocus}
           />
           <div css={inviteButtonStyle}>
-            <button >
+            <button onClick={handleCopy}>
               <Icon path={mdiClipboardMultiple} size={1.8} />
             </button>
           </div>
