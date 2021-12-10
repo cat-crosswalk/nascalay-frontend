@@ -86,6 +86,7 @@ const subTitleStyle = css`
 `
 
 const containerStyle = css`
+  width: 100%;
   background-color: ${colorToRgb.red};
   padding: 36px 48px;
   padding-top: 12px;

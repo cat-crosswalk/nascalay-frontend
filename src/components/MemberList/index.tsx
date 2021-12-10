@@ -26,6 +26,7 @@ const MemberList = () => {
 }
 
 const containerStyle = css`
+  width: 100%;
   background-color: ${colorToRgb.white};
   padding: 36px 48px;
   padding-top: 12px;

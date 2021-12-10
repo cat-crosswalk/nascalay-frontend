@@ -32,7 +32,7 @@ const Lobby = () => {
 
 const pageContainer = css`
   width: 80%;
-  max-width: 1024px;
+  max-width: 1100px;
   margin: 0 auto;
 `
 
@@ -45,6 +45,7 @@ const title = css`
 
 const container = css`
   display: flex;
+  gap: 2rem;
 `
 
 export default Lobby
