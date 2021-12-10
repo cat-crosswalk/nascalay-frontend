@@ -79,7 +79,7 @@ const Draw = () => {
           penSize={10}
           color={penColor}
           width={800}
-          height={600}
+          height={800}
           adjacentColors={[
             ['blue', null, 'yellow'],
             [null, null, null],
