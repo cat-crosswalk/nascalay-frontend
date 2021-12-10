@@ -12,6 +12,8 @@ export type Props = {
   color: `#${string}`
   penSize: number
   penType: 'pen' | 'eraser' | 'bucket'
+  width: number
+  height: number
 }
 export interface Handler {
   clear(): void
@@ -208,8 +210,8 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   return (
     <canvas
       ref={canvasRef}
-      width="500"
-      height="500"
+      width={props.width - 2}
+      height={props.height - 2}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseOut={mouseOut}
