@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { DrawStartEvent } from '/@/utils/apis/generated'
+import { WsDrawStartEventBody } from '/@/utils/apis/generated'
 
-const initialState: DrawStartEvent = {
+const initialState: WsDrawStartEventBody = {
   timeLimit: 40,
   canvas: {
     boardName: '',
@@ -17,8 +17,8 @@ export const drawSlice = createSlice({
   name: 'draw',
   initialState,
   reducers: {
-    setDraw: (state, action: PayloadAction<DrawStartEvent>) => {
-      state = action.payload
+    setDraw: (state, action: PayloadAction<WsDrawStartEventBody>) => {
+      return action.payload
     },
   },
 })

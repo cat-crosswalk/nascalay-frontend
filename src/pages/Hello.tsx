@@ -3,9 +3,8 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import api, { Room } from '/@/utils/apis/index'
-import { setupWebSocket, wsSend, wsListener, WsEvent } from '/@/websocket/index'
+import { wsSend, wsListener, WsEvent } from '/@/websocket/index'
 
-import { useAppSelector } from '/@/store/hooks'
 import MyCanvas, {
   Handler as CanvasHandler,
   Props as CanvasProps,
@@ -17,11 +16,6 @@ const Hello = () => {
     font-size: 10em;
     margin: 0.5em;
   `
-
-  // test *********
-  // TODO: webSocketに接続するときに1回呼び出せれば良いので，どこに置くか考えておく
-  setupWebSocket(useAppSelector((state) => state.user.userId))
-  // **************
 
   const { name } = useParams()
   const [room, setRoom] = useState<Room | null>(null)

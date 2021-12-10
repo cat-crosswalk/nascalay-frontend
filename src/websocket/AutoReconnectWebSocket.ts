@@ -1,5 +1,5 @@
 import { wait } from '/@/utils/timer'
-import { InlineObject } from '/@/utils/apis'
+import { WsSendMessage, WsReceiveMessage } from '/@/utils/apis'
 
 export interface Options {
   maxReconnectionDelay: number
@@ -12,6 +12,9 @@ const defaultOptions: Options = {
   minReconnectionDelay: 700,
   connectionTimeout: 4000,
 }
+
+export type WsClientSendMessage = WsReceiveMessage
+export type WsClientReceiveMessage = WsSendMessage
 
 export default class AutoReconnectWebSocket {
   _ws?: WebSocket
@@ -46,7 +49,7 @@ export default class AutoReconnectWebSocket {
     this.fullUrl = `${this.url}?user=${id}`
   }
 
-  send(message: InlineObject) {
+  send(message: WsClientSendMessage) {
     // TODO: WebSocketが未接続とかで送信できなかった場合の処理
     if (this.isOpen) {
       const json = JSON.stringify(message)
@@ -91,7 +94,7 @@ export default class AutoReconnectWebSocket {
       this._ws.addEventListener('message', (event) => {
         console.log('[WebSocket] Message', event)
         try {
-          const message: InlineObject = JSON.parse(event.data)
+          const message: WsClientReceiveMessage = JSON.parse(event.data)
           this.eventTarget.dispatchEvent(
             new CustomEvent(message.type ?? 'message', { detail: message.body })
           )
