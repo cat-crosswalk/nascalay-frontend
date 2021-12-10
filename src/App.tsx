@@ -28,6 +28,12 @@ const App = () => {
             -webkit-font-smoothing: antialiased;
             font-smooth: auto;
           }
+
+          body {
+            font-family: 'Kiwi Maru', -apple-system, BlinkMacSystemFont,
+              'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+              'Droid Sans', 'Helvetica Neue', sans-serif;
+          }
         `}
       />
       <header>Welcome to React Router!</header>
