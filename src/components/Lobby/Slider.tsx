@@ -1,10 +1,9 @@
-import React from 'react'
 import { styled } from '@mui/material/styles'
 import Slider from '@mui/material/Slider'
 
 const CustomSlider = styled(Slider)({
-  marginTop: '20px',
-  marginBottom: '0px',
+  width: 'calc(100% - 48px)',
+  margin: '36px 24px',
   height: '12px',
   borderRadius: 0,
   border: '3px solid #000',
@@ -44,6 +43,9 @@ const CustomSlider = styled(Slider)({
   },
   '& .MuiSlider-mark': {
     display: 'none',
+  },
+  '& .MuiSlider-markLabel': {
+    top: '18px',
   },
   '& .Mui-active': {
     boxShadow: 'none',
