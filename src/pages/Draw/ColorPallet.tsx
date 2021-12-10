@@ -68,18 +68,33 @@ const palletColor: { hex: `#${string}`; whiteLike?: boolean }[] = [
   },
 ]
 
-const ColorPallet = () => {
+type Props = {
+  value?: number,
+  onChange?: (color: typeof palletColor[number]['hex']) => void,
+}
+
+const ColorPallet = (props: Props) => {
   const [vivus, setVivus] = React.useState<Vivus | null>(null)
-  const [selectedColorIndex, setSelectedColorIndex] = React.useState<number>(11)
+  const [selectedColorIndex, setSelectedColorIndex] = React.useState<number>(props.value ?? 11)
   const animDuration = 50
   const changeSelectedColor = useCallback(
     (index: number) => {
       setSelectedColorIndex(index)
+      if (props.onChange) {
+        props.onChange(palletColor[index].hex)
+      }
       vivus?.reset()
       vivus?.play()
     },
-    [setSelectedColorIndex, vivus],
+    [props, vivus],
   )
+
+  useEffect(() => {
+    if (props.onChange) {
+      props.onChange(palletColor[selectedColorIndex].hex)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setVivus(
