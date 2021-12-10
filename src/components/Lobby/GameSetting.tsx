@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { css } from '@emotion/react'
 import CustomSlider from './Slider'
-import {card} from '/@/styles/card'
+import { card } from '/@/styles/card'
 
 const GameSetting = () => {
   const sliderStyle = css`
@@ -31,7 +31,14 @@ const GameSetting = () => {
         <h2>ゲーム設定</h2>
         <div css={sliderStyle}>
           <p>時間設定</p>
-          <CustomSlider defaultValue={1} max={2} min={0} marks={marks} value={time} onChange={handleChange}/>
+          <CustomSlider
+            defaultValue={1}
+            max={2}
+            min={0}
+            marks={marks}
+            value={time}
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div>

@@ -15,7 +15,7 @@ const CustomSlider = styled(Slider)({
     height: 0,
     borderRadius: 0,
     borderStyle: 'solid',
-    
+
     borderWidth: '27.7px 16px 0 16px',
     borderColor: '#000 transparent transparent transparent',
     backgroundColor: 'transparent',
@@ -33,7 +33,7 @@ const CustomSlider = styled(Slider)({
       borderStyle: 'solid',
       borderWidth: '19.1px 11px 0 11px',
       boxShadow: 'none',
-    }
+    },
   },
   '& .MuiSlider-track': {
     display: 'none',
@@ -50,7 +50,7 @@ const CustomSlider = styled(Slider)({
   },
   '& 	.MuiSlider-trackFalse': {
     boxShadow: 'none',
-  }
+  },
 })
 
 export default CustomSlider
