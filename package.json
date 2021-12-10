@@ -17,7 +17,7 @@
     "gen-api": "openapi-generator-cli generate -g typescript-axios -i https://raw.githubusercontent.com/21hack02win/nascalay-backend/main/docs/openapi.yml -o ./src/utils/apis/generated/"
   },
   "lint-staged": {
-    "src/*.{js,jsx,ts,tsx,html,css}": [
+    "src/*.{js,jsx,ts,tsx,html}": [
       "eslint",
       "prettier --check"
     ]
