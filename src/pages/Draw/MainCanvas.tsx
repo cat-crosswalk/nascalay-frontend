@@ -104,15 +104,15 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
       <span
         css={css`
           position: absolute;
-          top: ${props.height / 7}px;
-          left: ${props.width / 7}px;
+          top: ${props.height / 7 + 1.5}px;
+          left: ${props.width / 7 + 1.5}px;
           z-index: 4;
         `}
       >
         <Canvas
           {...props}
-          width={(props.width * 5) / 7}
-          height={(props.height * 5) / 7}
+          width={(props.width * 5) / 7 - 3}
+          height={(props.height * 5) / 7 - 3}
           ref={ref}
         />
       </span>
