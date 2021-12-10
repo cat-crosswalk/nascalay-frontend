@@ -31,6 +31,6 @@ export default defineConfig({
     },
   },
   define: {
-    ENV_STAGE: process.env.STAGE ?? JSON.stringify('development')
+    VITE_ENV_STAGE: process.env.STAGE ?? JSON.stringify('development')
   }
 })
