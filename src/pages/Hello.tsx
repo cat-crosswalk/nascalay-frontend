@@ -157,7 +157,9 @@ const Hello = () => {
             checked={penType === 'eraser'}
             onChange={() => setPenType('eraser')}
           />
-          <label htmlFor="eraser"><Icon path={mdiEraser} size={1} /></label>
+          <label htmlFor="eraser">
+            <Icon path={mdiEraser} size={1} />
+          </label>
           <input
             type="radio"
             id="bucket"
