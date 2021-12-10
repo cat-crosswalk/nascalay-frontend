@@ -8,7 +8,7 @@
     "serve": "vite preview",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx --cache --ignore-path .gitignore",
-    "lint:prettier": "prettier **/*.{js,jsx,ts,tsx} --check --ignore-path .gitignore",
+    "lint:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check --ignore-path .gitignore",
     "lint:typecheck": "tsc",
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "yarn lint:eslint --fix",
@@ -25,6 +25,7 @@
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.3",
     "@mdi/js": "^6.5.95",
     "@mdi/react": "^1.5.0",
     "@reduxjs/toolkit": "^1.6.2",
