@@ -15,7 +15,6 @@ const GameSetting = () => {
   }
   const isHost = true // TODO
   const roomId = useAppSelector((state) => state.room.roomId)
-  console.log(location)
   const [inviteUrl, setInviteUrl] = useState('')
   useEffect(() => {
     const url = location.protocol + '//' + location.host + '?c=' + roomId
