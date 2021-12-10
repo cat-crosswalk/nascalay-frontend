@@ -42,14 +42,14 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
           content: '';
           transition: all 0.2s ease-out;
           ${props.selected
-      ? `
+            ? `
             top: 6px;
             left: 6px;
             bottom: 6px;
             right: 6px;
             border: 3px solid rgba(0, 0, 0, 1);
           `
-      : `
+            : `
             top: 0;
             left: 0;
             bottom: 0;

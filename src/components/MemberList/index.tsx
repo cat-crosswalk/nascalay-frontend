@@ -1,7 +1,8 @@
 import React from 'react'
 import { css } from '@emotion/react'
 
-import { card, gameCardColor, borderColor, accentColor } from '/@/styles'
+import { card } from '/@/utils/card'
+import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 
 import Member from './member'
@@ -25,7 +26,7 @@ const MemberList = () => {
 }
 
 const containerStyle = css`
-  background-color: #fff;
+  background-color: ${colorToRgb.white};
   padding: 36px 48px;
   padding-top: 12px;
 `

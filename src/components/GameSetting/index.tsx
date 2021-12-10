@@ -3,7 +3,8 @@ import { css } from '@emotion/react'
 import Icon from '@mdi/react'
 import { mdiClipboardMultiple } from '@mdi/js'
 import CustomSlider from './Slider'
-import { card, gameCardColor, borderColor, accentColor } from '/@/styles'
+import { card } from '/@/utils/card'
+import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { wsSend } from '/@/websocket'
 
@@ -59,7 +60,7 @@ const GameSetting = () => {
         <h2 css={titleStyle}>招待</h2>
         <div css={inviteWrapStyle}>
           <div css={urlStyle}>{inviteUrl}</div>
-          <button css={copyButtonStyle}>
+          <button>
             <Icon path={mdiClipboardMultiple} size={1.8} />
           </button>
         </div>
@@ -83,21 +84,14 @@ const subTitleStyle = css`
 `
 
 const containerStyle = css`
-  background-color: ${gameCardColor};
+  background-color: ${colorToRgb.red};
   padding: 36px 48px;
   padding-top: 12px;
 `
 
-const copyButtonStyle = css`
-  border: solid 3px ${borderColor};
-  background-color: #96a0c0;
-  width: 64px;
-  height: 64px;
-`
-
 const urlStyle = css`
-  background-color: ${accentColor};
-  border: solid 3px ${borderColor};
+  background-color: ${colorToRgb.yellow};
+  border: solid 3px ${colorToRgb.black};
   height: 64px;
   width: 100%;
   margin-right: 20px;
@@ -117,8 +111,8 @@ const startButtonStyle = css`
   margin-top: 3rem;
   & button {
     font-size: 2rem;
-    background-color: #96a0c0;
-    border: solid 3px ${borderColor};
+    background-color: ${colorToRgb.blue};
+    border: solid 3px ${colorToRgb.black};
     height: 80px;
     line-height: 80px;
     vertical-align: middle;

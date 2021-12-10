@@ -5,7 +5,8 @@ import { setupWebSocket } from '/@/websocket'
 import GameSetting from '/@/components/GameSetting'
 import MemberList from '/@/components/MemberList'
 
-import { card, gameCardColor, borderColor, accentColor } from '/@/styles'
+import { colorToRgb } from '/@/utils/color'
+import { card } from '/@/utils/card'
 
 // 待機部屋(ROOM)
 const Lobby = () => {
@@ -37,7 +38,7 @@ const pageContainer = css`
 
 const title = css`
   display: flex;
-  background-color: ${accentColor};
+  background-color: ${colorToRgb.yellow};
   margin: 1em 0;
   padding: 1em 4em;
 `
