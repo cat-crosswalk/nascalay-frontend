@@ -6,7 +6,7 @@ type Props = {
   text: string
   color: ColorType
   selected?: boolean
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 const FlatButton: React.VFC<Props> = (props: Props) => {
