@@ -1,19 +1,26 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import Icon from '@mdi/react'
 import { mdiClipboardMultiple } from '@mdi/js'
 import CustomSlider from './Slider'
 import { card, gameCardColor, borderColor, accentColor } from '/@/styles'
-
+import { useAppSelector } from '/@/store/hooks'
 import { wsSend } from '/@/websocket'
 
 const GameSetting = () => {
   const [time, setTime] = useState(1)
   const handleChange = (event: Event, newValue: number | number[]) => {
+    // TODO
     setTime(newValue as number)
   }
   const isHost = true // TODO
-  const inviteUrl = 'https://www.google.com' // TODO
+  const roomId = useAppSelector((state) => state.room.roomId)
+  console.log(location)
+  const [inviteUrl, setInviteUrl] = useState('')
+  useEffect(() => {
+    const url = location.protocol + '//' + location.host + '?c=' + roomId
+    setInviteUrl(url)
+  }, [roomId])
 
   const requestGameStart = useCallback(() => {
     wsSend.requestGameStart()
@@ -53,14 +60,16 @@ const GameSetting = () => {
         <h2 css={titleStyle}>招待</h2>
         <div css={inviteWrapStyle}>
           <div css={urlStyle}>{inviteUrl}</div>
-          <button css={copyButtonStyle}><Icon path={mdiClipboardMultiple} size={1.8}/></button>
+          <button css={copyButtonStyle}>
+            <Icon path={mdiClipboardMultiple} size={1.8} />
+          </button>
         </div>
       </div>
-      {isHost &&
-      <div css={startButtonStyle}>
-        <button onClick={requestGameStart}>スタート</button>
-      </div>
-      }
+      {isHost && (
+        <div css={startButtonStyle}>
+          <button onClick={requestGameStart}>スタート</button>
+        </div>
+      )}
     </div>
   )
 }
@@ -82,7 +91,7 @@ const containerStyle = css`
 
 const copyButtonStyle = css`
   border: solid 3px ${borderColor};
-  background-color: #96A0C0;
+  background-color: #96a0c0;
   width: 64px;
   height: 64px;
 `
@@ -109,7 +118,7 @@ const startButtonStyle = css`
   margin-top: 3rem;
   & button {
     font-size: 2rem;
-    background-color: #96A0C0;
+    background-color: #96a0c0;
     border: solid 3px ${borderColor};
     height: 80px;
     line-height: 80px;
