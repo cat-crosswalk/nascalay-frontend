@@ -1,10 +1,11 @@
 import { WEBSOCKET_ENDPOINT, BASE_URL } from '/@/utils/wsSetting'
 import AutoReconnectWebSocket from './AutoReconnectWebSocket'
 
-const baseUrl = (import.meta.env.VITE_ENV_STAGE === 'development') ? BASE_URL : location.protocol + '//' + location.host
-const wsEndpoint = (import.meta.env.VITE_ENV_STAGE === 'development') ? '/api' + WEBSOCKET_ENDPOINT : '/ws'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const baseUrl = (VITE_ENV_STAGE === 'development') ? BASE_URL : location.protocol + '//' + location.host
 
-const absoluteWebsocketEndpoint = new URL(wsEndpoint, baseUrl)
+const absoluteWebsocketEndpoint = new URL(WEBSOCKET_ENDPOINT, baseUrl)
 absoluteWebsocketEndpoint.protocol =
   window.location.protocol === 'https:' ? 'wss:' : 'ws:'
 
