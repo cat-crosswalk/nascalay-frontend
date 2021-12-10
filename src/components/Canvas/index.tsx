@@ -123,8 +123,8 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const rect = canvasRef.current!.getBoundingClientRect()
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: Math.round(e.clientX - rect.left),
+      y: Math.round(e.clientY - rect.top),
     }
   }, [])
   const draw = useCallback(
