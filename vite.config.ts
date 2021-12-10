@@ -27,7 +27,10 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         ws: true,
-      },
+      }
     },
   },
+  define: {
+    ENV_STAGE: process.env.STAGE ?? JSON.stringify('development')
+  }
 })
