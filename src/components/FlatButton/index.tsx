@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React from 'react'
-import { ColorType, colorToRgb } from '/@/utils/colorMapping'
+import { ColorType, colorToRgb } from '/@/utils/color'
 
 type Props = {
   text: string
