@@ -15,7 +15,11 @@ $ yarn dev
 ```sh
 $ yarn lint
 ```
-
+### enviroment
+```sh
+$ yarn gen-api
+```
+にはjava環境が必要です。
 ## Production
 
 ### Building
