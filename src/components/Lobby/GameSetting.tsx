@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
 import { css } from '@emotion/react'
-import { styled } from '@mui/material/styles'
-import Slider from '@mui/material/Slider'
+import CustomSlider from './Slider'
+import {card} from '/@/styles/card'
 
 const GameSetting = () => {
   const sliderStyle = css`
-    width: 50%;
     margin: 60px;
   `
   const [time, setTime] = useState(1)
@@ -26,56 +25,8 @@ const GameSetting = () => {
       label: 'ながい',
     },
   ]
-  const CustomSlider = styled(Slider)({
-    height: '12px',
-    borderRadius: 0,
-    border: '3px solid #000',
-    padding: '0px',
-    '& .MuiSlider-thumb': {
-      marginTop: '-12px',
-      width: 0,
-      height: 0,
-      borderRadius: 0,
-      borderStyle: 'solid',
-      
-      borderWidth: '27.7px 16px 0 16px',
-      borderColor: '#000 transparent transparent transparent',
-      backgroundColor: 'transparent',
-      boxShadow: 'none',
-      '&:hover': {
-        boxShadow: 'none',
-      },
-      '&::before': {
-        marginTop: '-30px',
-        content: '""',
-        display: 'block',
-        borderColor: '#fff transparent transparent transparent',
-        width: 0,
-        height: 0,
-        borderStyle: 'solid',
-        borderWidth: '19.1px 11px 0 11px',
-        boxShadow: 'none',
-      }
-    },
-    '& .MuiSlider-track': {
-      display: 'none',
-    },
-    '& .MuiSlider-rail': {
-      backgroundColor: '#4356FF',
-      opacity: 1,
-    },
-    '& .MuiSlider-mark': {
-      display: 'none',
-    },
-    '& .Mui-active': {
-      boxShadow: 'none',
-    },
-    '& 	.MuiSlider-trackFalse': {
-      boxShadow: 'none',
-    }
-  })
   return (
-    <div>
+    <div css={card}>
       <div>
         <h2>ゲーム設定</h2>
         <div css={sliderStyle}>
