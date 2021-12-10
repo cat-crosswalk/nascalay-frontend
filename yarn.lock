@@ -583,6 +583,11 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
+"@types/vivus@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@types/vivus/-/vivus-0.4.4.tgz#d798db5402566d35978efaf913c25452ca2eb39d"
+  integrity sha512-eE7dV8JjjkLpTvZKQomknJssib0A1kCkC7fG1NMVSp/4Am/gjNsn9o0XtZXNmXJYHVddHbHL/M0OJIVhoVioeA==
+
 "@typescript-eslint/eslint-plugin@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.5.0.tgz#12d5f47f127af089b985f3a205c0e34a812f8fce"
@@ -3118,6 +3123,11 @@ vite@^2.6.4:
     rollup "^2.57.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+vivus@^0.4.6:
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/vivus/-/vivus-0.4.6.tgz#60661b43d08aaa70efc1854dfd2f1583f2066608"
+  integrity sha512-q6cDPTGqw/bq9sKF2h2T6GJ9PlwAFncHq7MdaK95WTSyd/7gz//UHTZbJ3B+r8f7AhcISPTC3sv9+u65BmmFbw==
 
 wcwidth@>=1.0.1, wcwidth@^1.0.1:
   version "1.0.1"

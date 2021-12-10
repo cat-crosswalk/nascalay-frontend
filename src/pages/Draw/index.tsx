@@ -1,6 +1,7 @@
 import { mdiEraser } from '@mdi/js'
 import Icon from '@mdi/react'
 import React, { useCallback, useState } from 'react'
+import ColorPallet from './ColorPallet'
 import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
@@ -31,47 +32,11 @@ const Draw = () => {
   }, [])
   const [penType, setPenType] = useState<MainCanvasProps['penType']>('pen')
   const [penColor, setPenColor] = useState<MainCanvasProps['color']>('#f00')
-  const selectableColor: {
-    name: string
-    color: MainCanvasProps['color']
-  }[] = [
-    {
-      name: 'red',
-      color: '#f00',
-    },
-    {
-      name: 'green',
-      color: '#0f0',
-    },
-    {
-      name: 'blue',
-      color: '#00f',
-    },
-    {
-      name: 'black',
-      color: '#000',
-    },
-    {
-      name: 'white',
-      color: '#fff',
-    },
-    {
-      name: 'yellow',
-      color: '#ff0',
-    },
-    {
-      name: 'orange',
-      color: '#f60',
-    },
-    {
-      name: 'pink',
-      color: '#f0f',
-    },
-  ]
 
   return (
     <div>
       <h1>Draw</h1>
+      <ColorPallet onChange={setPenColor} />
       <div onKeyDown={shortcut} tabIndex={-1}>
         <MainCanvas
           ref={canvasRef}
@@ -121,21 +86,6 @@ const Draw = () => {
             onChange={() => setPenType('bucket')}
           />
           <label htmlFor="bucket">bucket</label>
-        </div>
-        <div>
-          {selectableColor.map((color) => (
-            <React.Fragment key={`${color.name}-wrapper`}>
-              <input
-                type="radio"
-                id={color.name}
-                name="color"
-                value={color.color}
-                checked={penColor === color.color}
-                onChange={() => setPenColor(color.color)}
-              />
-              <label htmlFor={color.name}>{color.name}</label>
-            </React.Fragment>
-          ))}
         </div>
       </div>
     </div>
