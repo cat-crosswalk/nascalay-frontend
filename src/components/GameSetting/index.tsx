@@ -13,10 +13,13 @@ import FlatButton from '/@/components/FlatButton'
 const GameSetting = () => {
   // ゲーム設定
   const [time, setTime] = useState(1)
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    // TODO ゲーム設定を送信する
-    setTime(newValue as number)
-  }
+  const handleChange = useCallback(
+    (event: Event, newValue: number | number[]) => {
+      // TODO ゲーム設定を送信する
+      setTime(newValue as number)
+    },
+    []
+  )
 
   // ホストかどうか判定する
   const hostId = useAppSelector((state) => state.room.hostId)
