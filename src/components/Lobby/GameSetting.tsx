@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { css } from '@emotion/react'
 import { styled } from '@mui/material/styles'
 import Slider from '@mui/material/Slider'
@@ -8,6 +8,10 @@ const GameSetting = () => {
     width: 50%;
     margin: 60px;
   `
+  const [time, setTime] = useState(1)
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    setTime(newValue as number)
+  }
   const marks = [
     {
       value: 0,
@@ -22,7 +26,6 @@ const GameSetting = () => {
       label: 'ながい',
     },
   ]
-  const sliderThumbBorderWidth = '2px'
   const CustomSlider = styled(Slider)({
     height: '12px',
     borderRadius: 0,
@@ -67,6 +70,9 @@ const GameSetting = () => {
     '& .Mui-active': {
       boxShadow: 'none',
     },
+    '& 	.MuiSlider-trackFalse': {
+      boxShadow: 'none',
+    }
   })
   return (
     <div>
@@ -74,7 +80,7 @@ const GameSetting = () => {
         <h2>ゲーム設定</h2>
         <div css={sliderStyle}>
           <p>時間設定</p>
-          <CustomSlider defaultValue={1} max={2} min={0} marks={marks} />
+          <CustomSlider defaultValue={1} max={2} min={0} marks={marks} value={time} onChange={handleChange}/>
         </div>
       </div>
       <div>
