@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { WsGameStartEventBody } from '/@/utils/apis/generated'
 
 const initialState: WsGameStartEventBody = {
-  odaiHint: '',
+  odaiExample: '',
   timeLimit: 40,
 }
 
