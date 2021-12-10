@@ -18,28 +18,33 @@ import FlatButton from '/@/components/FlatButton'
 const GameSetting = () => {
   const [time, setTime] = useState(1)
   const handleChange = (event: Event, newValue: number | number[]) => {
-    // TODO
+    // TODO ゲーム設定を送信する
     setTime(newValue as number)
   }
-  const isHost = true // TODO
+
+  // ホストかどうか判定する
+  const hostId = useAppSelector(state => state.room.hostId)
+  const myId = useAppSelector(state => state.user.userId)
+  const [isHost, setIsHost] = useState(false)
+  useEffect(() => {
+    setIsHost(hostId === myId)
+  },[hostId, myId])
+
+  // 招待URLを設定する
   const roomId = useAppSelector((state) => state.room.roomId)
-  const [inviteUrl, setInviteUrl] = useState('')
   const [shortUrl, setShortUrl] = useState('')
   useEffect(() => {
-    const url = location.protocol + '//' + location.host + '?c=' + roomId
-    setInviteUrl(url)
     setShortUrl(location.host + '?c=' + roomId)
   }, [roomId])
 
+  // 招待URLのコピー・選択
   const inputField = useRef<HTMLInputElement>(null)
   const inputFocus = useCallback(() => {
     inputField.current?.select()
   }, [])
-
   const requestGameStart = useCallback(() => {
     wsSend.requestGameStart()
   }, [])
-
   const handleCopy = () => {
     inputField.current?.select()
     document.execCommand('copy')
@@ -142,7 +147,8 @@ const startButtonStyle = css`
 const inviteButtonStyle = css`
   position: relative;
   & button {
-    backgronud-color: ${colorToRgb.blue};
+    background-color: ${colorToRgb.blue};
+    border: solid 3px ${colorToRgb.black};
     width: 64px;
     height: 64px;
     &::after {

@@ -52,7 +52,6 @@ const title = css`
 const container = css`
   display: flex;
   gap: 2rem;
-  height: 60vh;
 `
 
 export default Lobby
