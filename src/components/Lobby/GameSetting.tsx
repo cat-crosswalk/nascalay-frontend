@@ -24,39 +24,48 @@ const GameSetting = () => {
   ]
   const sliderThumbBorderWidth = '2px'
   const CustomSlider = styled(Slider)({
-    height: '16px',
+    height: '12px',
     borderRadius: 0,
     border: '3px solid #000',
     padding: '0px',
     '& .MuiSlider-thumb': {
-      marginTop: '-20px',
+      marginTop: '-12px',
       width: 0,
       height: 0,
       borderRadius: 0,
       borderStyle: 'solid',
-      borderWidth: '21.7px 12.5px 0 12.5px',
-      borderColor: '#ff0000 transparent transparent transparent',
+      
+      borderWidth: '27.7px 16px 0 16px',
+      borderColor: '#000 transparent transparent transparent',
       backgroundColor: 'transparent',
-      filter: `drop-shadow(0px ${sliderThumbBorderWidth} 0px #000)
-               drop-shadow(0px -${sliderThumbBorderWidth} 0px #000)
-               drop-shadow(${sliderThumbBorderWidth} 0px 0px #000)
-               drop-shadow(-${sliderThumbBorderWidth} 0px 0px #000)`,
+      boxShadow: 'none',
       '&:hover': {
+        boxShadow: 'none',
+      },
+      '&::before': {
+        marginTop: '-30px',
+        content: '""',
+        display: 'block',
+        borderColor: '#fff transparent transparent transparent',
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderWidth: '19.1px 11px 0 11px',
         boxShadow: 'none',
       }
     },
     '& .MuiSlider-track': {
-      backgroundColor: '#4356FF',
+      display: 'none',
     },
     '& .MuiSlider-rail': {
       backgroundColor: '#4356FF',
       opacity: 1,
     },
-    '&:hover .MuiSlider-thumb': {
-      boxShadow: '0 0 0 0 rgba(255,0,0,0.5)',
-    },
     '& .MuiSlider-mark': {
       display: 'none',
+    },
+    '& .Mui-active': {
+      boxShadow: 'none',
     },
   })
   return (
