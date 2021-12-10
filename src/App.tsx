@@ -29,7 +29,9 @@ const App = () => {
             font-smooth: auto;
           }
 
-          body {
+          body,
+          input,
+          button {
             font-family: 'Kiwi Maru', -apple-system, BlinkMacSystemFont,
               'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
               'Droid Sans', 'Helvetica Neue', sans-serif;
