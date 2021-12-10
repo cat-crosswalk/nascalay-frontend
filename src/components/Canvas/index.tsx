@@ -210,15 +210,12 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   return (
     <canvas
       ref={canvasRef}
-      width={props.width - 2}
-      height={props.height - 2}
+      width={props.width}
+      height={props.height}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseOut={mouseOut}
       onMouseMove={mouseMove}
-      css={css({
-        border: '1px solid #000',
-      })}
     ></canvas>
   )
 }

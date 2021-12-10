@@ -51,16 +51,29 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
           })
         }
         ctx.strokeStyle = '#000'
-        ctx.lineWidth = 1
+        ctx.lineWidth = 3
         ctx.beginPath()
         ctx.moveTo(canvas.width / 7, 0)
+        ctx.lineTo(canvas.width / 7, canvas.height / 7)
+        ctx.lineTo(0, canvas.height / 7)
+        ctx.moveTo(canvas.width, canvas.height / 7)
+        ctx.lineTo(canvas.width * 6 / 7, canvas.height / 7)
+        ctx.lineTo(canvas.width * 6 / 7, 0)
+        ctx.moveTo(canvas.width * 6 / 7, canvas.height)
+        ctx.lineTo(canvas.width * 6 / 7, canvas.height * 6 / 7)
+        ctx.lineTo(canvas.width, canvas.height * 6 / 7)
+        ctx.moveTo(0, canvas.height * 6 / 7)
+        ctx.lineTo(canvas.width / 7, canvas.height * 6 / 7)
         ctx.lineTo(canvas.width / 7, canvas.height)
-        ctx.moveTo((canvas.width * 6) / 7, 0)
-        ctx.lineTo((canvas.width * 6) / 7, canvas.height)
-        ctx.moveTo(0, canvas.height / 7)
-        ctx.lineTo(canvas.width, canvas.height / 7)
-        ctx.moveTo(0, (canvas.height * 6) / 7)
-        ctx.lineTo(canvas.width, (canvas.height * 6) / 7)
+        ctx.stroke()
+        ctx.closePath()
+        ctx.strokeStyle='#DA3116'
+        ctx.beginPath()
+        ctx.moveTo(canvas.width / 7, canvas.height / 7)
+        ctx.lineTo((canvas.width * 6) / 7, canvas.height / 7)
+        ctx.lineTo((canvas.width * 6) / 7, (canvas.height * 6) / 7)
+        ctx.lineTo(canvas.width / 7, (canvas.height * 6) / 7)
+        ctx.lineTo(canvas.width / 7, canvas.height / 7)
         ctx.stroke()
         ctx.closePath()
       }
@@ -73,7 +86,7 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
         position: relative;
         width: ${props.width}px;
         height: ${props.height}px;
-        border: 1px solid #000;
+        border: 3px solid #000;
         overflow: hidden;
         margin: 8px;
       `}
