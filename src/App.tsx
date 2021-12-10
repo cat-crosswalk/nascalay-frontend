@@ -36,7 +36,6 @@ const App = () => {
           }
         `}
       />
-      <header>Welcome to React Router!</header>
       <Router />
     </div>
   )
