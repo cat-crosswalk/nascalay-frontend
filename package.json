@@ -8,7 +8,7 @@
     "serve": "vite preview",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx --cache --ignore-path .gitignore",
-    "lint:prettier": "prettier **/*.{js,jsx,ts,tsx} --check --ignore-path .gitignore",
+    "lint:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check --ignore-path .gitignore",
     "lint:typecheck": "tsc",
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "yarn lint:eslint --fix",
