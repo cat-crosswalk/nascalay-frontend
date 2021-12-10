@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { css } from '@emotion/react'
 import Icon from '@mdi/react'
 import { mdiClipboardMultiple } from '@mdi/js'
@@ -24,12 +19,12 @@ const GameSetting = () => {
   }
 
   // ホストかどうか判定する
-  const hostId = useAppSelector(state => state.room.hostId)
-  const myId = useAppSelector(state => state.user.userId)
+  const hostId = useAppSelector((state) => state.room.hostId)
+  const myId = useAppSelector((state) => state.user.userId)
   const [isHost, setIsHost] = useState(false)
   useEffect(() => {
     setIsHost(hostId === myId)
-  },[hostId, myId])
+  }, [hostId, myId])
 
   // 招待URLを設定する
   const roomId = useAppSelector((state) => state.room.roomId)
@@ -98,11 +93,14 @@ const GameSetting = () => {
           </div>
         </div>
       </div>
-      {isHost && (
-        <div css={startButtonStyle}>
-          <FlatButton text="スタート" onClick={requestGameStart} color="blue" />
-        </div>
-      )}
+      <div css={startButtonStyle}>
+        <FlatButton
+          text="スタート"
+          disabled={!isHost}
+          onClick={requestGameStart}
+          color="blue"
+        />
+      </div>
     </div>
   )
 }

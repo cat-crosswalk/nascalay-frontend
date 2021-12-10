@@ -11,15 +11,21 @@ import { setRoom } from '/@/store/slice/room'
 const MemberList = () => {
   const memberList = useAppSelector((state) => state.room.members)
   const dispatch = useAppDispatch()
-  
+
   useEffect(() => {
     const joinNewMember = (e: CustomEvent) => {
       dispatch(setRoom(e.detail))
     }
-    wsListener.addEventListener(WsEvent.RoomNewMember, joinNewMember as EventListener)
+    wsListener.addEventListener(
+      WsEvent.RoomNewMember,
+      joinNewMember as EventListener
+    )
 
     return () => {
-      wsListener.removeEventListener(WsEvent.RoomNewMember, joinNewMember as EventListener)
+      wsListener.removeEventListener(
+        WsEvent.RoomNewMember,
+        joinNewMember as EventListener
+      )
     }
   }, [dispatch])
   return (

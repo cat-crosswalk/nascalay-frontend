@@ -5,6 +5,7 @@ import { ColorType, colorToRgb } from '/@/utils/color'
 type Props = {
   text: string
   color: ColorType
+  disabled?: boolean
   selected?: boolean
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
