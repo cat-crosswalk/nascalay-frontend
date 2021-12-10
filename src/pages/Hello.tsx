@@ -11,6 +11,7 @@ import MyCanvas, {
   Handler as CanvasHandler,
   Props as CanvasProps,
 } from '/@/components/Canvas'
+import FlatButton from '../components/FlatButton'
 
 const Hello = () => {
   const PurpleDiv = styled.div`
@@ -96,8 +97,31 @@ const Hello = () => {
     }
   }
 
+  const [isSelected, setIsSelected] = useState(false)
+  const toggleSelect = useCallback(() => {
+    setIsSelected((prev) => !prev)
+  }, [])
+
   return (
     <>
+      <FlatButton
+        onClick={toggleSelect}
+        text="スタート"
+        color="red"
+        selected={isSelected}
+      />
+      <FlatButton
+        onClick={toggleSelect}
+        text="スタート"
+        color="yellow"
+        selected={isSelected}
+      />
+      <FlatButton
+        onClick={toggleSelect}
+        text="スタート"
+        color="blue"
+        selected={isSelected}
+      />
       {/* tabIndex つけないと div で keydown 起動しない
            -1 をつけると tab でこの div に遷移しない
        */}
