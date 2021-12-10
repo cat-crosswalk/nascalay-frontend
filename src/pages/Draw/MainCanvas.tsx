@@ -4,11 +4,12 @@ import Canvas, {
   Handler as CanvasHandler,
   Props as CanvasProps,
 } from '/@/components/Canvas'
+import { colorToRgb, ColorType } from '/@/utils/color'
 
 export type Props = {
-  width: number
-  height: number
-  disableSquares?: ('top' | 'bottom' | 'left' | 'right')[]
+  readonly width: number
+  readonly height: number
+  readonly adjacentColors?: readonly (readonly (ColorType | null)[])[] // 3 * 3 が想定されている
 } & CanvasProps
 
 export type Handler = {
@@ -26,59 +27,28 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
     if (canvas) {
       const ctx = canvas.getContext('2d')
       if (ctx) {
-        ctx.fillStyle = '#B6B9C1'
-        ctx.fillRect(0, 0, canvas.width / 7, canvas.height / 7)
-        ctx.fillRect(
-          (canvas.width * 6) / 7,
-          0,
-          canvas.width / 7,
-          canvas.height / 7
-        )
-        ctx.fillRect(
-          0,
-          (canvas.height * 6) / 7,
-          canvas.width / 7,
-          canvas.height / 7
-        )
-        ctx.fillRect(
-          (canvas.width * 6) / 7,
-          (canvas.height * 6) / 7,
-          canvas.width / 7,
-          canvas.height / 7
-        )
-        if (props.disableSquares !== undefined) {
-          if ('top' in props.disableSquares) {
-            ctx.fillRect(
-              canvas.width / 7,
-              0,
-              (canvas.width * 5) / 7,
-              canvas.height / 7
-            )
-          }
-          if ('bottom' in props.disableSquares) {
-            ctx.fillRect(
-              canvas.width / 7,
-              (canvas.height * 6) / 7,
-              (canvas.width * 5) / 7,
-              canvas.height / 7
-            )
-          }
-          if ('left' in props.disableSquares) {
-            ctx.fillRect(
-              0,
-              canvas.height / 7,
-              canvas.width / 7,
-              (canvas.height * 5) / 7
-            )
-          }
-          if ('right' in props.disableSquares) {
-            ctx.fillRect(
-              (canvas.width * 6) / 7,
-              canvas.height / 7,
-              canvas.width / 7,
-              (canvas.height * 5) / 7
-            )
-          }
+        if (props.adjacentColors !== undefined) {
+          props.adjacentColors.forEach((adjacentColor, i) => {
+            adjacentColor.forEach((color, j) => {
+              if (color === null) return
+              const rgb = colorToRgb[color]
+              ctx.fillStyle = rgb
+              ctx.fillRect(
+                i === 0
+                  ? 0
+                  : i === 1
+                  ? canvas.width / 7
+                  : (canvas.width * 6) / 7,
+                j === 0
+                  ? 0
+                  : j === 1
+                  ? canvas.height / 7
+                  : (canvas.height * 6) / 7,
+                i === 0 || i === 2 ? canvas.width / 7 : (canvas.width * 5) / 7,
+                j === 0 || j === 2 ? canvas.height / 7 : (canvas.height * 5) / 7
+              )
+            })
+          })
         }
         ctx.strokeStyle = '#000'
         ctx.lineWidth = 1
@@ -95,7 +65,7 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
         ctx.closePath()
       }
     }
-  }, [mainCanvasRef, props.disableSquares])
+  }, [mainCanvasRef, props.adjacentColors])
 
   return (
     <div

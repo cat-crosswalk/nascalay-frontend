@@ -80,6 +80,11 @@ const Draw = () => {
           color={penColor}
           width={800}
           height={600}
+          adjacentColors={[
+            ['blue', null, 'yellow'],
+            [null, null, null],
+            ['yellow', null, 'red'],
+          ]}
         />
         <div>
           <button onClick={clearCanvas}>Clear</button>
