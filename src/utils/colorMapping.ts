@@ -1,6 +1,6 @@
 export type ColorType = 'yellow' | 'red' | 'blue'
 
-export const colorToRgb:  Record<
+export const colorToRgb: Record<
   ColorType,
   `rgb(${number}, ${number}, ${number})`
 > = {
