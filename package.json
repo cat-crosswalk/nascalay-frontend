@@ -8,7 +8,7 @@
     "serve": "vite preview",
     "lint": "run-p lint:*",
     "lint:eslint": "eslint src --ext .js,.jsx,.ts,.tsx --cache --ignore-path .gitignore",
-    "lint:prettier": "prettier . --check --ignore-path .gitignore",
+    "lint:prettier": "prettier **/*.{js,jsx,ts,tsx} --check --ignore-path .gitignore",
     "lint:typecheck": "tsc",
     "fix": "run-s fix:eslint fix:prettier",
     "fix:eslint": "yarn lint:eslint --fix",
@@ -34,7 +34,8 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-redux": "^7.2.6",
-    "react-router-dom": "6"
+    "react-router-dom": "6",
+    "vivus": "^0.4.6"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.3.0",
@@ -43,6 +44,7 @@
     "@types/node": "^16.11.11",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/vivus": "^0.4.4",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
     "@vitejs/plugin-react": "^1.0.0",

@@ -131,6 +131,8 @@ const Hello = () => {
           color={penColor}
           penSize={10}
           penType={penType}
+          width={500}
+          height={500}
         />
         <div>
           <button onClick={clearCanvas}>clear</button>

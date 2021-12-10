@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import React, {
   forwardRef,
   useCallback,
@@ -12,6 +11,8 @@ export type Props = {
   color: `#${string}`
   penSize: number
   penType: 'pen' | 'eraser' | 'bucket'
+  width: number
+  height: number
 }
 export interface Handler {
   clear(): void
@@ -121,8 +122,8 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const rect = canvasRef.current!.getBoundingClientRect()
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
+      x: Math.round(e.clientX - rect.left),
+      y: Math.round(e.clientY - rect.top),
     }
   }, [])
   const draw = useCallback(
@@ -208,15 +209,12 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   return (
     <canvas
       ref={canvasRef}
-      width="500"
-      height="500"
+      width={props.width}
+      height={props.height}
       onMouseDown={mouseDown}
       onMouseUp={mouseUp}
       onMouseOut={mouseOut}
       onMouseMove={mouseMove}
-      css={css({
-        border: '1px solid #000',
-      })}
     ></canvas>
   )
 }
