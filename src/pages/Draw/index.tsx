@@ -7,7 +7,7 @@ import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
 } from './MainCanvas'
-import ToolButton from './ToolButton'
+import ToolBox from './ToolBox'
 
 // 絵を描くページ
 const Draw = () => {
@@ -39,70 +39,14 @@ const Draw = () => {
     <div>
       <h1>Draw</h1>
       <ColorPallet onChange={setPenColor} />
-      <div
-        css={css`
-          display: grid;
-          grid-template-columns: 64px 64px 64px;
-          grid-row-gap: 20px;
-          grid-column-gap: 20px;
-        `}
-      >
-        <input
-          css={css`
-            display: none;
-          `}
-          type="radio"
-          name="toolType"
-          id="pen"
-          checked={penType === 'pen'}
-          onChange={() => setPenType('pen')}
-        />
-        <label htmlFor="pen">
-          <ToolButton
-            type="pen"
-            color={penColor}
-            isSelected={penType === 'pen'}
-          />
-        </label>
-        <input
-          css={css`
-            display: none;
-          `}
-          type="radio"
-          name="toolType"
-          id="eraser"
-          checked={penType === 'eraser'}
-          onChange={() => setPenType('eraser')}
-        />
-        <label htmlFor="eraser">
-          <ToolButton
-            type="eraser"
-            color={penColor}
-            isSelected={penType === 'eraser'}
-          />
-        </label>
-        <input
-          css={css`
-            display: none;
-          `}
-          type="radio"
-          name="toolType"
-          id="bucket"
-          checked={penType === 'bucket'}
-          onChange={() => setPenType('bucket')}
-        />
-        <label htmlFor="bucket">
-          <ToolButton
-            type="bucket"
-            color={penColor}
-            isSelected={penType === 'bucket'}
-          />
-        </label>
-
-        <ToolButton type="undo" onClick={undo} />
-        <ToolButton type="redo" onClick={redo} />
-        <ToolButton type="clear" onClick={clearCanvas} />
-      </div>
+      <ToolBox
+        onChange={setPenType}
+        penType={penType}
+        penColor={penColor}
+        undo={undo}
+        redo={redo}
+        clear={clearCanvas}
+      />
 
       <div onKeyDown={shortcut} tabIndex={-1}>
         <MainCanvas
