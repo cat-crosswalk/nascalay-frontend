@@ -18,7 +18,7 @@ export const drawSlice = createSlice({
   initialState,
   reducers: {
     setDraw: (state, action: PayloadAction<WsDrawStartEventBody>) => {
-      state = action.payload
+      return action.payload
     },
   },
 })

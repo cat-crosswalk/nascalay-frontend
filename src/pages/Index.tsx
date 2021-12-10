@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { setRoom } from '../store/slice/room'
 import { setUser } from '../store/slice/user'
 import { useAppDispatch } from '/@/store/hooks'
-import api, { JoinRoomRequest, CreateRoomRequest, User } from '/@/utils/apis'
+import api, { JoinRoomRequest, CreateRoomRequest } from '/@/utils/apis'
 
 // TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 // 招待リンク ?c=xxxxxroomIdxxxxx
@@ -17,12 +17,6 @@ const Index = () => {
   const roomId = new URLSearchParams(search).get('c')
 
   const goRobby = useCallback(async () => {
-    const me: User = {
-      avatar: avatar,
-      username: userName,
-      userId: '',
-    }
-    dispatch(setUser(me))
     if (roomId) {
       // 招待リンクを踏んだ場合
       const request: JoinRoomRequest = {
@@ -31,9 +25,8 @@ const Index = () => {
         avatar: avatar,
       }
       const { data } = await api.joinRoom(request)
-      me.userId = data.userId
       dispatch(setRoom(data))
-      dispatch(setUser(me))
+      dispatch(setUser({ avatar, username: userName, userId: data.userId }))
     } else {
       // 新規ルーム作成
       const request: CreateRoomRequest = {
@@ -42,9 +35,8 @@ const Index = () => {
         capacity: 6,
       }
       const { data } = await api.createRoom(request)
-      me.userId = data.userId
+      dispatch(setUser({ avatar, username: userName, userId: data.userId }))
       dispatch(setRoom(data))
-      dispatch(setUser(me))
     }
     navigate('/lobby', { replace: false })
   }, [avatar, userName, dispatch, roomId, navigate])

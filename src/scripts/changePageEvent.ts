@@ -1,5 +1,5 @@
 import { NavigateFunction } from 'react-router'
-import { wsListener, WsEvent } from '/@/websocket'
+import { wsListener, WsEvent, closeWebSocket } from '/@/websocket'
 import { AppDispatch } from '/@/store/store'
 import { setTheme } from '/@/store/slice/theme'
 import { setDraw } from '/@/store/slice/draw'
@@ -33,6 +33,7 @@ export const addPageEventListener = (
   }
 
   const breakRoom = () => {
+    closeWebSocket()
     navigate('/', { replace: true })
   }
 

@@ -7,6 +7,7 @@ const Lobby = () => {
   const userId = useAppSelector((state) => state.user.userId)
   useEffect(() => {
     // websocket接続
+    if (userId == '') return
     setupWebSocket(userId)
   }, [userId])
 
