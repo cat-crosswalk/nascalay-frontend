@@ -7,8 +7,8 @@ import MainCanvas, {
 } from './MainCanvas'
 import ToolBox from './ToolBox'
 import SizeSlider from './SizeSlider'
-import LineTimer from '/@/components/LineTimer'
 import LineTimerCard from '/@/components/LineTimerCard'
+import OdaiBoard from '/@/components/OdaiBoard'
 
 // 絵を描くページ
 const Draw = () => {
@@ -43,9 +43,8 @@ const Draw = () => {
 
   return (
     <div>
-      <h1>Draw</h1>
+      <OdaiBoard text="横断歩道をわたる猫" height="100px" width="200px" />
       <LineTimerCard maxValueMs={maxTimeMs} width="500px" />
-      <LineTimer maxValueMs={maxTimeMs} width="500px" height="30px" />
       <SizeSlider value={penSize} onChange={setPenSize} />
       <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
       <ColorPallet onChange={setPenColor} />
