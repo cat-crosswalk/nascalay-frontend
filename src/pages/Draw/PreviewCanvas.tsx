@@ -77,14 +77,8 @@ const PreviewCanvas = (props: Props) => {
         maskCtx.beginPath()
         for (let i = 0; i < 4; i++) {
           if (i !== props.targetArea[0] && i + 1 !== props.targetArea[0]) {
-            maskCtx.moveTo(
-              ((i + 1) * canvas.width) / 5,
-              0
-            )
-            maskCtx.lineTo(
-              ((i + 1) * canvas.width) / 5,
-              canvas.height
-            )
+            maskCtx.moveTo(((i + 1) * canvas.width) / 5, 0)
+            maskCtx.lineTo(((i + 1) * canvas.width) / 5, canvas.height)
           }
         }
         for (let j = 0; j < 4; j++) {
@@ -94,84 +88,46 @@ const PreviewCanvas = (props: Props) => {
           }
         }
         const [i, j] = props.targetArea
-        maskCtx.moveTo(
-          (i * canvas.width) / 5,
-          0
-        )
-        maskCtx.lineTo(
-          (i * canvas.width) / 5,
-          (j * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          0,
-          (j * canvas.height) / 5
-        )
-        maskCtx.moveTo(
-          canvas.width,
-          (j * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          ((i + 1) * canvas.width) / 5,
-          (j * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          ((i + 1) * canvas.width) / 5,
-          0
-        )
-        maskCtx.moveTo(
-          ((i + 1) * canvas.width) / 5,
-          canvas.height
-        )
+        maskCtx.moveTo((i * canvas.width) / 5, 0)
+        maskCtx.lineTo((i * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(0, (j * canvas.height) / 5)
+        maskCtx.moveTo(canvas.width, (j * canvas.height) / 5)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, 0)
+        maskCtx.moveTo(((i + 1) * canvas.width) / 5, canvas.height)
         maskCtx.lineTo(
           ((i + 1) * canvas.width) / 5,
           ((j + 1) * canvas.height) / 5
         )
-        maskCtx.lineTo(
-          canvas.width,
-          ((j + 1) * canvas.height) / 5
-        )
-        maskCtx.moveTo(
-          0,
-          ((j + 1) * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          (i * canvas.width) / 5,
-          ((j + 1) * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          (i * canvas.width) / 5,
-          canvas.height
-        )
+        maskCtx.lineTo(canvas.width, ((j + 1) * canvas.height) / 5)
+        maskCtx.moveTo(0, ((j + 1) * canvas.height) / 5)
+        maskCtx.lineTo((i * canvas.width) / 5, ((j + 1) * canvas.height) / 5)
+        maskCtx.lineTo((i * canvas.width) / 5, canvas.height)
         maskCtx.stroke()
         maskCtx.closePath()
         maskCtx.strokeStyle = '#DA3116'
         maskCtx.beginPath()
-        maskCtx.moveTo(
-          (i * canvas.width) / 5,
-          (j * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          ((i + 1) * canvas.width) / 5,
-          (j * canvas.height) / 5
-        )
+        maskCtx.moveTo((i * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, (j * canvas.height) / 5)
         maskCtx.lineTo(
           ((i + 1) * canvas.width) / 5,
           ((j + 1) * canvas.height) / 5
         )
-        maskCtx.lineTo(
-          (i * canvas.width) / 5,
-          ((j + 1) * canvas.height) / 5
-        )
-        maskCtx.lineTo(
-          (i * canvas.width) / 5,
-          (j * canvas.height) / 5
-        )
+        maskCtx.lineTo((i * canvas.width) / 5, ((j + 1) * canvas.height) / 5)
+        maskCtx.lineTo((i * canvas.width) / 5, (j * canvas.height) / 5)
         maskCtx.stroke()
         maskCtx.closePath()
         break
       }
     }
-  }, [drawnArea2D, props.boardType, props.img, props.isColored, props.targetArea, props.type])
+  }, [
+    drawnArea2D,
+    props.boardType,
+    props.img,
+    props.isColored,
+    props.targetArea,
+    props.type,
+  ])
 
   return (
     <div

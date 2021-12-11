@@ -75,18 +75,20 @@ const Draw = () => {
         `}
         onKeyDown={shortcut}
       >
-        <div css={css`
-          background-color: ${colorToRgb.yellow};
-          box-shadow: 8px 8px 0 #000000;
-          border: 3px solid #000000;
-          height: 100%;
-          width: 100%;
-          font-size: 32px;
-          display: grid;
-          place-items: center;
-          grid-column: 1 / 2;
-          grid-row: 1 / 2;
-        `}>
+        <div
+          css={css`
+            background-color: ${colorToRgb.yellow};
+            box-shadow: 8px 8px 0 #000000;
+            border: 3px solid #000000;
+            height: 100%;
+            width: 100%;
+            font-size: 32px;
+            display: grid;
+            place-items: center;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+          `}
+        >
           {`${nowPhase}ターン目/${maxPhase}`}
         </div>
         <div
