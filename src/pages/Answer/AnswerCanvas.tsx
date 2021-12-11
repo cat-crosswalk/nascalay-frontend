@@ -8,7 +8,7 @@ const AnswerCanvas = () => {
   const canvasWidth = 400
   const canvasHeight = 400
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const imageData = useAppSelector(state => state.answer.img)
+  const imageData = useAppSelector((state) => state.answer.img)
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!

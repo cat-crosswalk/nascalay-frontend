@@ -18,18 +18,13 @@ const Answer = () => {
           <p>回答</p>
         </div>
         <div css={timerStyle}>
-          <LineTimerCard
-            maxValueMs={maxTimeMs}
-            width="100%"
-            hasShadow={true}
-          />
+          <LineTimerCard maxValueMs={maxTimeMs} width="100%" hasShadow={true} />
         </div>
       </div>
       <div css={container}>
         <AnswerCanvas />
         <AnswerCard />
       </div>
-
     </div>
   )
 }

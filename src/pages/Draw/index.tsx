@@ -168,19 +168,23 @@ const Draw = () => {
               border: 3px solid #000;
             `}
           >
-            <div css={css`
-              margin-left: auto;
-              margin-right: auto;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              height: 100%;
-              gap: 16px;
-            `}>
+            <div
+              css={css`
+                margin-left: auto;
+                margin-right: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 100%;
+                gap: 16px;
+              `}
+            >
               <ColorPallet onChange={setPenColor} />
-              <div css={css`
-                margin-top: auto;
-              `}>
+              <div
+                css={css`
+                  margin-top: auto;
+                `}
+              >
                 <ToolBox
                   onChange={setPenType}
                   penType={penType}
@@ -198,7 +202,15 @@ const Draw = () => {
               flex-shrink: 0;
             `}
           >
-            <DoneButton text="完了！" doneText="編集" color="red" doneColor="yellow" isDone={isDone} onClick={setIsDone} hasShadow />
+            <DoneButton
+              text="完了！"
+              doneText="編集"
+              color="red"
+              doneColor="yellow"
+              isDone={isDone}
+              onClick={setIsDone}
+              hasShadow
+            />
           </div>
         </div>
       </div>
