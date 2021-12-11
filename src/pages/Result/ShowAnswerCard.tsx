@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { css } from '@emotion/react'
+import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import AvatarIcon from '/@/components/AvatarIcon'
 import { User } from '/@/utils/apis'
 
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
+import { wsListener, WsEvent } from '/@/websocket'
+import { setShowNext } from '/@/store/slice/status'
 
 const ShowAnswerCard = () => {
-  const user: User = {
+  const userInit: User = {
     userId: 'aaaaa',
     username: 'aaaaa',
     avatar: {
@@ -15,10 +18,40 @@ const ShowAnswerCard = () => {
       color: '#fff',
     },
   }
+  const dispatch = useAppDispatch()
+  const nextShow = useAppSelector((state) => state.status.showNext)
+  const [answer, setAnswer] = useState('')
+  const [user, setUser] = useState<User>(userInit)
+
+  useEffect(() => {
+    const getAnswer = (e: CustomEvent) => {
+      const body = e.detail
+      setAnswer(body.answer)
+      // setUser(body.user) TODO: oapiに追従する
+      dispatch(setShowNext(body.next))
+    }
+    wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)
+
+    return () => {
+      wsListener.removeEventListener(
+        WsEvent.ShowAnswer,
+        getAnswer as EventListener
+      )
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    if (nextShow === 'odai') {
+      setAnswer('')
+      setUser(userInit)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nextShow])
+
   return (
     <div css={[answerContainer, card]}>
       <div css={answerStyle}>
-        <p>ここに回答</p>
+        <p>{answer}</p>
       </div>
       <div css={userStyle}>
         <AvatarIcon avatar={user.avatar} size={72} />
