@@ -27,8 +27,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
         ws: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
+        rewrite: path => path.replace(/^\/api/, ''),
+      }
     },
   },
+  define: {
+    VITE_ENV_STAGE: JSON.stringify(process.env.VITE_STAGE) ?? JSON.stringify('development')
+  }
 })
