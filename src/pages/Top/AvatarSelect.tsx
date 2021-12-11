@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { css } from '@emotion/react'
 
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
-
-import ColorPallet from '/@/components/ColorPallet'
+import ColorPallet, { palletColor } from '/@/components/ColorPallet'
 import Avatar from '/@/components/Avatar'
+import { getRandomInt } from '/@/utils/random'
 
 const AvatarSelect = () => {
+  const colorId = getRandomInt(palletColor.length)
+  const [color, setColor] = useState<string>(palletColor[colorId].hex)
+  const colorChange = useCallback((hex: string) => {
+    setColor(hex)
+  }, [])
   return (
     <div css={[containerStyle, card]}>
-      <Avatar size={148} avaterId={0} color="#EE8B17" />
-      <ColorPallet />
+      <Avatar size={148} avaterId={0} color={color} />
+      <ColorPallet value={colorId} onChange={colorChange} />
     </div>
   )
 }
