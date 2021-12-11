@@ -137,6 +137,8 @@ const inviteWrapStyle = css`
     height: 64px;
     width: 100%;
     margin-right: 20px;
+    &:hover {
+      cursor: url('../src/assets/cursors/onTextBox.png') 20 20, auto;
   }
 `
 
@@ -165,6 +167,8 @@ const inviteButtonStyle = css`
       background-color: rgba(255, 255, 255, 0);
       transition: all 0.2s ease-out;
     }
+    &:hover {
+      cursor: url('../src/assets/cursors/onHover.png') 5 0, auto;
     &:hover::after {
       background-color: rgba(255, 255, 255, 0.15);
     }
