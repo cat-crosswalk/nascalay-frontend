@@ -89,7 +89,6 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
         height: ${props.height}px;
         border: 3px solid #000;
         overflow: hidden;
-        margin: 8px;
         background-color: #fff;
         ${props.hasShadow ? 'box-shadow: 8px 8px 0 #000;' : ''}
       `}
