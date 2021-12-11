@@ -94,7 +94,7 @@ const GameSetting = () => {
           />
           <div css={inviteButtonStyle}>
             <button onClick={handleCopy}>
-              <Icon path={mdiClipboardMultiple} size={1.8} />
+              <Icon path={mdiClipboardMultiple} size={1.5} />
             </button>
           </div>
         </div>
@@ -139,6 +139,7 @@ const inviteWrapStyle = css`
     font-size: 1.5rem;
     height: 64px;
     width: 100%;
+    padding:0px 18px;
     margin-right: 20px;
     &:hover {
       cursor: url('../src/assets/cursors/onTextBox.png') 20 20, auto;
