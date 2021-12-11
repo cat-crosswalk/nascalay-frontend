@@ -38,7 +38,15 @@ const Draw = () => {
   return (
     <div>
       <h1>Draw</h1>
-      <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} text='完成!' doneText='編集' color='red' doneColor='yellow' />
+      <DoneButton
+        isDone={isDone}
+        onClick={setIsDone}
+        hasShadow={true}
+        text="完成!"
+        doneText="編集"
+        color="red"
+        doneColor="yellow"
+      />
       <ColorPallet onChange={setPenColor} />
       <ToolBox
         onChange={setPenType}
