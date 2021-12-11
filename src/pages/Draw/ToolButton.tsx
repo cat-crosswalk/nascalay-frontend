@@ -50,7 +50,7 @@ const ToolButton = (props: Props) => {
         transition: all 0.1s ease-out;
         ${props.isSelected && ['pen', 'bucket'].includes(props.type)
           ? `background-color: ${props.color};`
-          : ''}
+          : 'background-color: #ffffff;'}
         &:hover {
           cursor: url('../src/assets/cursors/onHover.png') 5 0, auto;
         }
