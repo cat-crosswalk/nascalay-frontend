@@ -71,20 +71,21 @@ const answerContainer = css`
 }`
 
 const answerStyle = css`
-  position: relative;
+  position:relative;
+  height: 80px;
   flex-grow: 1;
-  background: ${colorToRgb.white};
-  padding: 10px;
-  text-align: center;
-  border: 3px solid ${colorToRgb.black};
-  color: ${colorToRgb.black};
-  font-size: 1.5rem;
-  margin: 5px 0px;
-  margin-right: 50px;
-  overflow: hidden;
+  background:${colorToRgb.white};
+  padding:10px;
+  text-align:center;
+  border:3px solid ${colorToRgb.black};
+  color:${colorToRgb.black};
+  font-size:1.5rem;
+  font-weight:bold;
+  margin: 0em 5rem;
+  margin-left: 1rem;
   &::after,
   ::before {
-    border: solid transparent;
+    border: solid black;
     content: '';
     height: 0;
     width: 0;
