@@ -49,6 +49,7 @@ const containerStyle = css`
   background-color: ${colorToRgb.white};
   padding: 36px 48px;
   padding-top: 12px;
+  height: 580px;
 `
 
 const titleStyle = css`
@@ -74,7 +75,7 @@ const listStyle = css`
   &::-webkit-scrollbar-thumb {
     background-color: ${colorToRgb.blue};
     border: ${colorToRgb.black} solid;
-    border-width: 3px 0px 0px 3px;
+    border-width: 3px 0px 3px 3px;
   }
   & div {
     padding-bottom: 0.75rem;
