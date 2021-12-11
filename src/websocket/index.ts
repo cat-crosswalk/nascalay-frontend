@@ -1,9 +1,10 @@
 import { WEBSOCKET_ENDPOINT, BASE_URL } from '/@/utils/wsSetting'
 import AutoReconnectWebSocket from './AutoReconnectWebSocket'
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const baseUrl = VITE_ENV_STAGE === 'development'
+const baseUrl =
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  VITE_ENV_STAGE === 'development'
     ? BASE_URL
     : location.protocol + '//api.nascalay.trasta.dev'
 
