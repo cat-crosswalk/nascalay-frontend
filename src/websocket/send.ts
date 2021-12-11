@@ -28,7 +28,7 @@ class WsSend {
   }
   odaiSend(): void {
     const message: WsClientSendMessage = {
-      type: WsEvent.OdaiCancel,
+      type: WsEvent.OdaiSend,
       body: {
         odai: this.odai,
       },
