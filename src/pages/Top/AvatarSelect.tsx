@@ -35,7 +35,7 @@ const AvatarSelect = () => {
   return (
     <div css={[containerStyle, card]}>
       <div css={avaterStyle}>
-        <AvatarIcon size={148} avatar={{color:color, type:avatarId}} />
+        <AvatarIcon size={148} avatar={{ color: color, type: avatarId }} />
         <button css={diceStyle} onClick={randomAvatar}>
           <Icon path={mdiDice3Outline} size={1.8} />
         </button>

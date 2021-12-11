@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
-import {Avatar}from '/@/utils/apis'
+import { Avatar } from '/@/utils/apis'
 
 type Props = {
   avatar: Avatar
