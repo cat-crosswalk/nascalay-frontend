@@ -13,7 +13,7 @@ import { setBgColor } from '/@/store/slice/status'
 const Answer = () => {
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#D1A9A9'))
-  const maxTimeMs = useAppSelector((state) => state.answer.timeLimit * 1000)
+  const maxTimeMs = useAppSelector((state) => state.answer.timeLimit) * 1000
   return (
     <div css={pageContainer}>
       <div css={headerWrap}>
