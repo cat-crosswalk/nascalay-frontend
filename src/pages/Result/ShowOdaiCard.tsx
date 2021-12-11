@@ -10,8 +10,8 @@ import { wsListener, WsEvent } from '/@/websocket'
 
 const ShowOdaiCard = () => {
   const initUser: User = {
-    userId: 'aaaaa',
-    username: 'aaaaa',
+    userId: '',
+    username: '',
     avatar: {
       type: 0,
       color: '#fff',

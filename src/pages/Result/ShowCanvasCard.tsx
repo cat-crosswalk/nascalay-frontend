@@ -9,8 +9,6 @@ const ShowCanvasCard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const canvasWidth = 400
   const canvasHeight = 400
-  const verticalDivision = 5
-  const horizontalDivision = 5
 
   const [imageData, setImageData] = useState('')
   const dispatch = useAppDispatch()

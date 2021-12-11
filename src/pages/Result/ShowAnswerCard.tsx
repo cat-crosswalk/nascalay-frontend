@@ -11,8 +11,8 @@ import { setShowNext, setShowNow } from '/@/store/slice/status'
 
 const ShowAnswerCard = () => {
   const userInit: User = {
-    userId: 'aaaaa',
-    username: 'aaaaa',
+    userId: '',
+    username: '',
     avatar: {
       type: 0,
       color: '#fff',
