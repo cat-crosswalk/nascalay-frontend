@@ -4,7 +4,7 @@ import { useAppDispatch } from '/@/store/hooks'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 import ColorPallet, { palletColor } from '/@/components/ColorPallet'
-import Avatar from '/@/components/Avatar'
+import AvatarIcon from '/@/components/AvatarIcon'
 import { getRandomInt } from '/@/utils/random'
 import { setAvatarColor, setAvatarType } from '/@/store/slice/user'
 
@@ -35,7 +35,7 @@ const AvatarSelect = () => {
   return (
     <div css={[containerStyle, card]}>
       <div css={avaterStyle}>
-        <Avatar size={148} avaterId={avatarId} color={color} />
+        <AvatarIcon size={148} avatar={{color:color, type:avatarId}} />
         <button css={diceStyle} onClick={randomAvatar}>
           <Icon path={mdiDice3Outline} size={1.8} />
         </button>

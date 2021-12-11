@@ -1,17 +1,17 @@
 import React from 'react'
 import { css } from '@emotion/react'
-import { colorToRgb } from '/@/utils/color'
+import AvatarIcon from '../AvatarIcon'
+import { Avatar } from '/@/utils/apis'
 
 interface MemberData {
-  avatar: number
+  avatar: Avatar
   name: string
 }
 
 const Member = (props: MemberData) => {
-  const avatarSrc = '/@/assets/userIcon.png'
   return (
     <div css={container}>
-      <img src={avatarSrc} />
+      <AvatarIcon avatar={props.avatar} size={72} />
       <p>{props.name}</p>
     </div>
   )
@@ -21,10 +21,7 @@ const container = css`
   display: flex;
   font-size: 1.5rem;
   & img {
-    width: 72px;
-    height: 72px;
     margin-right: 28px;
-    border: 3px solid ${colorToRgb.black};
   }
   & p {
     height: 72px;
