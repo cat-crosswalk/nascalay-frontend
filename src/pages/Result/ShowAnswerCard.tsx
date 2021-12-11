@@ -51,7 +51,6 @@ const ShowAnswerCard = () => {
 
   return (
     <div css={[answerContainer, card]}>
-      {showNow}aaa
       <div css={answerStyle}>
         <p>{answer}</p>
       </div>
