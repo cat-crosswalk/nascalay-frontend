@@ -1,8 +1,5 @@
-import { css } from '@emotion/react'
-import { mdiEraser } from '@mdi/js'
-import Icon from '@mdi/react'
 import React, { useCallback, useState } from 'react'
-import ColorPallet from './ColorPallet'
+import ColorPallet from '/@/components/ColorPallet.tsx'
 import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
