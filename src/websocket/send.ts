@@ -6,6 +6,7 @@ import { ws } from './index'
 class WsSend {
   odai = ''
   answer = ''
+  img = ''
   requestGameStart(): void {
     const message: WsClientSendMessage = {
       type: WsEvent.RequestGameStart,
@@ -64,6 +65,29 @@ class WsSend {
     const message: WsClientSendMessage = {
       type: WsEvent.AnswerCancel,
       body: {},
+    }
+    ws.send(message)
+  }
+  drawReady(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.DrawReady,
+      body: {},
+    }
+    ws.send(message)
+  }
+  drawCancel(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.DrawCancel,
+      body: {},
+    }
+    ws.send(message)
+  }
+  drawSend(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.DrawSend,
+      body: {
+        img: this.img,
+      },
     }
     ws.send(message)
   }
