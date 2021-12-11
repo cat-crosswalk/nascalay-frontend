@@ -39,7 +39,7 @@ const DoneButton = (props: Props) => {
     <div
       css={css`
         position: relative;
-        width: 232px;
+        width: 292px;
         height: 80px;
         ${props.hasShadow
           ? `
@@ -61,7 +61,7 @@ const DoneButton = (props: Props) => {
           text={props.text}
           color={props.color}
           height="80px"
-          width="232px"
+          width="292px"
           onClick={onClickDone}
         />
       </div>
@@ -70,7 +70,7 @@ const DoneButton = (props: Props) => {
           text={props.doneText}
           color={props.doneColor}
           height="80px"
-          width="232px"
+          width="292px"
           onClick={onClickUndone}
         />
       </div>

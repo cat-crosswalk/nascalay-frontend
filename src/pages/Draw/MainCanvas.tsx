@@ -89,6 +89,7 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
         border: 3px solid #000;
         overflow: hidden;
         margin: 8px;
+        background-color: #fff;
       `}
     >
       <canvas

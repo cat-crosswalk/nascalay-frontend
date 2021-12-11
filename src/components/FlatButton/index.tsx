@@ -10,6 +10,7 @@ type Props = {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   height?: string
   width?: string
+  hasShadow?: boolean
 }
 
 const FlatButton: React.VFC<Props> = (props: Props) => {
@@ -28,6 +29,7 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
         ${props.height ? `height: ${props.height};` : ''}
         ${props.width ? `width: ${props.width};` : ''}
         transition: all 0.1s ease-in-out;
+        ${props.hasShadow ? 'box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);' : ''}
         &::after {
           position: absolute;
           content: '';

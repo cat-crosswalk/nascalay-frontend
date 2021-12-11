@@ -48,7 +48,7 @@ const LineTimer = (props: Props) => {
       }
     }, props.maxValueMs * 0.9)
     return () => clearTimeout(timer)
-  }, [props])
+  }, [props.maxValueMs])
   const onAnimEnd = useCallback(() => {
     if (props.onFinish) {
       props.onFinish()
