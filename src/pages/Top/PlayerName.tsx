@@ -69,6 +69,7 @@ const containerStyle = css`
   background-color: ${colorToRgb.blue};
   padding: 36px 48px;
   padding-top: 12px;
+  min-height: 479px;
 `
 
 const inputNameStyle = css`
@@ -80,6 +81,7 @@ const inputNameStyle = css`
   padding-left: 1rem;
   width: 100%;
   height: 64px;
+  margin: 2rem 0px;
 `
 
 const titleStyle = css`
@@ -88,6 +90,7 @@ const titleStyle = css`
 `
 
 const goLobbyStyle = css`
+  padding-top: 4rem;
   display: flex;
   justify-content: center;
   margin-top: 2.5rem;
