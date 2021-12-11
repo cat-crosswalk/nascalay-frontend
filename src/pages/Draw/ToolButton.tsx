@@ -51,7 +51,9 @@ const ToolButton = (props: Props) => {
         ${props.isSelected && ['pen', 'bucket'].includes(props.type)
           ? `background-color: ${props.color};`
           : ''}
-        &:hover,
+        &:hover {
+          cursor: url('../src/assets/cursors/onHover.png') 5 0, auto;
+        }
         &:active {
           color: #646260;
         }
