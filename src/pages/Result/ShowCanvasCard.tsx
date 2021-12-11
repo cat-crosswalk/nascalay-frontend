@@ -12,23 +12,27 @@ const ShowCanvasCard = () => {
   const horizontalDivision = 5
 
   useEffect(() => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const canvas = canvasRef.current!
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const ctx = canvas.getContext('2d')!
-      const img = new Image()
-      img.src = testImage
-      img.onload = () => {
-        ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight)
-      }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const canvas = canvasRef.current!
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const ctx = canvas.getContext('2d')!
+    const img = new Image()
+    img.src = testImage
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight)
+    }
   }, [])
-
 
   // TODO: ?キャンバスアニメーション
   return (
     <div css={canvasContainer}>
       <div>
-        <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} css={canvasStyle} ></canvas>
+        <canvas
+          ref={canvasRef}
+          width={canvasWidth}
+          height={canvasHeight}
+          css={canvasStyle}
+        ></canvas>
       </div>
     </div>
   )

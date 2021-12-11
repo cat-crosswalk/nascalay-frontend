@@ -7,13 +7,13 @@ import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 
 const ShowOdaiCard = () => {
-  const user :User = {
+  const user: User = {
     userId: 'aaaaa',
     username: 'aaaaa',
     avatar: {
       type: 0,
       color: '#fff',
-    }
+    },
   }
   return (
     <div css={[cardContainer, card]}>

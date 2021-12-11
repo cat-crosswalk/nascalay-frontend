@@ -6,19 +6,20 @@ import { User } from '/@/utils/apis'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 
-
 const ShowAnswerCard = () => {
-  const user :User = {
+  const user: User = {
     userId: 'aaaaa',
     username: 'aaaaa',
     avatar: {
       type: 0,
       color: '#fff',
-    }
+    },
   }
   return (
-    <div css={[AnswerContainer, card]}>
-      <div>ここに回答</div>
+    <div css={[answerContainer, card]}>
+      <div css={answerStyle}>
+        <p>ここに回答</p>
+      </div>
       <div css={userStyle}>
         <AvatarIcon avatar={user.avatar} size={72} />
         <p>{user.username}</p>
@@ -27,13 +28,62 @@ const ShowAnswerCard = () => {
   )
 }
 
-const AnswerContainer = css`
+const answerContainer = css`
   width: 100%;
   display: flex;
   padding: 18px 48px;
   background-color: ${colorToRgb.red};
   font-size: 1.5rem;
 }`
+
+const answerStyle = css`
+  position: relative;
+  flex-grow: 1;
+  background: ${colorToRgb.white};
+  padding: 10px;
+  text-align: center;
+  border: 3px solid ${colorToRgb.black};
+  color: ${colorToRgb.black};
+  font-size: 1.5rem;
+  margin: 5px 0px;
+  margin-right: 50px;
+  &::after,
+  ::before {
+    border: solid transparent;
+    content: '';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    position: absolute;
+    left: 100%;
+    top: 34%;
+  }
+  &::after {
+    border-color: rgba(0, 153, 255, 0);
+    border-top-width: 6px;
+    border-bottom-width: 6px;
+    border-left-width: 26px;
+    border-right-width: 26px;
+    margin-top: -6px;
+    border-left-color: ${colorToRgb.white};
+  }
+  &::before {
+    border-color: rgba(0, 0, 0, 0);
+    border-top-width: 9px;
+    border-bottom-width: 9px;
+    border-left-width: 39px;
+    border-right-width: 39px;
+    margin-top: -9px;
+    margin-left: 3px;
+    border-left-color: ${colorToRgb.black};
+  }
+  & p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+`
 
 const userStyle = css`
   flex-shrink: 0;
