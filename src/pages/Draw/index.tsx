@@ -5,13 +5,28 @@ import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
 } from './MainCanvas'
+import PreviewCanvas from './PreviewCanvas'
 import ToolBox from './ToolBox'
+import image from './tmp'
 import SizeSlider from './SizeSlider'
 import LineTimerCard from '/@/components/LineTimerCard'
 import OdaiBoard from '/@/components/OdaiBoard'
+import { css } from '@emotion/react'
+import FlatButton from '/@/components/FlatButton'
+import { colorToRgb } from '/@/utils/color'
 
 // 絵を描くページ
 const Draw = () => {
+  const [previewImage, setPreviewImage] = useState<string | null>(image)
+  const [drawnArea, setDrawnArea] = useState<[number, number][]>([
+    [0, 0],
+    [1, 1],
+    [1, 2],
+    [2, 3],
+    [3, 3],
+  ])
+  const [targetArea, setTargetArea] = useState<[number, number]>([2, 2])
+
   const canvasRef = React.useRef<MainCanvasHandler>(null)
   const clearCanvas = useCallback(() => {
     if (canvasRef.current) {
@@ -41,36 +56,151 @@ const Draw = () => {
 
   const maxTimeMs = 40000
 
+  const [nowPhase, setNowPhase] = useState<number>(5)
+  const [maxPhase, setMaxPhase] = useState<number>(25)
+  const [odaiContent, setOdaiContent] = useState<string>('横断歩道を渡る猫')
+
   return (
     <div>
-      <OdaiBoard text="横断歩道をわたる猫" height="100px" width="200px" />
-      <LineTimerCard maxValueMs={maxTimeMs} width="500px" />
-      <SizeSlider value={penSize} onChange={setPenSize} />
-      <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
-      <ColorPallet onChange={setPenColor} />
-      <ToolBox
-        onChange={setPenType}
-        penType={penType}
-        penColor={penColor}
-        undo={undo}
-        redo={redo}
-        clear={clearCanvas}
-      />
-
-      <div onKeyDown={shortcut} tabIndex={-1}>
-        <MainCanvas
-          ref={canvasRef}
-          penType={penType}
-          penSize={penSize}
-          color={penColor}
-          width={800}
-          height={800}
-          adjacentColors={[
-            ['blue', null, 'yellow'],
-            [null, null, null],
-            ['yellow', null, 'red'],
-          ]}
+      <div
+        css={css`
+          display: grid;
+          grid-template-columns: 352px 512px 300px;
+          grid-column-gap: 32px;
+          grid-template-rows: 78px 1fr;
+          grid-row-gap: 32px;
+          justify-content: center;
+          align-items: center;
+          margin-top: 32px;
+        `}
+        onKeyDown={shortcut}
+      >
+        <FlatButton
+          text={`${nowPhase}ターン目/${maxPhase}`}
+          color="yellow"
+          hasShadow
         />
+        <div
+          css={css`
+            display: inline-block;
+            grid-column: 2 / 4;
+          `}
+        >
+          <LineTimerCard maxValueMs={maxTimeMs} width="100%" />
+        </div>
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+          `}
+        >
+          <div
+            css={css`
+              background-color: ${colorToRgb.red};
+              box-shadow: 8px 8px 0px #000000;
+              padding: 32px;
+              font-size: 32px;
+              border: 3px solid #000;
+            `}
+          >
+            <div
+              css={css`
+                margin-bottom: 32px;
+              `}
+            >
+              お題
+            </div>
+            <OdaiBoard text={odaiContent} width="100%" height="200px" />
+          </div>
+          <div
+            css={css`
+              flex-shrink: 0;
+            `}
+          >
+            <PreviewCanvas
+              boardType="5x5"
+              drawnArea={drawnArea}
+              img={previewImage}
+              targetArea={targetArea}
+              width="100%"
+              isColored
+              type="large"
+            />
+          </div>
+        </div>
+
+        <div
+          css={css`
+            margin: auto;
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+          `}
+        >
+          <MainCanvas
+            ref={canvasRef}
+            penType={penType}
+            color={penColor}
+            penSize={penSize}
+            width={512}
+            height={512}
+          />
+        </div>
+        <div
+          css={css`
+            display: flex;
+            flex-direction: column;
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
+            gap: 32px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+          `}
+        >
+          <div
+            css={css`
+              background-color: ${colorToRgb.red};
+              height: 100%;
+              padding: 32px 0;
+              box-shadow: 8px 8px 0px #000000;
+              border: 3px solid #000;
+            `}
+          >
+            <div css={css`
+              margin-left: auto;
+              margin-right: auto;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              height: 100%;
+              gap: 16px;
+            `}>
+              <ColorPallet onChange={setPenColor} />
+              <div css={css`
+                margin-top: auto;
+              `}>
+                <ToolBox
+                  onChange={setPenType}
+                  penType={penType}
+                  penColor={penColor}
+                  undo={undo}
+                  redo={redo}
+                  clear={clearCanvas}
+                />
+              </div>
+              <SizeSlider value={penSize} onChange={setPenSize} />
+            </div>
+          </div>
+          <div
+            css={css`
+              flex-shrink: 0;
+            `}
+          >
+            <DoneButton isDone={isDone} onClick={setIsDone} hasShadow />
+          </div>
+        </div>
       </div>
     </div>
   )
