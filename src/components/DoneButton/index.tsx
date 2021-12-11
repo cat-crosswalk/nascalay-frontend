@@ -41,7 +41,6 @@ const DoneButton = (props: Props) => {
             box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
           `
           : ''}
-        margin: 16px;
         transition: box-shadow 0.1s ease-out;
         ${props.hasShadow
           ? `
