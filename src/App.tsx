@@ -4,8 +4,9 @@ import { useEffect } from 'react'
 import { Global, css } from '@emotion/react'
 import './App.css'
 import Router from '/@/router/index'
-import { useAppDispatch } from '/@/store/hooks'
+import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { addPageEventListener } from '/@/scripts/changePageEvent'
+import bgImage from '/@/assets/bg.svg'
 
 const App = () => {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ const App = () => {
     addPageEventListener(navigate, dispatch)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  const bgColor = useAppSelector((state) => state.status.bgColor)
   return (
     <div>
       <Global
@@ -27,6 +29,11 @@ const App = () => {
             -moz-osx-font-smoothing: grayscale;
             -webkit-font-smoothing: antialiased;
             font-smooth: auto;
+          }
+
+          body {
+            background-image: url(${bgImage});
+            background-color: ${bgColor};
           }
 
           body,

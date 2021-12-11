@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { css } from '@emotion/react'
-
+import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 import { useAppSelector } from '/@/store/hooks'
 
@@ -8,7 +8,7 @@ const AnswerCanvas = () => {
   const canvasWidth = 400
   const canvasHeight = 400
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const imageData = useAppSelector(state => state.answer.img)
+  const imageData = useAppSelector((state) => state.answer.img)
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
@@ -45,6 +45,7 @@ const container = css`
 const canvasStyle = css`
   width: calc(96vh - 300px);
   height: calc(96vh - 300px);
+  background-color: ${colorToRgb.white};
 `
 
 export default AnswerCanvas

@@ -5,10 +5,13 @@ import { card } from '/@/utils/card'
 import MemberList from '/@/components/MemberList'
 import ThemeInput from './ThemInput'
 import LineTimerCard from '/@/components/LineTimerCard'
-import { useAppSelector } from '/@/store/hooks'
+import { useAppDispatch, useAppSelector } from '/@/store/hooks'
+import { setBgColor } from '/@/store/slice/status'
 
 // お題を入力するページ(ODAI)
 const Theme = () => {
+  const dispatch = useAppDispatch()
+  dispatch(setBgColor('#96A0C0'))
   const maxTimeMs = useAppSelector((state) => state.theme.timeLimit * 1000)
   return (
     <div>
