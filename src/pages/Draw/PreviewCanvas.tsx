@@ -54,17 +54,9 @@ const PreviewCanvas = (props: Props) => {
             Math.abs(j - props.targetArea[1]) <=
           1
         const calcColor = (x: number, y: number): `#${string}` => {
-          if (!props.isColored) return '#B2B8CB'
-          if (nearTarget(x, y)) return '#B2B8CB'
-          switch ((x + y) % 3) {
-            case 0:
-              return '#F29A8C'
-            case 1:
-              return '#F6DF93'
-            case 2:
-              return '#A0A7E9'
-          }
-          return '#B2B8CB'
+          if (!props.isColored) return '#ABACB8'
+          if (!drawnArea2D[x][y]) return '#ABACB8'
+          return '#F6DF93'
         }
         for (let i = 0; i < 5; i++) {
           for (let j = 0; j < 5; j++) {
@@ -78,24 +70,54 @@ const PreviewCanvas = (props: Props) => {
               canvas.height / 5
             )
             if (!drawnArea2D[i][j]) continue
-            maskCtx.strokeStyle = '#000000'
-            maskCtx.beginPath()
-            maskCtx.moveTo(
-              (i * canvas.width) / 5 + canvas.width / (5 * 4),
-              (j * canvas.height) / 5 + canvas.height / (5 * 2)
-            )
-            maskCtx.lineTo(
-              (i * canvas.width) / 5 + (canvas.width * 3) / (5 * 7),
-              (j * canvas.height) / 5 + (canvas.height * 5) / (5 * 7)
-            )
-            maskCtx.lineTo(
-              (i * canvas.width) / 5 + (canvas.width * 3) / (5 * 4),
-              (j * canvas.height) / 5 + canvas.height / (5 * 3)
-            )
-            maskCtx.stroke()
-            maskCtx.closePath()
           }
         }
+        maskCtx.strokeStyle = '#000000'
+        maskCtx.lineWidth = props.type === 'small' ? 2 : 3
+        maskCtx.beginPath()
+        for (let i = 0; i < 4; i++) {
+          if (i !== props.targetArea[0] && i + 1 !== props.targetArea[0]) {
+            maskCtx.moveTo(((i + 1) * canvas.width) / 5, 0)
+            maskCtx.lineTo(((i + 1) * canvas.width) / 5, canvas.height)
+          }
+        }
+        for (let j = 0; j < 4; j++) {
+          if (j !== props.targetArea[1] && j + 1 !== props.targetArea[1]) {
+            maskCtx.moveTo(0, ((j + 1) * canvas.height) / 5)
+            maskCtx.lineTo(canvas.width, ((j + 1) * canvas.height) / 5)
+          }
+        }
+        const [i, j] = props.targetArea
+        maskCtx.moveTo((i * canvas.width) / 5, 0)
+        maskCtx.lineTo((i * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(0, (j * canvas.height) / 5)
+        maskCtx.moveTo(canvas.width, (j * canvas.height) / 5)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, 0)
+        maskCtx.moveTo(((i + 1) * canvas.width) / 5, canvas.height)
+        maskCtx.lineTo(
+          ((i + 1) * canvas.width) / 5,
+          ((j + 1) * canvas.height) / 5
+        )
+        maskCtx.lineTo(canvas.width, ((j + 1) * canvas.height) / 5)
+        maskCtx.moveTo(0, ((j + 1) * canvas.height) / 5)
+        maskCtx.lineTo((i * canvas.width) / 5, ((j + 1) * canvas.height) / 5)
+        maskCtx.lineTo((i * canvas.width) / 5, canvas.height)
+        maskCtx.stroke()
+        maskCtx.closePath()
+        maskCtx.strokeStyle = '#DA3116'
+        maskCtx.beginPath()
+        maskCtx.moveTo((i * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.lineTo(
+          ((i + 1) * canvas.width) / 5,
+          ((j + 1) * canvas.height) / 5
+        )
+        maskCtx.lineTo((i * canvas.width) / 5, ((j + 1) * canvas.height) / 5)
+        maskCtx.lineTo((i * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.stroke()
+        maskCtx.closePath()
+        break
       }
     }
   }, [
@@ -104,6 +126,7 @@ const PreviewCanvas = (props: Props) => {
     props.img,
     props.isColored,
     props.targetArea,
+    props.type,
   ])
 
   return (
