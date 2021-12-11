@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import React from 'react'
+import React, { useCallback } from 'react'
 
 type Props = {
   value: number
@@ -7,7 +7,14 @@ type Props = {
 }
 
 const SizeSlider = (props: Props) => {
-  const [value, setValue] = React.useState(props.value)
+  const onChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (props.onChange) {
+        props.onChange(Number(event.target.value))
+      }
+    },
+    [props]
+  )
 
   return (
     <div
@@ -22,8 +29,8 @@ const SizeSlider = (props: Props) => {
         min="5"
         max="100"
         step="5"
-        value={value}
-        onChange={(e) => setValue(parseInt(e.target.value))}
+        value={props.value}
+        onChange={onChange}
         css={css`
           -webkit-appearance: none;
           width: 232px;
@@ -70,7 +77,7 @@ const SizeSlider = (props: Props) => {
         css={css`
           position: absolute;
           bottom: 5px;
-          left: ${((value - 5) / 95) * (232 - 36)}px;
+          left: ${((props.value - 5) / 95) * (232 - 36)}px;
           pointer-events: none;
           transition: left 0.1s ease-out;
         `}
