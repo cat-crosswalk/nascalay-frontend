@@ -16,8 +16,12 @@ const Index = () => {
         <p>ゲームを始める</p>
       </div>
       <div css={container}>
-        <Avatar />
-        <PlayerName />
+        <div>
+          <Avatar />
+        </div>
+        <div css={width100}>
+          <PlayerName />
+        </div>
       </div>
     </div>
   )
@@ -45,6 +49,10 @@ const title = css`
 const container = css`
   display: flex;
   gap: 2rem;
+`
+
+const width100 = css`
+  width: 100%;
 `
 
 export default Index

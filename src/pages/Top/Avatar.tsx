@@ -4,10 +4,12 @@ import { css } from '@emotion/react'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 
+import ColorPallet from '/@/components/ColorPallet.tsx'
+
 const Avatar = () => {
   return (
     <div css={[containerStyle, card]}>
-      <p>アバター</p>
+      <ColorPallet />
     </div>
   )
 }

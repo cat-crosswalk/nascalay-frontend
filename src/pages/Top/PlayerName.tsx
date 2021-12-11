@@ -75,6 +75,8 @@ const inputNameStyle = css`
   background-color: ${colorToRgb.white};
   border: 3px solid ${colorToRgb.black};
   font-size: 1.5rem;
+  line-height: 64px;
+  vertical-align: middle;
   padding-left: 1rem;
   width: 100%;
   height: 64px;
