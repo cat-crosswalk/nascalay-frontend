@@ -40,10 +40,10 @@ const AnswerCard = () => {
   }, [])
   return (
     <div css={[container, card]}>
-      <h2 css={titleStyle}>イラストのお題は？</h2>
+      <h2 css={titleStyle}>お題を予想しよう</h2>
       <input
         type="text"
-        placeholder="お題を予想しよう"
+        placeholder="イラストのお題は？"
         value={answer}
         onChange={inputHandler}
         readOnly={isReadOnly}
@@ -74,10 +74,10 @@ const container = css`
 const inputStyle = css`
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 40%;
   left: 50%;
   background-color: ${colorToRgb.white};
-  width: calc(100% - 96px);
+  width: calc(100% - 84px);
   height: 64px;
   border: 3px solid ${colorToRgb.black};
   font-size: 1.5rem;

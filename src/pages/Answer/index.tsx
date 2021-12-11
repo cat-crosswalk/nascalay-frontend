@@ -45,6 +45,7 @@ const pageContainer = css`
 const container = css`
   display: flex;
   gap: 20px;
+  min-height: 350px;
 `
 
 const headerWrap = css`
