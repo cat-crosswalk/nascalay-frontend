@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet.tsx'
-import DoneButton from './DoneButton'
+import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
@@ -38,7 +38,7 @@ const Draw = () => {
   return (
     <div>
       <h1>Draw</h1>
-      <DoneButton isDone={isDone} onClick={setIsDone} />
+      <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
       <ColorPallet onChange={setPenColor} />
       <ToolBox
         onChange={setPenType}

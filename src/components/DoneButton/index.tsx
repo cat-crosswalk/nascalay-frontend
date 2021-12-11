@@ -5,6 +5,7 @@ import FlatButton from '/@/components/FlatButton'
 type Props = {
   isDone?: boolean
   onClick?: (e: boolean) => void
+  hasShadow?: boolean
 }
 
 const DoneButton = (props: Props) => {
@@ -35,8 +36,11 @@ const DoneButton = (props: Props) => {
         position: relative;
         width: 232px;
         height: 80px;
-        /* filter: drop-shadow(8px 8px 0px rgba(0, 0, 0, 1)); */
-        box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+        ${props.hasShadow
+          ? `
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+          `
+          : ''}
         margin: 16px;
       `}
     >
