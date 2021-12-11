@@ -11,7 +11,7 @@ const Theme = () => {
     <div>
       <div css={pageContainer}>
         <div css={[card, title]}>
-          <p>待機部屋</p>
+          <p>お題決め</p>
         </div>
         <div css={container}>
           <MemberList />
