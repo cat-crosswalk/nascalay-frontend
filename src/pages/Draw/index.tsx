@@ -56,19 +56,19 @@ const Draw = () => {
 
   const [isDone, setIsDone] = useState(false)
 
-  const maxTimeMs = 40000
+  const maxTimeMs = useAppSelector((state) => state.draw.timeLimit) * 1000
 
   const [nowPhase, setNowPhase] = useState<number>(5)
   const [maxPhase, setMaxPhase] = useState<number>(25)
   const [odaiContent, setOdaiContent] = useState<string>('横断歩道を渡る猫')
 
-  const drawData = useAppSelector(state => state.draw)
+  const drawData = useAppSelector((state) => state.draw)
   useEffect(() => {
     setPreviewImage(drawData.img)
     setNowPhase(drawData.drawPhaseNum)
     setMaxPhase(drawData.allDrawPhaseNum)
     setOdaiContent(drawData.odai)
-    setTargetArea(areaToXY(drawData.canvas.areaId,drawData.canvas.boardName))
+    setTargetArea(areaToXY(drawData.canvas.areaId, drawData.canvas.boardName))
   }, [drawData])
 
   return (
