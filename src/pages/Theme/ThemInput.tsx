@@ -6,6 +6,7 @@ import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 
 import DoneButton from '/@/components/DoneButton'
+import { wsSend } from '/@/websocket'
 
 const ThemeInput = () => {
   const odai = useAppSelector((state) => state.theme)
@@ -20,6 +21,11 @@ const ThemeInput = () => {
     setIsDone(e)
     setIsReadonly(e)
     // wsSend
+    if (e) {
+      wsSend.odaiReady()
+    } else {
+      wsSend.odaiCancel()
+    }
   }, [])
   return (
     <div css={[containerStyle, card]}>

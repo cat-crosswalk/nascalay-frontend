@@ -11,6 +11,20 @@ class WsSend {
     }
     ws.send(message)
   }
+  odaiReady() {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiReady,
+      body: {},
+    }
+    ws.send(message)
+  }
+  odaiCancel() {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiCancel,
+      body: {},
+    }
+    ws.send(message)
+  }
 }
 
 export const wsSend = new WsSend()
