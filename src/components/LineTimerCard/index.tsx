@@ -8,6 +8,7 @@ type Props = {
   width: string
   maxValueMs: number
   onFinish?: () => void
+  hasShadow?: boolean
 }
 
 const LineTimerCard = (props: Props) => {
@@ -40,6 +41,7 @@ const LineTimerCard = (props: Props) => {
         align-items: center;
         padding: 8px 20px;
         border: 3px solid #000000;
+        ${props.hasShadow ? 'box-shadow: 8px 8px 0px rgb(0, 0, 0);' : ''}
       `}
     >
       <Icon
