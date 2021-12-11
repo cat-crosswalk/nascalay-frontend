@@ -37,6 +37,7 @@ const PreviewCanvas = (props: Props) => {
     const maskCtx = maskCanvas.getContext('2d')
     if (!ctx || !maskCtx) return
     const imageData = ctx.createImageData(canvas.width, canvas.height)
+    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height)
     if (props.img !== null) {
       const img = new Image()
       img.onload = () => {
