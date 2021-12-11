@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet.tsx'
+import DoneButton from './DoneButton'
 import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
@@ -32,9 +33,12 @@ const Draw = () => {
   const [penType, setPenType] = useState<MainCanvasProps['penType']>('pen')
   const [penColor, setPenColor] = useState<MainCanvasProps['color']>('#f00')
 
+  const [isDone, setIsDone] = useState(false)
+
   return (
     <div>
       <h1>Draw</h1>
+      <DoneButton isDone={isDone} onClick={setIsDone} />
       <ColorPallet onChange={setPenColor} />
       <ToolBox
         onChange={setPenType}
@@ -59,42 +63,6 @@ const Draw = () => {
             ['yellow', null, 'red'],
           ]}
         />
-        <div>
-          <button onClick={clearCanvas}>Clear</button>
-          <button onClick={undo}>Undo</button>
-          <button onClick={redo}>Redo</button>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="pen"
-            name="penType"
-            value="pen"
-            checked={penType === 'pen'}
-            onChange={() => setPenType('pen')}
-          />
-          <label htmlFor="pen">pen</label>
-          <input
-            type="radio"
-            id="eraser"
-            name="penType"
-            value="eraser"
-            checked={penType === 'eraser'}
-            onChange={() => setPenType('eraser')}
-          />
-          <label htmlFor="eraser">
-            <Icon path={mdiEraser} size={1} />
-          </label>
-          <input
-            type="radio"
-            id="bucket"
-            name="penType"
-            value="bucket"
-            checked={penType === 'bucket'}
-            onChange={() => setPenType('bucket')}
-          />
-          <label htmlFor="bucket">bucket</label>
-        </div>
       </div>
     </div>
   )
