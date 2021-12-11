@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import ColorPallet from '/@/components/ColorPallet.tsx'
+import ColorPallet from '/@/components/ColorPallet'
 import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
   Handler as MainCanvasHandler,
