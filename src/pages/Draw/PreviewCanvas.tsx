@@ -69,7 +69,6 @@ const PreviewCanvas = (props: Props) => {
               canvas.width / 5,
               canvas.height / 5
             )
-            if (!drawnArea2D[i][j]) continue
           }
         }
         maskCtx.strokeStyle = '#000000'
