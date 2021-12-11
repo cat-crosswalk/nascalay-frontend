@@ -86,39 +86,7 @@ const Draw = () => {
     setDrawnArea(drawnArea)
   }, [drawData])
 
-  /**
-   * 600x600 の画像生成
-   */
-  // const generateSendImage = useCallback(async (): Promise<string | null> => {
-  //   const drawnData = canvasRef.current?.exportImage()
-  //   if (drawnData === null || drawnData === undefined) return null
-  //   if (previewImage === null) return null
-  //   // TODO: boardType 追加されたら場合分けが必要
-  //   const scaledElementData = scaleImageData(drawnData, 600 / 5, 600 / 5)
-  //   if (scaledElementData === null) return null
-  //   const canvas = document.createElement('canvas')
-  //   const ctx = canvas.getContext('2d')
-  //   if (ctx === null) return null
-  //   canvas.width = 600
-  //   canvas.height = 600
-  //   try {
-  //     const res = await loadImage(previewImage)
-  //     if (res === null) return null
-  //     ctx.drawImage(res, 0, 0, canvas.width, canvas.height)
-  //   } catch (e) {
-  //     console.error(e)
-  //     return null
-  //   }
-  //   ctx.putImageData(
-  //     scaledElementData,
-  //     (targetArea[0] * 600) / 5,
-  //     (targetArea[1] * 600) / 5
-  //   )
-  //   return canvas.toDataURL('image/png')
-  // }, [previewImage, targetArea])
-
   const [requestBase64, setRequestBase64] = useState<string>('')
-  const [requestBase64done, setRequestBase64done] = useState<string>('')
 
   useEffect(() => {
     if (requestBase64 !== 'aaa') return
