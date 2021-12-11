@@ -9,6 +9,7 @@ type Props = {
   width: string
   isColored?: boolean
   type: 'large' | 'small'
+  hasShadow?: boolean
 }
 
 const PreviewCanvas = (props: Props) => {
@@ -111,6 +112,8 @@ const PreviewCanvas = (props: Props) => {
         position: relative;
         width: ${props.width};
         background-color: #ffffff;
+        border: 3px solid #000000;
+        ${props.hasShadow ? 'box-shadow: 8px 8px 0px #000000;' : ''}
         &:before {
           content: '';
           display: block;

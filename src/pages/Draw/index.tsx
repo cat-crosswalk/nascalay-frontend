@@ -128,6 +128,7 @@ const Draw = () => {
               width="100%"
               isColored
               type="large"
+              hasShadow
             />
           </div>
         </div>
