@@ -38,7 +38,7 @@ const SizeSlider = (props: Props) => {
           top: 0;
           left: 0;
           opacity: 0;
-          cursor: pointer;
+          cursor: url('../src/assets/cursors/slideBarOnHover.png') 22 0, auto;
           &::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
