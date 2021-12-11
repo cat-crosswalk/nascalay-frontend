@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { css } from '@emotion/react'
-
+import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 import { useAppSelector } from '/@/store/hooks'
 
@@ -45,6 +45,7 @@ const container = css`
 const canvasStyle = css`
   width: calc(96vh - 300px);
   height: calc(96vh - 300px);
+  background-color: ${colorToRgb.white};
 `
 
 export default AnswerCanvas

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { colorToRgb } from '/@/utils/color'
 import { WsEvent, wsListener } from '/@/websocket'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
+import { card } from '/@/utils/card'
 
 const ShowCanvasCard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -62,7 +63,7 @@ const ShowCanvasCard = () => {
           ref={canvasRef}
           width={canvasWidth}
           height={canvasHeight}
-          css={canvasStyle}
+          css={[canvasStyle, card]}
         ></canvas>
       </div>
     </div>
@@ -77,7 +78,7 @@ const canvasContainer = css`
 const canvasStyle = css`
   width: calc(96vh - 320px);
   height: calc(96vh - 320px);
-  border: 3px solid ${colorToRgb.black};
+  background-color: ${colorToRgb.white};
 `
 
 export default ShowCanvasCard
