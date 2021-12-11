@@ -10,6 +10,7 @@ export type Props = {
   readonly width: number
   readonly height: number
   readonly adjacentColors?: readonly (readonly (ColorType | null)[])[] // 3 * 3 が想定されている
+  readonly hasShadow?: boolean
 } & CanvasProps
 
 export type Handler = {
@@ -90,6 +91,7 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
         overflow: hidden;
         margin: 8px;
         background-color: #fff;
+        ${props.hasShadow ? 'box-shadow: 8px 8px 0 #000;' : ''}
       `}
     >
       <canvas

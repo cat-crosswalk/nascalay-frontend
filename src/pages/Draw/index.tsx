@@ -147,6 +147,7 @@ const Draw = () => {
             penSize={penSize}
             width={512}
             height={512}
+            hasShadow
           />
         </div>
         <div
