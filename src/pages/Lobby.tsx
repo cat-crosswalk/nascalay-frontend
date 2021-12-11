@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
-import { useAppSelector } from '/@/store/hooks'
+import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { setupWebSocket } from '/@/websocket'
 import GameSetting from '/@/components/GameSetting'
 import MemberList from '/@/components/MemberList'
 
 import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
+import { setBgColor } from '../store/slice/status'
 
 // 待機部屋(ROOM)
 const Lobby = () => {
+  const dispatch = useAppDispatch()
+  dispatch(setBgColor('#DCCCA2'))
   const userId = useAppSelector((state) => state.user.userId)
   useEffect(() => {
     // websocket接続
