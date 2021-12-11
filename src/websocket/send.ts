@@ -4,11 +4,36 @@ import { ws } from './index'
 
 // ここにいい感じにsendの処理を追加していく
 class WsSend {
-  requestGameStart() {
+  odai = ''
+  requestGameStart(): void {
     const message: WsClientSendMessage = {
       type: WsEvent.RequestGameStart,
       body: {},
     }
+    ws.send(message)
+  }
+  odaiReady(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiReady,
+      body: {},
+    }
+    ws.send(message)
+  }
+  odaiCancel(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiCancel,
+      body: {},
+    }
+    ws.send(message)
+  }
+  odaiSend(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiCancel,
+      body: {
+        odai: this.odai,
+      },
+    }
+    console.log(this.odai)
     ws.send(message)
   }
 }

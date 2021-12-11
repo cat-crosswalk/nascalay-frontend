@@ -47,7 +47,15 @@ const Draw = () => {
       <LineTimerCard maxValueMs={maxTimeMs} width="500px" />
       <LineTimer maxValueMs={maxTimeMs} width="500px" height="30px" />
       <SizeSlider value={penSize} onChange={setPenSize} />
-      <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
+      <DoneButton
+        isDone={isDone}
+        onClick={setIsDone}
+        hasShadow={true}
+        text="完成!"
+        doneText="編集"
+        color="red"
+        doneColor="yellow"
+      />
       <ColorPallet onChange={setPenColor} />
       <ToolBox
         onChange={setPenType}

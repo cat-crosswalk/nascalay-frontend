@@ -46,7 +46,7 @@ const title = css`
   line-height: 2rem;
   vertical-align: middle;
   margin: 1rem 0;
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
 `
 
 const container = css`
