@@ -4,15 +4,15 @@ import { useAppDispatch } from '/@/store/hooks'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 import ColorPallet, { palletColor } from '/@/components/ColorPallet'
-import Avatar from '/@/components/Avatar'
+import AvatarIcon from '/@/components/AvatarIcon'
 import { getRandomInt } from '/@/utils/random'
-import { setAvatar } from '/@/store/slice/user'
+import { setAvatarColor, setAvatarType } from '/@/store/slice/user'
 
 import { Icon } from '@mdi/react'
 import { mdiDice3Outline } from '@mdi/js'
 
 const AvatarSelect = () => {
-  const maxAvatarId = 0
+  const maxAvatarId = 0 // TODO:アバター数に応じて変更する
   const colorId = getRandomInt(palletColor.length)
   const [color, setColor] = useState<string>(palletColor[colorId].hex)
   const [avatarId, setAvatarId] = useState(0)
@@ -21,21 +21,21 @@ const AvatarSelect = () => {
   const colorChange = useCallback(
     (hex: string) => {
       setColor(hex)
-      // TODO:oapiに追加されたら色変化に対応する
-      dispatch(setAvatar(avatarId))
+      dispatch(setAvatarColor(hex))
     },
-    [avatarId, dispatch]
+    [dispatch]
   )
   const randomAvatar = useCallback(() => {
-    setAvatarId(getRandomInt(maxAvatarId))
-    dispatch(setAvatar(avatarId))
-  }, [avatarId, dispatch])
+    const id = getRandomInt(maxAvatarId)
+    setAvatarId(id)
+    dispatch(setAvatarType(id))
+  }, [dispatch])
 
   // TODO: ダイズを出目に対応して変更する
   return (
     <div css={[containerStyle, card]}>
       <div css={avaterStyle}>
-        <Avatar size={148} avaterId={avatarId} color={color} />
+        <AvatarIcon size={148} avatar={{ color: color, type: avatarId }} />
         <button css={diceStyle} onClick={randomAvatar}>
           <Icon path={mdiDice3Outline} size={1.8} />
         </button>

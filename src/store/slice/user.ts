@@ -2,7 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { User } from '/@/utils/apis/generated'
 
 const initialState: User = {
-  avatar: 0,
+  avatar: {
+    type: 0,
+    color: '#ffffff',
+  },
   username: '',
   userId: '',
 }
@@ -14,12 +17,16 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       return action.payload
     },
-    setAvatar: (state, action: PayloadAction<number>) => {
-      state.avatar = action.payload
+    setAvatarType: (state, action: PayloadAction<number>) => {
+      state.avatar.type = action.payload
+      return state
+    },
+    setAvatarColor: (state, action: PayloadAction<string>) => {
+      state.avatar.color = action.payload
       return state
     },
   },
 })
 
-export const { setUser, setAvatar } = userSlice.actions
+export const { setUser, setAvatarType, setAvatarColor } = userSlice.actions
 export default userSlice.reducer

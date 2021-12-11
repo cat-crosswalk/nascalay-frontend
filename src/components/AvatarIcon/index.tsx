@@ -1,17 +1,17 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
+import { Avatar } from '/@/utils/apis'
 
 type Props = {
-  color: string
-  avaterId: number
+  avatar: Avatar
   size: number
 }
 
-const Avatar = (props: Props) => {
-  const src = `/@/assets/avatar${props.avaterId}.png`
+const AvatarIcon = (props: Props) => {
+  const src = `/@/assets/avatar${props.avatar.type}.png`
   const imageStyle = css`
-    background-color: ${props.color};
+    background-color: ${props.avatar.color};
     width: ${props.size}px;
     height: ${props.size}px;
     border: 3px solid ${colorToRgb.black};
@@ -19,4 +19,4 @@ const Avatar = (props: Props) => {
   return <img src={src} css={imageStyle} alt="avatar" />
 }
 
-export default Avatar
+export default AvatarIcon

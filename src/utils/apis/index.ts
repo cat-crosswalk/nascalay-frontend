@@ -1,11 +1,15 @@
-import { RoomApi, Configuration, ConfigurationParameters } from '/@/utils/apis/generated'
+import {
+  RoomApi,
+  Configuration,
+  ConfigurationParameters,
+} from '/@/utils/apis/generated'
 
 let path = {}
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-if (VITE_ENV_STAGE === 'development') {
+if (import.meta.env.VITE_ENV_STAGE === 'development') {
   path = {
-    basePath: '/api'
+    basePath: '/api',
   } as ConfigurationParameters
 }
 
