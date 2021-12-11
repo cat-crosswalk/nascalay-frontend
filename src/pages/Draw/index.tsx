@@ -6,6 +6,7 @@ import MainCanvas, {
   Props as MainCanvasProps,
 } from './MainCanvas'
 import ToolBox from './ToolBox'
+import SizeSlider from './SizeSlider'
 
 // 絵を描くページ
 const Draw = () => {
@@ -32,12 +33,14 @@ const Draw = () => {
   }, [])
   const [penType, setPenType] = useState<MainCanvasProps['penType']>('pen')
   const [penColor, setPenColor] = useState<MainCanvasProps['color']>('#f00')
+  const [penSize, setPenSize] = useState<MainCanvasProps['penSize']>(10)
 
   const [isDone, setIsDone] = useState(false)
 
   return (
     <div>
       <h1>Draw</h1>
+      <SizeSlider value={penSize} onChange={setPenSize} />
       <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
       <ColorPallet onChange={setPenColor} />
       <ToolBox
@@ -53,7 +56,7 @@ const Draw = () => {
         <MainCanvas
           ref={canvasRef}
           penType={penType}
-          penSize={10}
+          penSize={penSize}
           color={penColor}
           width={800}
           height={800}
