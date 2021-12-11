@@ -42,6 +42,14 @@ const DoneButton = (props: Props) => {
           `
           : ''}
         margin: 16px;
+        transition: box-shadow 0.1s ease-out;
+        ${props.hasShadow
+          ? `
+        &:active {
+          box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+        }
+      `
+          : ''}
       `}
     >
       <div css={(props.isDone ? [rotateUp] : []).concat([baseStyle])}>
