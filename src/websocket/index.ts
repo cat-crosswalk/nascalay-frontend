@@ -3,7 +3,7 @@ import AutoReconnectWebSocket from './AutoReconnectWebSocket'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const baseUrl = (VITE_ENV_STAGE === 'development') ? BASE_URL : location.protocol + '//' + location.host
+const baseUrl = (VITE_ENV_STAGE === 'development') ? BASE_URL : location.protocol + '//api.nascalay.trasta.dev'
 
 const absoluteWebsocketEndpoint = new URL(WEBSOCKET_ENDPOINT, baseUrl)
 absoluteWebsocketEndpoint.protocol =
