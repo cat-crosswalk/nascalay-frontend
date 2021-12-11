@@ -71,16 +71,16 @@ const answerContainer = css`
 }`
 
 const answerStyle = css`
-  position:relative;
+  position: relative;
   height: 80px;
   flex-grow: 1;
-  background:${colorToRgb.white};
-  padding:10px;
-  text-align:center;
-  border:3px solid ${colorToRgb.black};
-  color:${colorToRgb.black};
-  font-size:1.5rem;
-  font-weight:bold;
+  background: ${colorToRgb.white};
+  padding: 10px;
+  text-align: center;
+  border: 3px solid ${colorToRgb.black};
+  color: ${colorToRgb.black};
+  font-size: 1.5rem;
+  font-weight: bold;
   margin: 0em 5rem;
   margin-left: 1rem;
   &::after,
