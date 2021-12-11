@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect } from 'react'
 import Vivus from 'vivus'
 
-const palletColor: { hex: `#${string}`; whiteLike?: boolean }[] = [
+export const palletColor: { hex: `#${string}`; whiteLike?: boolean }[] = [
   {
     hex: '#F22222',
   },

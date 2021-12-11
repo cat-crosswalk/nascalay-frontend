@@ -1,30 +1,27 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { css } from '@emotion/react'
-import { useAppSelector } from '/@/store/hooks'
-import { setupWebSocket } from '/@/websocket'
-import GameSetting from '/@/components/GameSetting'
-import MemberList from '/@/components/MemberList'
-
 import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 
-// 待機部屋(ROOM)
-const Lobby = () => {
-  const userId = useAppSelector((state) => state.user.userId)
-  useEffect(() => {
-    // websocket接続
-    if (userId == '') return
-    setupWebSocket(userId)
-  }, [userId])
+import PlayerName from './PlayerName'
+import AvatarSelect from './AvatarSelect'
 
+// TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
+// 招待リンク ?c=xxxxxroomIdxxxxx
+const Top = () => {
+  // TODO: アバター
   return (
     <div css={pageContainer}>
       <div css={[card, title]}>
-        <p>待機部屋</p>
+        <p>ゲームを始める</p>
       </div>
       <div css={container}>
-        <MemberList />
-        <GameSetting />
+        <div>
+          <AvatarSelect />
+        </div>
+        <div css={width100}>
+          <PlayerName />
+        </div>
       </div>
     </div>
   )
@@ -41,7 +38,7 @@ const pageContainer = css`
 const title = css`
   width: auto;
   display: inline-block;
-  background-color: ${colorToRgb.yellow};
+  background-color: ${colorToRgb.red};
   font-size: 2rem;
   line-height: 2rem;
   vertical-align: middle;
@@ -54,4 +51,8 @@ const container = css`
   gap: 2rem;
 `
 
-export default Lobby
+const width100 = css`
+  width: 100%;
+`
+
+export default Top

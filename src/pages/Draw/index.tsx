@@ -8,6 +8,7 @@ import MainCanvas, {
 import ToolBox from './ToolBox'
 import SizeSlider from './SizeSlider'
 import LineTimer from '/@/components/LineTimer'
+import LineTimerCard from '/@/components/LineTimerCard'
 
 // 絵を描くページ
 const Draw = () => {
@@ -43,9 +44,18 @@ const Draw = () => {
   return (
     <div>
       <h1>Draw</h1>
+      <LineTimerCard maxValueMs={maxTimeMs} width="500px" />
       <LineTimer maxValueMs={maxTimeMs} width="500px" height="30px" />
       <SizeSlider value={penSize} onChange={setPenSize} />
-      <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
+      <DoneButton
+        isDone={isDone}
+        onClick={setIsDone}
+        hasShadow={true}
+        text="完成!"
+        doneText="編集"
+        color="red"
+        doneColor="yellow"
+      />
       <ColorPallet onChange={setPenColor} />
       <ToolBox
         onChange={setPenType}

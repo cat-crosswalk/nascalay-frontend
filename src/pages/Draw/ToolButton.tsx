@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import {
-  mdiFormatColorFill,
-  mdiEraser,
-  mdiPencil,
-  mdiUndo,
-  mdiRedo,
   mdiDelete,
+  mdiEraser,
+  mdiFormatColorFill,
+  mdiPencil,
+  mdiRedo,
+  mdiUndo,
 } from '@mdi/js'
-import Icon from '@mdi/react'
+import { Icon } from '@mdi/react'
 import React, { useMemo } from 'react'
 import { Props as MainCanvasProps } from './MainCanvas'
 
