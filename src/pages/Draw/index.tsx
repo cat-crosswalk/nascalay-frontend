@@ -69,6 +69,7 @@ const Draw = () => {
 
   const drawData = useAppSelector((state) => state.draw)
   useEffect(() => {
+    setIsDone(false)
     setPreviewImage(drawData.img)
     setNowPhase(drawData.drawPhaseNum)
     setMaxPhase(drawData.allDrawPhaseNum)
