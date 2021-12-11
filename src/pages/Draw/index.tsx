@@ -16,7 +16,7 @@ import FlatButton from '/@/components/FlatButton'
 import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { areaToXY } from './boardData'
-import { wsSend } from '/@/websocket'
+import { WsEvent, wsListener, wsSend } from '/@/websocket'
 
 // 絵を描くページ
 const Draw = () => {
@@ -81,6 +81,19 @@ const Draw = () => {
     setOdaiContent(drawData.odai)
     setTargetArea(areaToXY(drawData.canvas.areaId, drawData.canvas.boardName))
   }, [drawData])
+
+  useEffect(() => {
+    const finishCallbackHandler = () => {
+      // callback
+      // wsSend.img にセットした画像を送信する
+      wsSend.drawSend()
+    }
+    wsListener.addEventListener(WsEvent.DrawFinish, finishCallbackHandler)
+
+    return () => {
+      wsListener.removeEventListener(WsEvent.DrawFinish, finishCallbackHandler)
+    }
+  }, [])
 
   return (
     <div>
