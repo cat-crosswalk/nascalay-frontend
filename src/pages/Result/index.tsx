@@ -31,14 +31,14 @@ const Result = () => {
     }
   }, [showNext])
   return (
-      <div css={pageContainer}>
-        <ShowOdaiCard />
-        <ShowCanvasCard />
-        <ShowAnswerCard />
-        <div css={nextBtnStyle}>
-          <FlatButton color="red" text={btnText} onClick={btnNext} />
-        </div>
+    <div css={pageContainer}>
+      <ShowOdaiCard />
+      <ShowCanvasCard />
+      <ShowAnswerCard />
+      <div css={nextBtnStyle}>
+        <FlatButton color="red" text={btnText} onClick={btnNext} />
       </div>
+    </div>
   )
 }
 
