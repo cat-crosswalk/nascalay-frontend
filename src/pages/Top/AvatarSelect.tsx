@@ -6,7 +6,7 @@ import { colorToRgb } from '/@/utils/color'
 
 import ColorPallet from '/@/components/ColorPallet.tsx'
 
-const Avatar = () => {
+const AvatarSelect = () => {
   return (
     <div css={[containerStyle, card]}>
       <ColorPallet />
@@ -21,4 +21,4 @@ const containerStyle = css`
   padding-top: 12px;
 `
 
-export default Avatar
+export default AvatarSelect

@@ -4,7 +4,7 @@ import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 
 import PlayerName from './PlayerName'
-import Avatar from './Avatar'
+import AvatarSelect from './AvatarSelect'
 
 // TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 // 招待リンク ?c=xxxxxroomIdxxxxx
@@ -17,7 +17,7 @@ const Index = () => {
       </div>
       <div css={container}>
         <div>
-          <Avatar />
+          <AvatarSelect />
         </div>
         <div css={width100}>
           <PlayerName />
