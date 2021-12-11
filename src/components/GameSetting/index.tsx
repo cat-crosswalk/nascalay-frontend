@@ -76,6 +76,9 @@ const GameSetting = () => {
             marks={marks}
             value={time}
             onChange={handleChange}
+            css={css`
+              cursor: url('../src/assets/cursors/slideBarOnHover.png') 22 0, auto;
+            `}
           />
         </div>
       </div>

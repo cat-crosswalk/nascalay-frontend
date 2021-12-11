@@ -52,7 +52,7 @@ const ToolButton = (props: Props) => {
           ? `background-color: ${props.color};`
           : ''}
         &:hover {
-          cursor: url('../src/assets/cursors/onHover.png'), auto;
+          cursor: url('../src/assets/cursors/onHover.png') 5 0, auto;
         }
         &:active {
           color: #646260;
