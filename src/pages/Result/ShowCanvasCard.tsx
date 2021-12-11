@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { css } from '@emotion/react'
-
-import { testImage } from './testImage'
+import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { colorToRgb } from '/@/utils/color'
+import { WsEvent, wsListener } from '/@/websocket'
+import { setShowNext, setShowNow } from '/@/store/slice/status'
 
 const ShowCanvasCard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -11,17 +12,49 @@ const ShowCanvasCard = () => {
   const verticalDivision = 5
   const horizontalDivision = 5
 
+  const [imageData, setImageData] = useState('')
+  const dispatch = useAppDispatch()
+  const showNow = useAppSelector((state) => state.status.showNow)
+
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctx = canvas.getContext('2d')!
+    if (imageData === '') {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+      return
+    }
     const img = new Image()
-    img.src = testImage
+    img.src = imageData
     img.onload = () => {
       ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight)
     }
-  }, [])
+  }, [imageData])
+
+  useEffect(() => {
+    const getImageData = (e: CustomEvent) => {
+      setImageData(e.detail.img)
+      dispatch(setShowNext(e.detail.next))
+      dispatch(setShowNow('canvas'))
+    }
+    wsListener.addEventListener(
+      WsEvent.ShowCanvas,
+      getImageData as EventListener
+    )
+    return () => {
+      wsListener.removeEventListener(
+        WsEvent.ShowCanvas,
+        getImageData as EventListener
+      )
+    }
+  }, [dispatch])
+
+  useEffect(() => {
+    if (showNow === 'odai') {
+      setImageData('')
+    }
+  }, [showNow])
 
   // TODO: ?キャンバスアニメーション
   return (

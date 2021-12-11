@@ -19,7 +19,7 @@ const ShowAnswerCard = () => {
     },
   }
   const dispatch = useAppDispatch()
-  const nextShow = useAppSelector((state) => state.status.showNext)
+  const showNow = useAppSelector((state) => state.status.showNow)
   const [answer, setAnswer] = useState('')
   const [user, setUser] = useState<User>(userInit)
 
@@ -42,15 +42,16 @@ const ShowAnswerCard = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (nextShow === 'odai') {
+    if (showNow === 'odai') {
       setAnswer('')
       setUser(userInit)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nextShow])
+  }, [showNow])
 
   return (
     <div css={[answerContainer, card]}>
+      {showNow}aaa
       <div css={answerStyle}>
         <p>{answer}</p>
       </div>

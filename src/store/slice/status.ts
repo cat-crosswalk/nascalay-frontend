@@ -19,9 +19,9 @@ export const statusSlice = createSlice({
       return state
     },
     setShowNow: (state, action: PayloadAction<string>) => {
-      state.showNext = action.payload
+      state.showNow = action.payload
       return state
-    }
+    },
   },
 })
 
