@@ -4,12 +4,12 @@ import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 import MemberList from '/@/components/MemberList'
 import ThemeInput from './ThemInput'
-import LineTimer from '/@/components/LineTimer'
+import LineTimerCard from '/@/components/LineTimerCard'
 import { useAppSelector } from '/@/store/hooks'
 
 // お題を入力するページ(ODAI)
 const Theme = () => {
-  const maxTimeMs = useAppSelector(state => state.theme.timeLimit * 1000)
+  const maxTimeMs = useAppSelector((state) => state.theme.timeLimit * 1000)
   return (
     <div>
       <div css={pageContainer}>
@@ -18,9 +18,11 @@ const Theme = () => {
             <p>お題決め</p>
           </div>
           <div css={timerStyle}>
-            <div>
-              <LineTimer maxValueMs={maxTimeMs} width="500px" height="30px" />
-            </div>
+            <LineTimerCard
+              maxValueMs={maxTimeMs}
+              width="100%"
+              hasShadow={true}
+            />
           </div>
         </div>
         <div css={container}>
@@ -41,23 +43,25 @@ const pageContainer = css`
 `
 
 const headerWrap = css`
+  width: 100%;
   display: flex;
   gap: 30px;
+  margin: 1rem 0;
 `
 
 const timerStyle = css`
   width; 100%;
-  & div
+  min-width:0;
+  flex-grow: 1;
 `
 
 const title = css`
-  width: auto;
+  flex-shrink: 0;
   display: inline-block;
   background-color: ${colorToRgb.yellow};
   font-size: 2rem;
   line-height: 2rem;
   vertical-align: middle;
-  margin: 1rem 0;
   padding: 1rem 2rem;
 `
 
