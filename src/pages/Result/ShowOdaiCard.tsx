@@ -7,6 +7,7 @@ import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
 import { wsListener, WsEvent } from '/@/websocket'
+import OdaiBoard from '/@/components/OdaiBoard'
 
 const ShowOdaiCard = () => {
   const initUser: User = {
@@ -24,7 +25,7 @@ const ShowOdaiCard = () => {
     const getOdai = (e: CustomEvent) => {
       const body = e.detail
       setTheme(body.odai)
-      // setUser(body.user) TODO: oapiに追従する
+      setUser(body.user)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('odai'))
     }
@@ -35,15 +36,14 @@ const ShowOdaiCard = () => {
     }
   }, [dispatch])
 
-  // TODO: しゅうまいさくコンポーネントを追加する
   return (
     <div css={[cardContainer, card]}>
       <div css={userStyle}>
         <AvatarIcon avatar={user.avatar} size={72} />
         <p>{user.username}</p>
       </div>
-      <div>
-        <p>{theme}</p>
+      <div css={odaiBoardStyle}>
+        <OdaiBoard text={theme} width={'100%'} height={'88px'} />
       </div>
     </div>
   )
@@ -60,6 +60,10 @@ const cardContainer = css`
 const userStyle = css`
   flex-shrink: 0;
   text-align: center;
+  margin-right: 2rem;
+`
+const odaiBoardStyle = css`
+  flex-grow: 1;
 `
 
 export default ShowOdaiCard
