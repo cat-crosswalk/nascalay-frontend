@@ -37,6 +37,7 @@ const PreviewCanvas = (props: Props) => {
     const maskCtx = maskCanvas.getContext('2d')
     if (!ctx || !maskCtx) return
     const imageData = ctx.createImageData(canvas.width, canvas.height)
+    maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height)
     if (props.img !== null) {
       const img = new Image()
       img.onload = () => {
@@ -69,7 +70,6 @@ const PreviewCanvas = (props: Props) => {
               canvas.width / 5,
               canvas.height / 5
             )
-            if (!drawnArea2D[i][j]) continue
           }
         }
         maskCtx.strokeStyle = '#000000'

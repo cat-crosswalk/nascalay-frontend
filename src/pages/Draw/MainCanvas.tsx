@@ -13,9 +13,7 @@ export type Props = {
   readonly hasShadow?: boolean
 } & CanvasProps
 
-export type Handler = {
-  export(): ImageData
-} & CanvasHandler
+export type Handler = CanvasHandler
 
 const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
   props,

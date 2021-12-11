@@ -18,7 +18,10 @@ export interface Handler {
   clear(): void
   undo(): void
   redo(): void
+  clearURList(): void
   shortcut(e: React.KeyboardEvent): void
+  exportImage(): ImageData | null
+  exportDataURL(): string
 }
 
 const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
@@ -30,6 +33,10 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
 
   const [undoList, setUndoList] = useState<Uint8ClampedArray[]>([])
   const [redoList, setRedoList] = useState<Uint8ClampedArray[]>([])
+  const clearURList = useCallback(() => {
+    setUndoList([])
+    setRedoList([])
+  }, [])
   const saveCanvas = useCallback(() => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
@@ -98,6 +105,19 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     },
     [undo, redo]
   )
+  const exportImage = useCallback((): ImageData | null => {
+    const canvas = canvasRef.current
+    return (
+      canvas
+        ?.getContext('2d')
+        ?.getImageData(0, 0, canvas.width, canvas.height) ?? null
+    )
+  }, [])
+
+  const exportDataURL = useCallback((): string => {
+    const canvas = canvasRef.current
+    return canvas?.toDataURL('image/png') ?? ''
+  }, [])
 
   useImperativeHandle(
     ref,
@@ -111,11 +131,20 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       redo() {
         redo()
       },
+      clearURList() {
+        clearURList()
+      },
       shortcut(e) {
         shortcut(e)
       },
+      exportImage() {
+        return exportImage()
+      },
+      exportDataURL() {
+        return exportDataURL()
+      },
     }),
-    [undo, redo, clear, shortcut]
+    [clear, undo, redo, clearURList, shortcut, exportImage, exportDataURL]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
