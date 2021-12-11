@@ -27,7 +27,7 @@ export const statusSlice = createSlice({
     setBgColor: (state, action: PayloadAction<string>) => {
       state.bgColor = action.payload
       return state
-    }
+    },
   },
 })
 
