@@ -7,7 +7,7 @@ import { User } from '/@/utils/apis'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 import { wsListener, WsEvent } from '/@/websocket'
-import { setShowNext } from '/@/store/slice/status'
+import { setShowNext, setShowNow } from '/@/store/slice/status'
 
 const ShowAnswerCard = () => {
   const userInit: User = {
@@ -29,6 +29,7 @@ const ShowAnswerCard = () => {
       setAnswer(body.answer)
       // setUser(body.user) TODO: oapiに追従する
       dispatch(setShowNext(body.next))
+      dispatch(setShowNow('answer'))
     }
     wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)
 
