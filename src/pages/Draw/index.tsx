@@ -157,6 +157,7 @@ const Draw = () => {
             gap: 32px;
             margin-right: 8px;
             margin-bottom: 8px;
+            height: 100%;
           `}
         >
           <div
@@ -166,6 +167,7 @@ const Draw = () => {
               padding: 32px 0;
               box-shadow: 8px 8px 0px #000000;
               border: 3px solid #000;
+              flex-grow: 1;
             `}
           >
             <div
