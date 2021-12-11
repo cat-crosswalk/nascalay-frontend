@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import { card } from '/@/utils/card'
 
@@ -6,7 +6,7 @@ import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 
 import DoneButton from '/@/components/DoneButton'
-import { wsSend } from '/@/websocket'
+import { wsListener, wsSend, WsEvent } from '/@/websocket'
 
 const ThemeInput = () => {
   const odai = useAppSelector((state) => state.theme)
@@ -26,6 +26,24 @@ const ThemeInput = () => {
     } else {
       wsSend.odaiCancel()
     }
+  }, [])
+
+  useEffect(() => {
+    wsSend.odai = theme === '' ? odai.odaiExample : theme
+  }, [theme, odai])
+  useEffect(() => {
+    const odaiSend = () => {
+      wsSend.odaiSend()
+    }
+    wsListener.addEventListener(WsEvent.OdaiFinish, odaiSend as EventListener)
+
+    return () => {
+      wsListener.removeEventListener(
+        WsEvent.OdaiFinish,
+        odaiSend as EventListener
+      )
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div css={[containerStyle, card]}>
