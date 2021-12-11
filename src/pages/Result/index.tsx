@@ -21,7 +21,7 @@ const pageContainer = css`
   height: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding-top: 5%;
+  padding-top: 1%;
 `
 
 export default Result
