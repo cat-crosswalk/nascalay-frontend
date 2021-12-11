@@ -5,12 +5,15 @@ import ShowOdaiCard from './ShowOdaiCard'
 import ShowCanvasCard from './ShowCanvasCard'
 import ShowAnswerCard from './ShowAnswerCard'
 import FlatButton from '/@/components/FlatButton'
-import { useAppSelector } from '/@/store/hooks'
+import { useAppSelector, useAppDispatch } from '/@/store/hooks'
 import { useNavigate } from 'react-router-dom'
 import { wsSend } from '/@/websocket'
+import { setBgColor } from '/@/store/slice/status'
 
 // 回答表示するページ(SHOW)
 const Result = () => {
+  const dispatch = useAppDispatch()
+  dispatch(setBgColor('#96A0C0'))
   const navigate = useNavigate()
   const [btnText, setBtnText] = useState('次へ')
   const showNext = useAppSelector((state) => state.status.showNext)
@@ -31,14 +34,14 @@ const Result = () => {
     }
   }, [showNext])
   return (
-      <div css={pageContainer}>
-        <ShowOdaiCard />
-        <ShowCanvasCard />
-        <ShowAnswerCard />
-        <div css={nextBtnStyle}>
-          <FlatButton color="red" text={btnText} onClick={btnNext} />
-        </div>
+    <div css={pageContainer}>
+      <ShowOdaiCard />
+      <ShowCanvasCard />
+      <ShowAnswerCard />
+      <div css={nextBtnStyle}>
+        <FlatButton color="red" text={btnText} onClick={btnNext} />
       </div>
+    </div>
   )
 }
 

@@ -1,37 +1,32 @@
 import React from 'react'
 import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
+import AnswerCanvas from './AnswerCanvas'
+import AnswerCard from './AnswerCard'
+
 import { card } from '/@/utils/card'
-import MemberList from '/@/components/MemberList'
-import ThemeInput from './ThemInput'
 import LineTimerCard from '/@/components/LineTimerCard'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { setBgColor } from '/@/store/slice/status'
 
-// お題を入力するページ(ODAI)
-const Theme = () => {
+// 絵を見てお題を当てるページ
+const Answer = () => {
   const dispatch = useAppDispatch()
-  dispatch(setBgColor('#96A0C0'))
-  const maxTimeMs = useAppSelector((state) => state.theme.timeLimit * 1000)
+  dispatch(setBgColor('#D1A9A9'))
+  const maxTimeMs = useAppSelector((state) => state.answer.timeLimit * 1000)
   return (
-    <div>
-      <div css={pageContainer}>
-        <div css={headerWrap}>
-          <div css={[card, title]}>
-            <p>お題決め</p>
-          </div>
-          <div css={timerStyle}>
-            <LineTimerCard
-              maxValueMs={maxTimeMs}
-              width="100%"
-              hasShadow={true}
-            />
-          </div>
+    <div css={pageContainer}>
+      <div css={headerWrap}>
+        <div css={[card, title]}>
+          <p>回答</p>
         </div>
-        <div css={container}>
-          <MemberList />
-          <ThemeInput />
+        <div css={timerStyle}>
+          <LineTimerCard maxValueMs={maxTimeMs} width="100%" hasShadow={true} />
         </div>
+      </div>
+      <div css={container}>
+        <AnswerCanvas />
+        <AnswerCard />
       </div>
     </div>
   )
@@ -43,6 +38,12 @@ const pageContainer = css`
   max-width: 1100px;
   margin: 0 auto;
   padding-top: 5%;
+`
+
+const container = css`
+  display: flex;
+  gap: 20px;
+  min-height: 350px;
 `
 
 const headerWrap = css`
@@ -68,10 +69,4 @@ const title = css`
   padding: 1rem 2rem;
 `
 
-const container = css`
-  display: flex;
-  gap: 2rem;
-  min-height: 60vh;
-`
-
-export default Theme
+export default Answer
