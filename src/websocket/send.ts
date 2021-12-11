@@ -36,6 +36,13 @@ class WsSend {
     console.log('[aaa]', this.odai)
     ws.send(message)
   }
+  showNext(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.ShowNext,
+      body: {},
+    }
+    ws.send(message)
+  }
 }
 
 export const wsSend = new WsSend()
