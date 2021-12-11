@@ -43,7 +43,7 @@ const Draw = () => {
   return (
     <div>
       <h1>Draw</h1>
-      <TimerLine maxValueMs={maxTimeMs} width="500px" height="30px" />
+      <LineTimer maxValueMs={maxTimeMs} width="500px" height="30px" />
       <SizeSlider value={penSize} onChange={setPenSize} />
       <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
       <ColorPallet onChange={setPenColor} />
