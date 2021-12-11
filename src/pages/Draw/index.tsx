@@ -20,6 +20,7 @@ import { ws, WsEvent, wsListener, wsSend } from '/@/websocket'
 
 // 絵を描くページ
 const Draw = () => {
+  const boardSize = 4 // TODO
   const [previewImage, setPreviewImage] = useState<string | null>(image)
   const [drawnArea, setDrawnArea] = useState<[number, number][]>([])
   const [targetArea, setTargetArea] = useState<[number, number]>([2, 2])
@@ -101,10 +102,10 @@ const Draw = () => {
     img.onload = function () {
       tmpCtx?.drawImage(
         img,
-        (600 / 5) * targetArea[0],
-        (600 / 5) * targetArea[1],
-        600 / 5,
-        600 / 5
+        (600 / boardSize) * targetArea[0],
+        (600 / boardSize) * targetArea[1],
+        600 / boardSize,
+        600 / boardSize
       )
       console.log(targetArea)
       if (previewImage === null || previewImage.length < 100) {
@@ -208,7 +209,7 @@ const Draw = () => {
             `}
           >
             <PreviewCanvas
-              boardType="5x5"
+              boardType="4x4"
               drawnArea={drawnArea}
               img={previewImage}
               targetArea={targetArea}

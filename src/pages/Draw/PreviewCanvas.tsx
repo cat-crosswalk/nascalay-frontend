@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React, { useEffect, useMemo, useRef } from 'react'
 
 type Props = {
-  boardType: '5x5'
+  boardType: '4x4' | '5x5'
   drawnArea: [number, number][]
   targetArea: [number, number]
   img: string | null
@@ -21,6 +21,15 @@ const PreviewCanvas = (props: Props) => {
         const result = [...Array(5)]
           .fill(0)
           .map((): boolean[] => [...Array(5)].fill(false))
+        props.drawnArea.forEach(([x, y]) => {
+          result[y][x] = true
+        })
+        return result
+      }
+      case '4x4': {
+        const result = [...Array(4)]
+          .fill(0)
+          .map((): boolean[] => [...Array(4)].fill(false))
         props.drawnArea.forEach(([x, y]) => {
           result[y][x] = true
         })
@@ -48,17 +57,16 @@ const PreviewCanvas = (props: Props) => {
     }
     ctx.putImageData(imageData, 0, 0)
 
+    const nearTarget = (i: number, j: number) =>
+      Math.abs(i - props.targetArea[0]) + Math.abs(j - props.targetArea[1]) <= 1
+    const calcColor = (x: number, y: number): `#${string}` => {
+      if (!props.isColored) return '#ABACB8'
+      if (!drawnArea2D[x][y]) return '#ABACB8'
+      return '#F6DF93'
+    }
+
     switch (props.boardType) {
       case '5x5': {
-        const nearTarget = (i: number, j: number) =>
-          Math.abs(i - props.targetArea[0]) +
-            Math.abs(j - props.targetArea[1]) <=
-          1
-        const calcColor = (x: number, y: number): `#${string}` => {
-          if (!props.isColored) return '#ABACB8'
-          if (!drawnArea2D[x][y]) return '#ABACB8'
-          return '#F6DF93'
-        }
         for (let i = 0; i < 5; i++) {
           for (let j = 0; j < 5; j++) {
             if (nearTarget(i, j) && drawnArea2D[i][j]) continue
@@ -115,6 +123,67 @@ const PreviewCanvas = (props: Props) => {
         )
         maskCtx.lineTo((i * canvas.width) / 5, ((j + 1) * canvas.height) / 5)
         maskCtx.lineTo((i * canvas.width) / 5, (j * canvas.height) / 5)
+        maskCtx.stroke()
+        maskCtx.closePath()
+        break
+      }
+      case '4x4': {
+        for (let i = 0; i < 4; i++) {
+          for (let j = 0; j < 4; j++) {
+            if (nearTarget(i, j) && drawnArea2D[i][j]) continue
+            if (i == props.targetArea[0] && j == props.targetArea[1]) continue
+            maskCtx.fillStyle = calcColor(i, j)
+            maskCtx.fillRect(
+              (i * canvas.width) / 4,
+              (j * canvas.height) / 4,
+              canvas.width / 4,
+              canvas.height / 4
+            )
+          }
+        }
+        maskCtx.strokeStyle = '#000000'
+        maskCtx.lineWidth = props.type === 'small' ? 2 : 3
+        maskCtx.beginPath()
+        for (let i = 0; i < 3; i++) {
+          if (i !== props.targetArea[0] && i + 1 !== props.targetArea[0]) {
+            maskCtx.moveTo(((i + 1) * canvas.width) / 4, 0)
+            maskCtx.lineTo(((i + 1) * canvas.width) / 4, canvas.height)
+          }
+        }
+        for (let j = 0; j < 3; j++) {
+          if (j !== props.targetArea[1] && j + 1 !== props.targetArea[1]) {
+            maskCtx.moveTo(0, ((j + 1) * canvas.height) / 4)
+            maskCtx.lineTo(canvas.width, ((j + 1) * canvas.height) / 4)
+          }
+        }
+        const [i, j] = props.targetArea
+        maskCtx.moveTo((i * canvas.width) / 4, 0)
+        maskCtx.lineTo((i * canvas.width) / 4, (j * canvas.height) / 4)
+        maskCtx.lineTo(0, (j * canvas.height) / 4)
+        maskCtx.moveTo(canvas.width, (j * canvas.height) / 4)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 4, (j * canvas.height) / 4)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 4, 0)
+        maskCtx.moveTo(((i + 1) * canvas.width) / 4, canvas.height)
+        maskCtx.lineTo(
+          ((i + 1) * canvas.width) / 4,
+          ((j + 1) * canvas.height) / 4
+        )
+        maskCtx.lineTo(canvas.width, ((j + 1) * canvas.height) / 4)
+        maskCtx.moveTo(0, ((j + 1) * canvas.height) / 4)
+        maskCtx.lineTo((i * canvas.width) / 4, ((j + 1) * canvas.height) / 4)
+        maskCtx.lineTo((i * canvas.width) / 4, canvas.height)
+        maskCtx.stroke()
+        maskCtx.closePath()
+        maskCtx.strokeStyle = '#DA3116'
+        maskCtx.beginPath()
+        maskCtx.moveTo((i * canvas.width) / 4, (j * canvas.height) / 4)
+        maskCtx.lineTo(((i + 1) * canvas.width) / 5, (j * canvas.height) / 4)
+        maskCtx.lineTo(
+          ((i + 1) * canvas.width) / 4,
+          ((j + 1) * canvas.height) / 4
+        )
+        maskCtx.lineTo((i * canvas.width) / 4, ((j + 1) * canvas.height) / 4)
+        maskCtx.lineTo((i * canvas.width) / 4, (j * canvas.height) / 4)
         maskCtx.stroke()
         maskCtx.closePath()
         break

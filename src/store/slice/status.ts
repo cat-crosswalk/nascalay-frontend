@@ -4,12 +4,14 @@ interface Status {
   showNext: string
   showNow: string
   bgColor: string
+  boardType: string
 }
 
 const initialState: Status = {
   showNext: '',
   showNow: '',
   bgColor: '#DCCCA2',
+  boardType: '4x4',
 }
 
 export const statusSlice = createSlice({
@@ -26,6 +28,10 @@ export const statusSlice = createSlice({
     },
     setBgColor: (state, action: PayloadAction<string>) => {
       state.bgColor = action.payload
+      return state
+    },
+    setBoardType: (state, action: PayloadAction<string>) => {
+      state.boardType = action.payload
       return state
     },
   },
