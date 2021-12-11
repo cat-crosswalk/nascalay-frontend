@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useEffect, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet'
 import DoneButton from '/@/components/DoneButton'
@@ -15,8 +16,7 @@ import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { areaToXY } from './boardData'
-import { WsEvent, wsListener, wsSend } from '/@/websocket'
-import { loadImage, scaleImageData } from '/@/utils/image'
+import { ws, WsEvent, wsListener, wsSend } from '/@/websocket'
 
 // 絵を描くページ
 const Draw = () => {
@@ -89,42 +89,71 @@ const Draw = () => {
   /**
    * 600x600 の画像生成
    */
-  const generateSendImage = useCallback(async (): Promise<string | null> => {
-    const drawnData = canvasRef.current?.exportImage()
-    if (drawnData === null || drawnData === undefined) return null
-    if (previewImage === null) return null
-    // TODO: boardType 追加されたら場合分けが必要
-    const scaledElementData = scaleImageData(drawnData, 600 / 5, 600 / 5)
-    if (scaledElementData === null) return null
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    if (ctx === null) return null
-    canvas.width = 600
-    canvas.height = 600
-    try {
-      const res = await loadImage(previewImage)
-      if (res === null) return null
-      ctx.drawImage(res, 0, 0, canvas.width, canvas.height)
-    } catch (e) {
-      console.error(e)
-      return null
-    }
-    ctx.putImageData(
-      scaledElementData,
-      (targetArea[0] * 600) / 5,
-      (targetArea[1] * 600) / 5
-    )
-    return canvas.toDataURL('image/png')
-  }, [previewImage, targetArea])
+  // const generateSendImage = useCallback(async (): Promise<string | null> => {
+  //   const drawnData = canvasRef.current?.exportImage()
+  //   if (drawnData === null || drawnData === undefined) return null
+  //   if (previewImage === null) return null
+  //   // TODO: boardType 追加されたら場合分けが必要
+  //   const scaledElementData = scaleImageData(drawnData, 600 / 5, 600 / 5)
+  //   if (scaledElementData === null) return null
+  //   const canvas = document.createElement('canvas')
+  //   const ctx = canvas.getContext('2d')
+  //   if (ctx === null) return null
+  //   canvas.width = 600
+  //   canvas.height = 600
+  //   try {
+  //     const res = await loadImage(previewImage)
+  //     if (res === null) return null
+  //     ctx.drawImage(res, 0, 0, canvas.width, canvas.height)
+  //   } catch (e) {
+  //     console.error(e)
+  //     return null
+  //   }
+  //   ctx.putImageData(
+  //     scaledElementData,
+  //     (targetArea[0] * 600) / 5,
+  //     (targetArea[1] * 600) / 5
+  //   )
+  //   return canvas.toDataURL('image/png')
+  // }, [previewImage, targetArea])
+
+  const [requestBase64, setRequestBase64] = useState<string>('')
+  const [requestBase64done, setRequestBase64done] = useState<string>('')
 
   useEffect(() => {
-    const finishCallbackHandler = async () => {
+    if (requestBase64 !== 'aaa') return
+    setRequestBase64('')
+    const mainBase64 =  canvasRef.current?.exportDataURL() as string
+    const tmpCanvas = document.createElement('canvas')
+    tmpCanvas.width = 600
+    tmpCanvas.height = 600
+    const tmpCtx = tmpCanvas.getContext('2d')
+    const img = new Image()
+    img.src = mainBase64
+    img.onload = function() {
+      tmpCtx?.drawImage(img, 600 / 5 * targetArea[0], 600 / 5 * targetArea[1] , 600 / 5, 600 / 5)
+      console.log(targetArea)
+      if (previewImage === null || previewImage.length < 100) {
+        wsSend.img = tmpCanvas.toDataURL('image/png')
+        wsSend.drawSend()
+        return
+      } 
+      const img2 = new Image()
+      img2.src = previewImage as string
+      img2.onload = function() {
+        tmpCtx?.drawImage(img2, 0, 0, 600, 600)
+        wsSend.img = tmpCanvas.toDataURL('image/png')
+        wsSend.drawSend()
+      }
+    }
+  },[previewImage, requestBase64, targetArea])
+
+  useEffect(() => {
+    const finishCallbackHandler = () => {
       // callback
       // wsSend.img にセットした画像を送信する
-      const img = await generateSendImage()
-      if (img === null) return
-      wsSend.img = img
-      wsSend.drawSend()
+      console.log("finishCallbackHandler")
+      setRequestBase64('aaa')
     }
     wsListener.addEventListener(WsEvent.DrawFinish, finishCallbackHandler)
 

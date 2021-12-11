@@ -21,6 +21,7 @@ export interface Handler {
   clearURList(): void
   shortcut(e: React.KeyboardEvent): void
   exportImage(): ImageData | null
+  exportDataURL(): string
 }
 
 const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
@@ -113,6 +114,11 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     )
   }, [])
 
+  const exportDataURL = useCallback((): string => {
+    const canvas = canvasRef.current
+    return canvas?.toDataURL('image/png') ?? ''
+  }, [])
+
   useImperativeHandle(
     ref,
     () => ({
@@ -134,8 +140,11 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       exportImage() {
         return exportImage()
       },
+      exportDataURL() {
+        return exportDataURL()
+      },
     }),
-    [undo, redo, clear,clearURList, shortcut, exportImage]
+    [clear, undo, redo, clearURList, shortcut, exportImage, exportDataURL]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
