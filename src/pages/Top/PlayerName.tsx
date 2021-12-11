@@ -58,6 +58,7 @@ const PlayerName = () => {
           text={roomId ? '参加' : '部屋を作る'}
           color="yellow"
           onClick={goRobby}
+          disabled={userName === ''}
         />
       </div>
     </div>
