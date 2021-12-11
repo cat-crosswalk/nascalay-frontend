@@ -16,6 +16,7 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
   return (
     <button
       onClick={props.onClick}
+      disabled={props.disabled ?? false}
       css={css`
         position: relative;
         user-select: none;
@@ -42,6 +43,13 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
         }
         &:active::after {
           background-color: rgba(0, 0, 0, 0.15);
+        }
+        &:disabled::after {
+          background-color: rgba(0, 0, 0, 0.15);
+        }
+        &:disabled {
+          color: #777777;
+          border-color: #777777;
         }
         :before {
           position: absolute;
