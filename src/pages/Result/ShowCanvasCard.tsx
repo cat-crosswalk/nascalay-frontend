@@ -78,6 +78,10 @@ const canvasContainer = css`
 const canvasStyle = css`
   width: calc(96vh - 320px);
   height: calc(96vh - 320px);
+  max-height: 500px;
+  max-width: 500px;
+  min-height: 300px;
+  min-width: 300px;
   background-color: ${colorToRgb.white};
 `
 

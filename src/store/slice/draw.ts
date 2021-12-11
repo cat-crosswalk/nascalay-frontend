@@ -11,6 +11,7 @@ const initialState: WsDrawStartEventBody = {
   odai: '',
   drawPhaseNum: 0,
   allDrawPhaseNum: 0,
+  drawnArea: [],
 }
 
 export const drawSlice = createSlice({
