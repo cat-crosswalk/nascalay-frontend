@@ -27,7 +27,7 @@ const ShowAnswerCard = () => {
     const getAnswer = (e: CustomEvent) => {
       const body = e.detail
       setAnswer(body.answer ?? '')
-      setUser(body.user ?? userInit)
+      setUser(body.answerer ?? userInit)
       dispatch(setShowNext(body.next ?? ''))
       dispatch(setShowNow('answer'))
     }

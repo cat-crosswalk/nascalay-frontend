@@ -25,7 +25,7 @@ const ShowOdaiCard = () => {
     const getOdai = (e: CustomEvent) => {
       const body = e.detail
       setTheme(body.odai)
-      setUser(body.user)
+      setUser(body.sender)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('odai'))
     }

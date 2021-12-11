@@ -74,7 +74,7 @@ const listStyle = css`
   &::-webkit-scrollbar-thumb {
     background-color: ${colorToRgb.blue};
     border: ${colorToRgb.black} solid;
-    border-width: 3px 0px 0px 3px;
+    border-width: 3px 0px 3px 3px;
   }
   & div {
     padding-bottom: 0.75rem;

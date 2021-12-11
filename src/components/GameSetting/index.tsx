@@ -33,7 +33,7 @@ const GameSetting = () => {
   const roomId = useAppSelector((state) => state.room.roomId)
   const [shortUrl, setShortUrl] = useState('')
   useEffect(() => {
-    setShortUrl(location.host + '?c=' + roomId)
+    setShortUrl(location.protocol + '//' + location.host + '?c=' + roomId)
   }, [roomId])
 
   // 招待URLのコピー・選択
