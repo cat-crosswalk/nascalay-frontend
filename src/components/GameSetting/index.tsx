@@ -84,7 +84,8 @@ const GameSetting = () => {
         <div css={inviteWrapStyle}>
           <input
             type="text"
-            value={shortUrl}
+            // value={shortUrl}
+            value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             readOnly={true}
             ref={inputField}
             onFocus={inputFocus}
@@ -136,7 +137,7 @@ const inviteWrapStyle = css`
     font-size: 1.5rem;
     height: 64px;
     width: 100%;
-    padding-left:18px;
+    padding:0px 18px;
     margin-right: 20px;
   }
 `
