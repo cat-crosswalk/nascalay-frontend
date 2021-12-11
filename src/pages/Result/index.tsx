@@ -48,7 +48,8 @@ const pageContainer = css`
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding-right: 230px;
+  padding-right: 290px;
+  padding-left: 100px;
   padding-top: 1%;
 `
 

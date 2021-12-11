@@ -81,6 +81,7 @@ const answerStyle = css`
   font-size: 1.5rem;
   margin: 5px 0px;
   margin-right: 50px;
+  overflow: hidden;
   &::after,
   ::before {
     border: solid transparent;
@@ -116,6 +117,7 @@ const answerStyle = css`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    overflow: hidden;
   }
 `
 
