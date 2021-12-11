@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 
-import ColorPallet from '/@/components/ColorPallet.tsx'
+import ColorPallet from '/@/components/ColorPallet'
 
 const AvatarSelect = () => {
   return (
