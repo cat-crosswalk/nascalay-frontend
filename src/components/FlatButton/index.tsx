@@ -23,7 +23,7 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
         background-color: ${colorToRgb[props.color]};
         color: #000;
         border: 3px solid #000;
-        padding: 16px 64px;
+        padding: 1rem 4rem;
         ${props.height ? `height: ${props.height};` : ''}
         ${props.width ? `width: ${props.width};` : ''}
         transition: all 0.1s ease-in-out;
