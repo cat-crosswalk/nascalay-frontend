@@ -18,6 +18,9 @@ const PlayerName = () => {
   const search = useLocation().search
   const roomId = new URLSearchParams(search).get('c')
   const avatar = useAppSelector((state) => state.user.avatar)
+  const playerNameHandler = useCallback((e) => {
+    setUserName(e.target.value.trim())
+  }, [])
 
   const goRobby = useCallback(async () => {
     if (roomId) {
@@ -49,7 +52,7 @@ const PlayerName = () => {
       <input
         type="text"
         value={userName}
-        onChange={(e) => setUserName(e.target.value)}
+        onChange={playerNameHandler}
         placeholder="なまえ"
         css={inputNameStyle}
       />
