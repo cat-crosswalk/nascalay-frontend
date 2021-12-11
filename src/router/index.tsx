@@ -2,7 +2,7 @@ import { Routes } from 'react-router'
 import { Route } from 'react-router-dom'
 
 import Hello from '/@/pages/Hello'
-import Index from '/@/pages/Index'
+import Index from '/@/pages/Top'
 import Lobby from '/@/pages/Lobby'
 import Theme from '/@/pages/Theme'
 import Draw from '/@/pages/Draw'
