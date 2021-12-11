@@ -16,6 +16,7 @@ import FlatButton from '/@/components/FlatButton'
 import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { areaToXY } from './boardData'
+import { wsSend } from '/@/websocket'
 
 // 絵を描くページ
 const Draw = () => {
@@ -55,6 +56,16 @@ const Draw = () => {
   const [penSize, setPenSize] = useState<MainCanvasProps['penSize']>(10)
 
   const [isDone, setIsDone] = useState(false)
+  const doneButtonHandler = useCallback((e) => {
+    setIsDone(e)
+    if (e) {
+      // ready
+      wsSend.drawReady()
+    } else {
+      // cancel
+      wsSend.drawCancel()
+    }
+  }, [])
 
   const maxTimeMs = useAppSelector((state) => state.draw.timeLimit) * 1000
 
@@ -222,7 +233,7 @@ const Draw = () => {
               color="red"
               doneColor="yellow"
               isDone={isDone}
-              onClick={setIsDone}
+              onClick={doneButtonHandler}
               hasShadow
             />
           </div>

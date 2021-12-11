@@ -67,6 +67,20 @@ class WsSend {
     }
     ws.send(message)
   }
+  drawReady(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.DrawReady,
+      body: {},
+    }
+    ws.send(message)
+  }
+  drawCancel(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.DrawCancel,
+      body: {},
+    }
+    ws.send(message)
+  }
 }
 
 export const wsSend = new WsSend()
