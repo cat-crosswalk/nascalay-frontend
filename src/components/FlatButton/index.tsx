@@ -5,8 +5,11 @@ import { ColorType, colorToRgb } from '/@/utils/color'
 type Props = {
   text: string
   color: ColorType
+  disabled?: boolean
   selected?: boolean
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  height?: string
+  width?: string
 }
 
 const FlatButton: React.VFC<Props> = (props: Props) => {
@@ -15,11 +18,14 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
       onClick={props.onClick}
       css={css`
         position: relative;
+        user-select: none;
         font-size: 32px;
         background-color: ${colorToRgb[props.color]};
         color: #000;
         border: 3px solid #000;
         padding: 16px 64px;
+        ${props.height ? `height: ${props.height};` : ''}
+        ${props.width ? `width: ${props.width};` : ''}
         transition: all 0.1s ease-in-out;
         &::after {
           position: absolute;
@@ -42,14 +48,14 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
           content: '';
           transition: all 0.2s ease-out;
           ${props.selected
-      ? `
+            ? `
             top: 6px;
             left: 6px;
             bottom: 6px;
             right: 6px;
             border: 3px solid rgba(0, 0, 0, 1);
           `
-      : `
+            : `
             top: 0;
             left: 0;
             bottom: 0;

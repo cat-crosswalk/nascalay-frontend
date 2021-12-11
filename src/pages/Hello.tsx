@@ -131,6 +131,8 @@ const Hello = () => {
           color={penColor}
           penSize={10}
           penType={penType}
+          width={500}
+          height={500}
         />
         <div>
           <button onClick={clearCanvas}>clear</button>
@@ -155,7 +157,9 @@ const Hello = () => {
             checked={penType === 'eraser'}
             onChange={() => setPenType('eraser')}
           />
-          <label htmlFor="eraser"><Icon path={mdiEraser} size={1} /></label>
+          <label htmlFor="eraser">
+            <Icon path={mdiEraser} size={1} />
+          </label>
           <input
             type="radio"
             id="bucket"
