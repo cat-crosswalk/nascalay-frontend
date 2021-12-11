@@ -33,7 +33,7 @@ class WsSend {
         odai: this.odai,
       },
     }
-    console.log(this.odai)
+    console.log('[aaa]', this.odai)
     ws.send(message)
   }
 }
