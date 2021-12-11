@@ -92,7 +92,7 @@ const GameSetting = () => {
           />
           <div css={inviteButtonStyle}>
             <button onClick={handleCopy}>
-              <Icon path={mdiClipboardMultiple} size={1.8} />
+              <Icon path={mdiClipboardMultiple} size={1.5} />
             </button>
           </div>
         </div>
