@@ -8,7 +8,7 @@ import AvatarSelect from './AvatarSelect'
 
 // TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 // 招待リンク ?c=xxxxxroomIdxxxxx
-const Index = () => {
+const Top = () => {
   // TODO: アバター
   return (
     <div css={pageContainer}>
@@ -55,4 +55,4 @@ const width100 = css`
   width: 100%;
 `
 
-export default Index
+export default Top
