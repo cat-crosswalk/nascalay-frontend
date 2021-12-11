@@ -91,36 +91,42 @@ const Draw = () => {
   useEffect(() => {
     if (requestBase64 !== 'aaa') return
     setRequestBase64('')
-    const mainBase64 =  canvasRef.current?.exportDataURL() as string
+    const mainBase64 = canvasRef.current?.exportDataURL() as string
     const tmpCanvas = document.createElement('canvas')
     tmpCanvas.width = 600
     tmpCanvas.height = 600
     const tmpCtx = tmpCanvas.getContext('2d')
     const img = new Image()
     img.src = mainBase64
-    img.onload = function() {
-      tmpCtx?.drawImage(img, 600 / 5 * targetArea[0], 600 / 5 * targetArea[1] , 600 / 5, 600 / 5)
+    img.onload = function () {
+      tmpCtx?.drawImage(
+        img,
+        (600 / 5) * targetArea[0],
+        (600 / 5) * targetArea[1],
+        600 / 5,
+        600 / 5
+      )
       console.log(targetArea)
       if (previewImage === null || previewImage.length < 100) {
         wsSend.img = tmpCanvas.toDataURL('image/png')
         wsSend.drawSend()
         return
-      } 
+      }
       const img2 = new Image()
       img2.src = previewImage as string
-      img2.onload = function() {
+      img2.onload = function () {
         tmpCtx?.drawImage(img2, 0, 0, 600, 600)
         wsSend.img = tmpCanvas.toDataURL('image/png')
         wsSend.drawSend()
       }
     }
-  },[previewImage, requestBase64, targetArea])
+  }, [previewImage, requestBase64, targetArea])
 
   useEffect(() => {
     const finishCallbackHandler = () => {
       // callback
       // wsSend.img にセットした画像を送信する
-      console.log("finishCallbackHandler")
+      console.log('finishCallbackHandler')
       setRequestBase64('aaa')
     }
     wsListener.addEventListener(WsEvent.DrawFinish, finishCallbackHandler)

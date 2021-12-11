@@ -15,7 +15,13 @@ const AvatarIcon = (props: Props) => {
     height: ${props.size}px;
     border: 3px solid ${colorToRgb.black};
   `
-  return <img src={`avatar/avatar${props.avatar.type}.svg`} css={imageStyle} alt="avatar" />
+  return (
+    <img
+      src={`avatar/avatar${props.avatar.type}.svg`}
+      css={imageStyle}
+      alt="avatar"
+    />
+  )
 }
 
 export default AvatarIcon

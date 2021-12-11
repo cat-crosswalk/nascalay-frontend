@@ -16,6 +16,8 @@ const Result = () => {
   dispatch(setBgColor('#96A0C0'))
   const navigate = useNavigate()
   const [btnText, setBtnText] = useState('次へ')
+  const hostId = useAppSelector((state) => state.room.hostId)
+  const myId = useAppSelector((state) => state.user.userId)
   const showNext = useAppSelector((state) => state.status.showNext)
   const btnNext = useCallback(() => {
     if (showNext === 'end') {
@@ -39,7 +41,12 @@ const Result = () => {
       <ShowCanvasCard />
       <ShowAnswerCard />
       <div css={nextBtnStyle}>
-        <FlatButton color="red" text={btnText} onClick={btnNext} />
+        <FlatButton
+          color="red"
+          text={btnText}
+          onClick={btnNext}
+          disabled={hostId !== myId}
+        />
       </div>
     </div>
   )
