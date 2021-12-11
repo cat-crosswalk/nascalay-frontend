@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { css, keyframes } from '@emotion/react'
+import { css } from '@emotion/react'
 import { useAppDispatch } from '/@/store/hooks'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
