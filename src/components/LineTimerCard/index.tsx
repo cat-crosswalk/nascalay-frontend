@@ -1,6 +1,6 @@
 import { css, keyframes } from '@emotion/react'
 import { mdiTimerSand } from '@mdi/js'
-import Icon from '@mdi/react'
+import { Icon } from '@mdi/react'
 import React from 'react'
 import LineTimer from '../LineTimer'
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { css } from '@emotion/react'
-import Icon from '@mdi/react'
+import { Icon } from '@mdi/react'
 import { mdiClipboardMultiple } from '@mdi/js'
 import CustomSlider from './Slider'
 import { card } from '/@/utils/card'
