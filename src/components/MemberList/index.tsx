@@ -32,15 +32,6 @@ const MemberList = () => {
     <div css={[containerStyle, card]}>
       <h2 css={titleStyle}>参加者</h2>
       <div css={listStyle}>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
-      <h2 css={titleStyle}>参加者</h2>
         {memberList.map((member) => (
           <Member
             key={member.userId}
