@@ -21,14 +21,14 @@ const ShowAnswerCard = () => {
   const dispatch = useAppDispatch()
   const showNow = useAppSelector((state) => state.status.showNow)
   const [answer, setAnswer] = useState('')
-  const [user, setUser] = useState<User>(userInit)
+  const [user, setUser] = useState(userInit)
 
   useEffect(() => {
     const getAnswer = (e: CustomEvent) => {
       const body = e.detail
-      setAnswer(body.answer)
-      // setUser(body.user) TODO: oapiに追従する
-      dispatch(setShowNext(body.next))
+      setAnswer(body.answer ?? '')
+      setUser(body.user ?? userInit)
+      dispatch(setShowNext(body.next ?? ''))
       dispatch(setShowNow('answer'))
     }
     wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)
