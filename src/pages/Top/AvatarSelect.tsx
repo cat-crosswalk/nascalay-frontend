@@ -12,7 +12,7 @@ import { Icon } from '@mdi/react'
 import { mdiDice3Outline } from '@mdi/js'
 
 const AvatarSelect = () => {
-  const maxAvatarId = 0 // TODO:アバター数に応じて変更する
+  const maxAvatarId = 72
   const colorId = getRandomInt(palletColor.length)
   const [color, setColor] = useState<string>(palletColor[colorId].hex)
   const [avatarId, setAvatarId] = useState(0)
