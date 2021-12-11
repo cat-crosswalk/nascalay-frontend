@@ -1,8 +1,13 @@
 import { css } from '@emotion/react'
 import React, { useCallback } from 'react'
+import { ColorType } from '/@/utils/color'
 import FlatButton from '/@/components/FlatButton'
 
 type Props = {
+  text: string
+  doneText: string
+  color: ColorType
+  doneColor: ColorType
   isDone?: boolean
   onClick?: (e: boolean) => void
   hasShadow?: boolean
@@ -41,13 +46,20 @@ const DoneButton = (props: Props) => {
             box-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
           `
           : ''}
-        margin: 16px;
+        transition: box-shadow 0.1s ease-out;
+        ${props.hasShadow
+          ? `
+        &:active {
+          box-shadow: 6px 6px 0px rgba(0, 0, 0, 1);
+        }
+      `
+          : ''}
       `}
     >
       <div css={(props.isDone ? [rotateUp] : []).concat([baseStyle])}>
         <FlatButton
-          text="完成！"
-          color="red"
+          text={props.text}
+          color={props.color}
           height="80px"
           width="232px"
           onClick={onClickDone}
@@ -55,8 +67,8 @@ const DoneButton = (props: Props) => {
       </div>
       <div css={(!props.isDone ? [rotateDown] : []).concat([baseStyle])}>
         <FlatButton
-          text="編集"
-          color="yellow"
+          text={props.doneText}
+          color={props.doneColor}
           height="80px"
           width="232px"
           onClick={onClickUndone}

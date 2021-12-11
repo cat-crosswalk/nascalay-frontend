@@ -16,6 +16,7 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
   return (
     <button
       onClick={props.onClick}
+      disabled={props.disabled ?? false}
       css={css`
         position: relative;
         user-select: none;
@@ -37,11 +38,21 @@ const FlatButton: React.VFC<Props> = (props: Props) => {
           background-color: rgba(255, 255, 255, 0);
           transition: all 0.2s ease-out;
         }
+        &:hover {
+          cursor: url('../src/assets/cursors/onHover.png') 5 0, auto;
+        }
         &:hover::after {
           background-color: rgba(255, 255, 255, 0.15);
         }
         &:active::after {
           background-color: rgba(0, 0, 0, 0.15);
+        }
+        &:disabled::after {
+          background-color: rgba(0, 0, 0, 0.15);
+        }
+        &:disabled {
+          color: #777777;
+          border-color: #777777;
         }
         :before {
           position: absolute;

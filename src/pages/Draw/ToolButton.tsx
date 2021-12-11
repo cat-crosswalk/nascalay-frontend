@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import {
-  mdiFormatColorFill,
-  mdiEraser,
-  mdiPencil,
-  mdiUndo,
-  mdiRedo,
   mdiDelete,
+  mdiEraser,
+  mdiFormatColorFill,
+  mdiPencil,
+  mdiRedo,
+  mdiUndo,
 } from '@mdi/js'
-import Icon from '@mdi/react'
+import { Icon } from '@mdi/react'
 import React, { useMemo } from 'react'
 import { Props as MainCanvasProps } from './MainCanvas'
 
@@ -51,7 +51,9 @@ const ToolButton = (props: Props) => {
         ${props.isSelected && ['pen', 'bucket'].includes(props.type)
           ? `background-color: ${props.color};`
           : ''}
-        &:hover,
+        &:hover {
+          cursor: url('../src/assets/cursors/onHover.png') 5 0, auto;
+        }
         &:active {
           color: #646260;
         }
