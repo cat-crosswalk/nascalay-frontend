@@ -4,9 +4,65 @@ import { ws } from './index'
 
 // ここにいい感じにsendの処理を追加していく
 class WsSend {
-  requestGameStart() {
+  odai = ''
+  answer = ''
+  requestGameStart(): void {
     const message: WsClientSendMessage = {
       type: WsEvent.RequestGameStart,
+      body: {},
+    }
+    ws.send(message)
+  }
+  odaiReady(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiReady,
+      body: {},
+    }
+    ws.send(message)
+  }
+  odaiCancel(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiCancel,
+      body: {},
+    }
+    ws.send(message)
+  }
+  odaiSend(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.OdaiSend,
+      body: {
+        odai: this.odai,
+      },
+    }
+    console.log('[aaa]', this.odai)
+    ws.send(message)
+  }
+  showNext(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.ShowNext,
+      body: {},
+    }
+    ws.send(message)
+  }
+  answerSend(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.AnswerSend,
+      body: {
+        answer: this.answer,
+      },
+    }
+    ws.send(message)
+  }
+  answerReady(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.AnswerReady,
+      body: {},
+    }
+    ws.send(message)
+  }
+  answerCancel(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.AnswerCancel,
       body: {},
     }
     ws.send(message)

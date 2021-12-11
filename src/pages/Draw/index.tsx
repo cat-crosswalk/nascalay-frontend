@@ -198,7 +198,7 @@ const Draw = () => {
               flex-shrink: 0;
             `}
           >
-            <DoneButton isDone={isDone} onClick={setIsDone} hasShadow />
+            <DoneButton text="完了！" doneText="編集" color="red" doneColor="yellow" isDone={isDone} onClick={setIsDone} hasShadow />
           </div>
         </div>
       </div>
