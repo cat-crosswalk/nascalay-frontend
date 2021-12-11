@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet'
 import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
@@ -14,6 +14,8 @@ import OdaiBoard from '/@/components/OdaiBoard'
 import { css } from '@emotion/react'
 import FlatButton from '/@/components/FlatButton'
 import { colorToRgb } from '/@/utils/color'
+import { useAppSelector } from '/@/store/hooks'
+import { areaToXY } from './boardData'
 
 // 絵を描くページ
 const Draw = () => {
@@ -59,6 +61,15 @@ const Draw = () => {
   const [nowPhase, setNowPhase] = useState<number>(5)
   const [maxPhase, setMaxPhase] = useState<number>(25)
   const [odaiContent, setOdaiContent] = useState<string>('横断歩道を渡る猫')
+
+  const drawData = useAppSelector(state => state.draw)
+  useEffect(() => {
+    setPreviewImage(drawData.img)
+    setNowPhase(drawData.drawPhaseNum)
+    setMaxPhase(drawData.allDrawPhaseNum)
+    setOdaiContent(drawData.odai)
+    setTargetArea(areaToXY(drawData.canvas.areaId,drawData.canvas.boardName))
+  }, [drawData])
 
   return (
     <div>
