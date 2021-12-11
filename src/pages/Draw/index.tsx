@@ -12,7 +12,6 @@ import SizeSlider from './SizeSlider'
 import LineTimerCard from '/@/components/LineTimerCard'
 import OdaiBoard from '/@/components/OdaiBoard'
 import { css } from '@emotion/react'
-import FlatButton from '/@/components/FlatButton'
 import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { areaToXY } from './boardData'
@@ -21,13 +20,7 @@ import { WsEvent, wsListener, wsSend } from '/@/websocket'
 // 絵を描くページ
 const Draw = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(image)
-  const [drawnArea, setDrawnArea] = useState<[number, number][]>([
-    [0, 0],
-    [1, 1],
-    [1, 2],
-    [2, 3],
-    [3, 3],
-  ])
+  const [drawnArea, setDrawnArea] = useState<[number, number][]>([])
   const [targetArea, setTargetArea] = useState<[number, number]>([2, 2])
 
   const canvasRef = React.useRef<MainCanvasHandler>(null)
@@ -56,7 +49,7 @@ const Draw = () => {
   const [penSize, setPenSize] = useState<MainCanvasProps['penSize']>(10)
 
   const [isDone, setIsDone] = useState(false)
-  const doneButtonHandler = useCallback((e) => {
+  const doneButtonHandler = useCallback((e: boolean) => {
     setIsDone(e)
     if (e) {
       // ready
@@ -69,9 +62,9 @@ const Draw = () => {
 
   const maxTimeMs = useAppSelector((state) => state.draw.timeLimit) * 1000
 
-  const [nowPhase, setNowPhase] = useState<number>(5)
-  const [maxPhase, setMaxPhase] = useState<number>(25)
-  const [odaiContent, setOdaiContent] = useState<string>('横断歩道を渡る猫')
+  const [nowPhase, setNowPhase] = useState<number>(0)
+  const [maxPhase, setMaxPhase] = useState<number>(0)
+  const [odaiContent, setOdaiContent] = useState<string>('')
 
   const drawData = useAppSelector((state) => state.draw)
   useEffect(() => {
