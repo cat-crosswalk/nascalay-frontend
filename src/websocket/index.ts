@@ -4,7 +4,7 @@ import AutoReconnectWebSocket from './AutoReconnectWebSocket'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const baseUrl =
-  VITE_ENV_STAGE === 'development'
+import.meta.env.VITE_ENV_STAGE === 'development'
     ? BASE_URL
     : location.protocol + '//api.nascalay.trasta.dev'
 
