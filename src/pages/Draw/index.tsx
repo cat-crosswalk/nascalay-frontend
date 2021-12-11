@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet'
 import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
@@ -14,6 +14,9 @@ import OdaiBoard from '/@/components/OdaiBoard'
 import { css } from '@emotion/react'
 import FlatButton from '/@/components/FlatButton'
 import { colorToRgb } from '/@/utils/color'
+import { useAppSelector } from '/@/store/hooks'
+import { areaToXY } from './boardData'
+import { WsEvent, wsListener, wsSend } from '/@/websocket'
 
 // 絵を描くページ
 const Draw = () => {
@@ -53,12 +56,44 @@ const Draw = () => {
   const [penSize, setPenSize] = useState<MainCanvasProps['penSize']>(10)
 
   const [isDone, setIsDone] = useState(false)
+  const doneButtonHandler = useCallback((e) => {
+    setIsDone(e)
+    if (e) {
+      // ready
+      wsSend.drawReady()
+    } else {
+      // cancel
+      wsSend.drawCancel()
+    }
+  }, [])
 
-  const maxTimeMs = 40000
+  const maxTimeMs = useAppSelector((state) => state.draw.timeLimit) * 1000
 
   const [nowPhase, setNowPhase] = useState<number>(5)
   const [maxPhase, setMaxPhase] = useState<number>(25)
   const [odaiContent, setOdaiContent] = useState<string>('横断歩道を渡る猫')
+
+  const drawData = useAppSelector((state) => state.draw)
+  useEffect(() => {
+    setPreviewImage(drawData.img)
+    setNowPhase(drawData.drawPhaseNum)
+    setMaxPhase(drawData.allDrawPhaseNum)
+    setOdaiContent(drawData.odai)
+    setTargetArea(areaToXY(drawData.canvas.areaId, drawData.canvas.boardName))
+  }, [drawData])
+
+  useEffect(() => {
+    const finishCallbackHandler = () => {
+      // callback
+      // wsSend.img にセットした画像を送信する
+      wsSend.drawSend()
+    }
+    wsListener.addEventListener(WsEvent.DrawFinish, finishCallbackHandler)
+
+    return () => {
+      wsListener.removeEventListener(WsEvent.DrawFinish, finishCallbackHandler)
+    }
+  }, [])
 
   return (
     <div>
@@ -75,11 +110,22 @@ const Draw = () => {
         `}
         onKeyDown={shortcut}
       >
-        <FlatButton
-          text={`${nowPhase}ターン目/${maxPhase}`}
-          color="yellow"
-          hasShadow
-        />
+        <div
+          css={css`
+            background-color: ${colorToRgb.yellow};
+            box-shadow: 8px 8px 0 #000000;
+            border: 3px solid #000000;
+            height: 100%;
+            width: 100%;
+            font-size: 32px;
+            display: grid;
+            place-items: center;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+          `}
+        >
+          {`${nowPhase}ターン目/${maxPhase}`}
+        </div>
         <div
           css={css`
             display: inline-block;
@@ -147,6 +193,7 @@ const Draw = () => {
             penSize={penSize}
             width={512}
             height={512}
+            hasShadow
           />
         </div>
         <div
@@ -211,7 +258,7 @@ const Draw = () => {
               color="red"
               doneColor="yellow"
               isDone={isDone}
-              onClick={setIsDone}
+              onClick={doneButtonHandler}
               hasShadow
             />
           </div>
