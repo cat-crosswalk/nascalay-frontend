@@ -16,6 +16,7 @@ import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { areaToXY } from './boardData'
 import { WsEvent, wsListener, wsSend } from '/@/websocket'
+import { loadImage, scaleImageData } from '/@/utils/image'
 
 // 絵を描くページ
 const Draw = () => {
@@ -75,10 +76,44 @@ const Draw = () => {
     setTargetArea(areaToXY(drawData.canvas.areaId, drawData.canvas.boardName))
   }, [drawData])
 
+  /**
+   * 600x600 の画像生成
+   */
+  const generateSendImage = useCallback(async (): Promise<string | null> => {
+    const drawnData = canvasRef.current?.exportImage()
+    if (drawnData === null || drawnData === undefined) return null
+    if (previewImage === null) return null
+    // TODO: boardType 追加されたら場合分けが必要
+    const scaledElementData = scaleImageData(drawnData, 600 / 5, 600 / 5)
+    if (scaledElementData === null) return null
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (ctx === null) return null
+    canvas.width = 600
+    canvas.height = 600
+    try {
+      const res = await loadImage(previewImage)
+      if (res === null) return null
+      ctx.drawImage(res, 0, 0, canvas.width, canvas.height)
+    } catch (e) {
+      console.error(e)
+      return null
+    }
+    ctx.putImageData(
+      scaledElementData,
+      (targetArea[0] * 600) / 5,
+      (targetArea[1] * 600) / 5
+    )
+    return canvas.toDataURL('image/png')
+  }, [previewImage, targetArea])
+
   useEffect(() => {
-    const finishCallbackHandler = () => {
+    const finishCallbackHandler = async () => {
       // callback
       // wsSend.img にセットした画像を送信する
+      const img = await generateSendImage()
+      if (img === null) return
+      wsSend.img = img
       wsSend.drawSend()
     }
     wsListener.addEventListener(WsEvent.DrawFinish, finishCallbackHandler)

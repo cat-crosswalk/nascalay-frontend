@@ -19,6 +19,7 @@ export interface Handler {
   undo(): void
   redo(): void
   shortcut(e: React.KeyboardEvent): void
+  exportImage(): ImageData | null
 }
 
 const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
@@ -98,6 +99,14 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     },
     [undo, redo]
   )
+  const exportImage = useCallback((): ImageData | null => {
+    const canvas = canvasRef.current
+    return (
+      canvas
+        ?.getContext('2d')
+        ?.getImageData(0, 0, canvas.width, canvas.height) ?? null
+    )
+  }, [])
 
   useImperativeHandle(
     ref,
@@ -114,8 +123,11 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       shortcut(e) {
         shortcut(e)
       },
+      exportImage() {
+        return exportImage()
+      },
     }),
-    [undo, redo, clear, shortcut]
+    [undo, redo, clear, shortcut, exportImage]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
