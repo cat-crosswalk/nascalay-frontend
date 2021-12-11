@@ -6,10 +6,13 @@ import AnswerCard from './AnswerCard'
 
 import { card } from '/@/utils/card'
 import LineTimerCard from '/@/components/LineTimerCard'
-import { useAppSelector } from '/@/store/hooks'
+import { useAppDispatch, useAppSelector } from '/@/store/hooks'
+import { setBgColor } from '/@/store/slice/status'
 
 // 絵を見てお題を当てるページ
 const Answer = () => {
+  const dispatch = useAppDispatch()
+  dispatch(setBgColor('#D1A9A9'))
   const maxTimeMs = useAppSelector((state) => state.answer.timeLimit * 1000)
   return (
     <div css={pageContainer}>
