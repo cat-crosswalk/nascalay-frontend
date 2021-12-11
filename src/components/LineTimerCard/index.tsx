@@ -41,6 +41,7 @@ const LineTimerCard = (props: Props) => {
         align-items: center;
         padding: 8px 20px;
         border: 3px solid #000000;
+        background-color: #ffffff;
         ${props.hasShadow ? 'box-shadow: 8px 8px 0px rgb(0, 0, 0);' : ''}
       `}
     >

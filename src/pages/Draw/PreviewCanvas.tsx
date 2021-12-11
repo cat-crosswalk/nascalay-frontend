@@ -110,6 +110,7 @@ const PreviewCanvas = (props: Props) => {
       css={css`
         position: relative;
         width: ${props.width};
+        background-color: #ffffff;
         &:before {
           content: '';
           display: block;
