@@ -86,7 +86,7 @@ class WsSend {
     const message: WsClientSendMessage = {
       type: WsEvent.DrawSend,
       body: {
-        img: this.img
+        img: this.img,
       },
     }
     ws.send(message)
