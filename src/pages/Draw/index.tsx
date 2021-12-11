@@ -1,11 +1,13 @@
 import React, { useCallback, useState } from 'react'
-import ColorPallet from '/@/components/ColorPallet.tsx'
+import ColorPallet from '/@/components/ColorPallet'
 import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
   Handler as MainCanvasHandler,
   Props as MainCanvasProps,
 } from './MainCanvas'
 import ToolBox from './ToolBox'
+import SizeSlider from './SizeSlider'
+import LineTimer from '/@/components/LineTimer'
 
 // 絵を描くページ
 const Draw = () => {
@@ -32,12 +34,17 @@ const Draw = () => {
   }, [])
   const [penType, setPenType] = useState<MainCanvasProps['penType']>('pen')
   const [penColor, setPenColor] = useState<MainCanvasProps['color']>('#f00')
+  const [penSize, setPenSize] = useState<MainCanvasProps['penSize']>(10)
 
   const [isDone, setIsDone] = useState(false)
+
+  const maxTimeMs = 40000
 
   return (
     <div>
       <h1>Draw</h1>
+      <LineTimer maxValueMs={maxTimeMs} width="500px" height="30px" />
+      <SizeSlider value={penSize} onChange={setPenSize} />
       <DoneButton
         isDone={isDone}
         onClick={setIsDone}
@@ -61,7 +68,7 @@ const Draw = () => {
         <MainCanvas
           ref={canvasRef}
           penType={penType}
-          penSize={10}
+          penSize={penSize}
           color={penColor}
           width={800}
           height={800}
