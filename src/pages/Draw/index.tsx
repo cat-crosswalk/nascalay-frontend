@@ -70,6 +70,10 @@ const Draw = () => {
   const drawData = useAppSelector((state) => state.draw)
   useEffect(() => {
     setIsDone(false)
+    if (canvasRef.current) {
+      canvasRef.current.clear()
+      canvasRef.current.clearURList()
+    }
     setPreviewImage(drawData.img)
     setNowPhase(drawData.drawPhaseNum)
     setMaxPhase(drawData.allDrawPhaseNum)
