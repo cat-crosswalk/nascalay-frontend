@@ -32,6 +32,55 @@ const MemberList = () => {
     <div css={[containerStyle, card]}>
       <h2 css={titleStyle}>参加者</h2>
       <div css={listStyle}>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
+        <h1 css={titleStyle}>fff</h1>
         {memberList.map((member) => (
           <Member
             key={member.userId}
@@ -63,11 +112,18 @@ const listStyle = css`
   height: calc(100% - 7rem);
   overflow-y: scroll;
   scrollbar-color: #4356ff ${colorToRgb.red};
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
   &::-webkit-scrollbar-track {
     background-color: ${colorToRgb.red};
+    border: ${colorToRgb.black} solid;
+    border-width: 0px 0px 0px 3px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #4356ff;
+    background-color: ${colorToRgb.blue};
+    border: ${colorToRgb.black} solid;
+    border-width: 3px 0px 0px 3px;
   }
   & div {
     padding-bottom: 0.75rem;
