@@ -72,6 +72,7 @@ const container = css`
   display: flex;
   gap: 2rem;
   min-height: 60vh;
+  height: 580px;
 `
 
 export default Theme

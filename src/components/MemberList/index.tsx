@@ -32,6 +32,15 @@ const MemberList = () => {
     <div css={[containerStyle, card]}>
       <h2 css={titleStyle}>参加者</h2>
       <div css={listStyle}>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
+      <h2 css={titleStyle}>参加者</h2>
         {memberList.map((member) => (
           <Member
             key={member.userId}
@@ -49,7 +58,6 @@ const containerStyle = css`
   background-color: ${colorToRgb.white};
   padding: 36px 48px;
   padding-top: 12px;
-  height: 580px;
 `
 
 const titleStyle = css`
