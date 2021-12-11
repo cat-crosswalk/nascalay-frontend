@@ -80,6 +80,11 @@ const Draw = () => {
     setMaxPhase(drawData.allDrawPhaseNum)
     setOdaiContent(drawData.odai)
     setTargetArea(areaToXY(drawData.canvas.areaId, drawData.canvas.boardName))
+    const drawnArea: [number, number][] = []
+    for (let i = 0; i < drawData.drawnArea.length; i++) {
+      drawnArea.push(areaToXY(drawData.drawnArea[i], drawData.canvas.boardName))
+    }
+    setDrawnArea(drawnArea)
   }, [drawData])
 
   useEffect(() => {

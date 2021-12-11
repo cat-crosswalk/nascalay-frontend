@@ -43,7 +43,7 @@ const ShowOdaiCard = () => {
         <p>{user.username}</p>
       </div>
       <div css={odaiBoardStyle}>
-        <OdaiBoard text={theme} width={'100%'} height={'88px'}/>
+        <OdaiBoard text={theme} width={'100%'} height={'88px'} />
       </div>
     </div>
   )
