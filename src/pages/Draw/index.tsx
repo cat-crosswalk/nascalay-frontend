@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet.tsx'
 import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
@@ -39,29 +39,11 @@ const Draw = () => {
   const [isDone, setIsDone] = useState(false)
 
   const maxTimeMs = 40000
-  const [startTime, setStartTime] = useState<number | null>(null)
-  const [rest, setRest] = useState<number>(maxTimeMs)
-  useEffect(() => {
-    if (startTime !== null) return
-    setStartTime(new Date().getTime())
-  }, [startTime])
-  useEffect(() => {
-    if (startTime === null) return
-    setInterval(() => {
-      const nowTime = new Date().getTime()
-      setRest(startTime ? Math.max(0, maxTimeMs - (nowTime - startTime)) : 0)
-    }, 10)
-  }, [startTime])
 
   return (
     <div>
       <h1>Draw</h1>
-      <TimerLine
-        value={rest ?? 100}
-        maxValue={maxTimeMs}
-        width="500px"
-        height="30px"
-      />
+      <TimerLine maxValueMs={maxTimeMs} width="500px" height="30px" />
       <SizeSlider value={penSize} onChange={setPenSize} />
       <DoneButton isDone={isDone} onClick={setIsDone} hasShadow={true} />
       <ColorPallet onChange={setPenColor} />
