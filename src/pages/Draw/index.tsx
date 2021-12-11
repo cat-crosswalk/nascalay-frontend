@@ -7,7 +7,7 @@ import MainCanvas, {
 } from './MainCanvas'
 import ToolBox from './ToolBox'
 import SizeSlider from './SizeSlider'
-import TimerLine from '/@/components/LineTimer'
+import LineTimer from '/@/components/LineTimer'
 
 // 絵を描くページ
 const Draw = () => {
