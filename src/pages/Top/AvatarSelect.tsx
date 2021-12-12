@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import { useAppDispatch } from '/@/store/hooks'
 import { card } from '/@/utils/card'
@@ -22,6 +22,11 @@ const AvatarSelect = () => {
   const [anim, setAnim] = useState([45, -45])
   const [avatarId, setAvatarId] = useState(getRandomInt(maxAvatarId))
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(setAvatarColor(color))
+    dispatch(setAvatarType(avatarId))
+  }, [avatarId, color, dispatch])
 
   const colorChange = useCallback(
     (hex: string) => {
