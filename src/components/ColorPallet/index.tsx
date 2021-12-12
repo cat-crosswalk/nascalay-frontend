@@ -117,7 +117,6 @@ const ColorPallet = (props: Props) => {
           width: calc(56px * 4 + 6px);
           height: calc(44px * 5 + 6px);
           border: 3px solid #000;
-          // cursor: url('../src/assets/cursors/onColorPalette.png') 0 40, auto;
         `}
       >
         {palletColor.map(({ hex }, index) => {
@@ -140,7 +139,6 @@ const ColorPallet = (props: Props) => {
               <label
                 htmlFor={hex}
                 css={css`
-                  // cursor: url('../src/assets/cursors/onColorPalette.png') 0 40, auto;
                   display: inline-block;
                   position: absolute;
                   width: 56px;
