@@ -175,6 +175,7 @@ const PreviewCanvas = (props: Props) => {
         maskCtx.stroke()
         maskCtx.closePath()
         maskCtx.strokeStyle = '#DA3116'
+        maskCtx.lineWidth = 8
         maskCtx.beginPath()
         maskCtx.moveTo((i * canvas.width) / 4, (j * canvas.height) / 4)
         maskCtx.lineTo(((i + 1) * canvas.width) / 4, (j * canvas.height) / 4)
