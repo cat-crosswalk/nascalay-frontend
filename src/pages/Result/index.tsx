@@ -8,9 +8,17 @@ import FlatButton from '/@/components/FlatButton'
 import { useAppSelector, useAppDispatch } from '/@/store/hooks'
 import { wsSend } from '/@/websocket'
 import { setBgColor } from '/@/store/slice/status'
+import { setBeforeUnload, removeBeforeUnload } from '/@/utils/beforeunload'
 
 // 回答表示するページ(SHOW)
 const Result = () => {
+  useEffect(() => {
+    setBeforeUnload()
+    return () => {
+      removeBeforeUnload()
+    }
+  })
+
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#96A0C0'))
   const [btnText, setBtnText] = useState('結果を見る')

@@ -8,9 +8,17 @@ import MemberList from '/@/components/MemberList'
 import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 import { setBgColor } from '../store/slice/status'
+import { setBeforeUnload, removeBeforeUnload } from '/@/utils/beforeunload'
 
 // 待機部屋(ROOM)
 const Lobby = () => {
+  useEffect(() => {
+    setBeforeUnload()
+    return () => {
+      removeBeforeUnload()
+    }
+  })
+
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#DCCCA2'))
   const userId = useAppSelector((state) => state.user.userId)

@@ -17,9 +17,17 @@ import { colorToRgb } from '/@/utils/color'
 import { useAppSelector } from '/@/store/hooks'
 import { areaToXY } from './boardData'
 import { ws, WsEvent, wsListener, wsSend } from '/@/websocket'
+import { setBeforeUnload, removeBeforeUnload } from '/@/utils/beforeunload'
 
 // 絵を描くページ
 const Draw = () => {
+  useEffect(() => {
+    setBeforeUnload()
+    return () => {
+      removeBeforeUnload()
+    }
+  })
+
   const boardSize = 4 // TODO
   const [previewImage, setPreviewImage] = useState<string | null>(image)
   const [drawnArea, setDrawnArea] = useState<[number, number][]>([])
