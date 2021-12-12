@@ -22,7 +22,7 @@ const PreviewCanvas = (props: Props) => {
           .fill(0)
           .map((): boolean[] => [...Array(5)].fill(false))
         props.drawnArea.forEach(([x, y]) => {
-          result[y][x] = true
+          result[x][y] = true
         })
         return result
       }
@@ -31,7 +31,7 @@ const PreviewCanvas = (props: Props) => {
           .fill(0)
           .map((): boolean[] => [...Array(4)].fill(false))
         props.drawnArea.forEach(([x, y]) => {
-          result[y][x] = true
+          result[x][y] = true
         })
         return result
       }
@@ -175,6 +175,7 @@ const PreviewCanvas = (props: Props) => {
         maskCtx.stroke()
         maskCtx.closePath()
         maskCtx.strokeStyle = '#DA3116'
+        maskCtx.lineWidth = 8
         maskCtx.beginPath()
         maskCtx.moveTo((i * canvas.width) / 4, (j * canvas.height) / 4)
         maskCtx.lineTo(((i + 1) * canvas.width) / 4, (j * canvas.height) / 4)
