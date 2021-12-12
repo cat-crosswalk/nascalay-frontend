@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import React from 'react'
+import { colorToRgb } from '/@/utils/color'
 
 type Props = {
   width: string
@@ -27,15 +28,15 @@ const OdaiBoard = (props: Props) => {
           &:before,
           &:after {
             content: '';
-            border-bottom: 5px solid #000;
+            border-bottom: 3px solid ${colorToRgb.black};
           }
         `}
       >
         <div
           css={css`
             display: inline-block;
-            font-size: 2rem;
-            margin: auto 4px -1.5rem 4px;
+            font-size: 3.5rem;
+            margin: auto 4px -2.5rem 4px;
           `}
         >
           “
@@ -43,9 +44,9 @@ const OdaiBoard = (props: Props) => {
       </div>
       <div
         css={css`
-          background-color: #fff;
-          border-left: 5px solid #000;
-          border-right: 5px solid #000;
+          background-color: ${colorToRgb.white};
+          border-left: 3px solid ${colorToRgb.black};
+          border-right: 3px solid ${colorToRgb.black};
           height: ${props.height};
           width: 100%;
           display: grid;
@@ -53,7 +54,11 @@ const OdaiBoard = (props: Props) => {
           text-align: center;
         `}
       >
-        {props.text}
+        <div css={css`
+          word-wrap: break-word;
+          width: 250px;
+        `}>{props.text}
+        </div>
       </div>
       <div
         css={css`
@@ -61,7 +66,7 @@ const OdaiBoard = (props: Props) => {
           &:before,
           &:after {
             content: '';
-            border-top: 5px solid #000;
+            border-top: 3px solid ${colorToRgb.black};
           }
           &:before {
             width: 90%;
@@ -74,8 +79,8 @@ const OdaiBoard = (props: Props) => {
         <div
           css={css`
             display: inline-block;
-            font-size: 2rem;
-            margin: -1.5rem 4px auto 4px;
+            font-size: 3.5rem;
+            margin: -2.5rem 4px auto 4px;
             transform: rotateZ(180deg);
           `}
         >
