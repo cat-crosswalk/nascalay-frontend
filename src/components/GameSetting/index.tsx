@@ -136,7 +136,7 @@ const inviteWrapStyle = css`
     font-size: 1.5rem;
     height: 64px;
     width: 100%;
-    padding:0px 18px;
+    padding: 0px 18px;
     margin-right: 20px;
   }
 `

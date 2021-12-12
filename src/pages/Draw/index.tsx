@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ColorPallet from '/@/components/ColorPallet'
 import DoneButton from '/@/components/DoneButton'
 import MainCanvas, {
@@ -25,6 +25,24 @@ const Draw = () => {
   const [drawnArea, setDrawnArea] = useState<[number, number][]>([])
   const [targetArea, setTargetArea] = useState<[number, number]>([2, 2])
   const [isTimer, setIsTimer] = useState<boolean>(false)
+  const adjacentColors = useMemo((): MainCanvasProps['adjacentColors'] => {
+    const res: MainCanvasProps['adjacentColors'] = [...Array(3)].map(() =>
+      [...Array(3)].map(() => null)
+    )
+    for (let i = -1; i <= 1; i++) {
+      for (let j = -1; j <= 1; j++) {
+        if (i === 0 && j === 0) continue
+        const [x, y] = [targetArea[0] + i, targetArea[1] + j]
+        if (drawnArea.some(([x2, y2]) => x2 === x && y2 === y)) {
+          if (Math.abs(i) + Math.abs(j) === 1) continue
+          res[i + 1][j + 1] = 'yellow'
+        } else {
+          res[i + 1][j + 1] = 'gray'
+        }
+      }
+    }
+    return res
+  }, [drawnArea, targetArea])
 
   const canvasRef = React.useRef<MainCanvasHandler>(null)
   const clearCanvas = useCallback(() => {
@@ -154,6 +172,7 @@ const Draw = () => {
           margin-top: 32px;
         `}
         onKeyDown={shortcut}
+        tabIndex={-1}
       >
         <div
           css={css`
@@ -242,6 +261,7 @@ const Draw = () => {
             penSize={penSize}
             width={512}
             height={512}
+            adjacentColors={adjacentColors}
             hasShadow
           />
         </div>

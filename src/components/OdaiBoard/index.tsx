@@ -54,10 +54,13 @@ const OdaiBoard = (props: Props) => {
           text-align: center;
         `}
       >
-        <div css={css`
-          word-wrap: break-word;
-          width: 250px;
-        `}>{props.text}
+        <div
+          css={css`
+            word-wrap: break-word;
+            width: 250px;
+          `}
+        >
+          {props.text}
         </div>
       </div>
       <div

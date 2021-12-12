@@ -4,13 +4,12 @@ import Canvas, {
   Handler as CanvasHandler,
   Props as CanvasProps,
 } from '/@/components/Canvas'
-import { colorToRgb, ColorType } from '/@/utils/color'
 
 export type Props = {
-  readonly width: number
-  readonly height: number
-  readonly adjacentColors?: readonly (readonly (ColorType | null)[])[] // 3 * 3 が想定されている
-  readonly hasShadow?: boolean
+  width: number
+  height: number
+  adjacentColors?: ('gray' | 'yellow' | null)[][] // 3 * 3 が想定されている
+  hasShadow?: boolean
 } & CanvasProps
 
 export type Handler = CanvasHandler
@@ -30,7 +29,7 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
           props.adjacentColors.forEach((adjacentColor, i) => {
             adjacentColor.forEach((color, j) => {
               if (color === null) return
-              const rgb = colorToRgb[color]
+              const rgb = color === 'gray' ? '#ABACB8' : '#F6DF93'
               ctx.fillStyle = rgb
               ctx.fillRect(
                 i === 0
