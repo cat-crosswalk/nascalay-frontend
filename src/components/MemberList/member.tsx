@@ -6,12 +6,17 @@ import { Avatar } from '/@/utils/apis'
 interface MemberData {
   avatar: Avatar
   name: string
+  isHost: boolean
 }
 
 const Member = (props: MemberData) => {
   return (
     <div css={container}>
-      <AvatarIcon avatar={props.avatar} size={72} />
+      <AvatarIcon
+        avatar={props.avatar}
+        size={72}
+        borderColor={props.isHost ? '#F6DF93' : undefined}
+      />
       <p>{props.name}</p>
     </div>
   )

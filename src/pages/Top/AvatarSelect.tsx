@@ -86,7 +86,7 @@ const cube = css`
   position: relative;
   transform-style: preserve-3d;
   transform: rotateX(45deg) rotateY(-40deg);
-  transition: transform 0.8s ease-out;
+  transition: transform 0.25s ease-out;
   & div {
     color: white;
     width: 100%;

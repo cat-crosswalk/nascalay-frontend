@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { css } from '@emotion/react'
 import { Icon } from '@mdi/react'
 import { mdiClipboardMultiple } from '@mdi/js'
@@ -48,6 +48,9 @@ const GameSetting = () => {
     inputField.current?.select()
     document.execCommand('copy')
   }
+
+  const members = useAppSelector((state) => state.room.members)
+  const isOnlyHost = useMemo(() => members.length <= 1, [members])
 
   const marks = [
     {
@@ -99,7 +102,7 @@ const GameSetting = () => {
       <div css={startButtonStyle}>
         <FlatButton
           text="スタート"
-          disabled={!isHost}
+          disabled={!isHost || isOnlyHost}
           onClick={requestGameStart}
           color="blue"
         />

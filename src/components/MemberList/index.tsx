@@ -11,6 +11,7 @@ import { setRoom } from '/@/store/slice/room'
 const MemberList = () => {
   const memberList = useAppSelector((state) => state.room.members)
   const dispatch = useAppDispatch()
+  const hostId = useAppSelector((state) => state.room.hostId)
 
   useEffect(() => {
     const joinNewMember = (e: CustomEvent) => {
@@ -37,6 +38,7 @@ const MemberList = () => {
             key={member.userId}
             name={member.username}
             avatar={member.avatar}
+            isHost={member.userId === hostId}
           />
         ))}
       </div>
