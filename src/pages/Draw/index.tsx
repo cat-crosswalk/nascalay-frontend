@@ -26,7 +26,9 @@ const Draw = () => {
   const [targetArea, setTargetArea] = useState<[number, number]>([2, 2])
   const [isTimer, setIsTimer] = useState<boolean>(false)
   const adjacentColors = useMemo((): MainCanvasProps['adjacentColors'] => {
-    const res: MainCanvasProps['adjacentColors'] = [...Array(3)].map(() => [...Array(3)].map(() => null))
+    const res: MainCanvasProps['adjacentColors'] = [...Array(3)].map(() =>
+      [...Array(3)].map(() => null)
+    )
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
         if (i === 0 && j === 0) continue
