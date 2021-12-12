@@ -1,7 +1,6 @@
 import { Routes } from 'react-router'
 import { Route } from 'react-router-dom'
 
-import Hello from '/@/pages/Hello'
 import Top from '/@/pages/Top'
 import Lobby from '/@/pages/Lobby'
 import Theme from '/@/pages/Theme'
@@ -18,7 +17,6 @@ const Router = () => {
       <Route path="/draw" element={<Draw />} />
       <Route path="/answer" element={<Answer />} />
       <Route path="/result" element={<Result />} />
-      <Route path="/hello/:name" element={<Hello />} />
     </Routes>
   )
 }
