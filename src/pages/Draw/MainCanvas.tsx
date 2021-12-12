@@ -22,60 +22,51 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
 
   useEffect(() => {
     const canvas = mainCanvasRef.current
-    if (canvas) {
-      const ctx = canvas.getContext('2d')
-      if (ctx) {
-        if (props.adjacentColors !== undefined) {
-          props.adjacentColors.forEach((adjacentColor, i) => {
-            adjacentColor.forEach((color, j) => {
-              if (color === null) return
-              const rgb = color === 'gray' ? '#ABACB8' : '#F6DF93'
-              ctx.fillStyle = rgb
-              ctx.fillRect(
-                i === 0
-                  ? 0
-                  : i === 1
-                  ? canvas.width / 7
-                  : (canvas.width * 6) / 7,
-                j === 0
-                  ? 0
-                  : j === 1
-                  ? canvas.height / 7
-                  : (canvas.height * 6) / 7,
-                i === 0 || i === 2 ? canvas.width / 7 : (canvas.width * 5) / 7,
-                j === 0 || j === 2 ? canvas.height / 7 : (canvas.height * 5) / 7
-              )
-            })
-          })
-        }
-        ctx.strokeStyle = '#000'
-        ctx.lineWidth = 3
-        ctx.beginPath()
-        ctx.moveTo(canvas.width / 7, 0)
-        ctx.lineTo(canvas.width / 7, canvas.height / 7)
-        ctx.lineTo(0, canvas.height / 7)
-        ctx.moveTo(canvas.width, canvas.height / 7)
-        ctx.lineTo((canvas.width * 6) / 7, canvas.height / 7)
-        ctx.lineTo((canvas.width * 6) / 7, 0)
-        ctx.moveTo((canvas.width * 6) / 7, canvas.height)
-        ctx.lineTo((canvas.width * 6) / 7, (canvas.height * 6) / 7)
-        ctx.lineTo(canvas.width, (canvas.height * 6) / 7)
-        ctx.moveTo(0, (canvas.height * 6) / 7)
-        ctx.lineTo(canvas.width / 7, (canvas.height * 6) / 7)
-        ctx.lineTo(canvas.width / 7, canvas.height)
-        ctx.stroke()
-        ctx.closePath()
-        ctx.strokeStyle = '#DA3116'
-        ctx.beginPath()
-        ctx.moveTo(canvas.width / 7, canvas.height / 7)
-        ctx.lineTo((canvas.width * 6) / 7, canvas.height / 7)
-        ctx.lineTo((canvas.width * 6) / 7, (canvas.height * 6) / 7)
-        ctx.lineTo(canvas.width / 7, (canvas.height * 6) / 7)
-        ctx.lineTo(canvas.width / 7, canvas.height / 7)
-        ctx.stroke()
-        ctx.closePath()
-      }
+    if (canvas === null) return
+    const ctx = canvas.getContext('2d')
+    if (ctx === null) return
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    if (props.adjacentColors !== undefined) {
+      props.adjacentColors.forEach((adjacentColor, i) => {
+        adjacentColor.forEach((color, j) => {
+          if (color === null) return
+          const rgb = color === 'gray' ? '#ABACB8' : '#F6DF93'
+          ctx.fillStyle = rgb
+          ctx.fillRect(
+            i === 0 ? 0 : i === 1 ? canvas.width / 7 : (canvas.width * 6) / 7,
+            j === 0 ? 0 : j === 1 ? canvas.height / 7 : (canvas.height * 6) / 7,
+            i === 0 || i === 2 ? canvas.width / 7 : (canvas.width * 5) / 7,
+            j === 0 || j === 2 ? canvas.height / 7 : (canvas.height * 5) / 7
+          )
+        })
+      })
     }
+    ctx.strokeStyle = '#000'
+    ctx.lineWidth = 3
+    ctx.beginPath()
+    ctx.moveTo(canvas.width / 7, 0)
+    ctx.lineTo(canvas.width / 7, canvas.height / 7)
+    ctx.lineTo(0, canvas.height / 7)
+    ctx.moveTo(canvas.width, canvas.height / 7)
+    ctx.lineTo((canvas.width * 6) / 7, canvas.height / 7)
+    ctx.lineTo((canvas.width * 6) / 7, 0)
+    ctx.moveTo((canvas.width * 6) / 7, canvas.height)
+    ctx.lineTo((canvas.width * 6) / 7, (canvas.height * 6) / 7)
+    ctx.lineTo(canvas.width, (canvas.height * 6) / 7)
+    ctx.moveTo(0, (canvas.height * 6) / 7)
+    ctx.lineTo(canvas.width / 7, (canvas.height * 6) / 7)
+    ctx.lineTo(canvas.width / 7, canvas.height)
+    ctx.stroke()
+    ctx.closePath()
+    ctx.strokeStyle = '#DA3116'
+    ctx.beginPath()
+    ctx.moveTo(canvas.width / 7, canvas.height / 7)
+    ctx.lineTo((canvas.width * 6) / 7, canvas.height / 7)
+    ctx.lineTo((canvas.width * 6) / 7, (canvas.height * 6) / 7)
+    ctx.lineTo(canvas.width / 7, (canvas.height * 6) / 7)
+    ctx.lineTo(canvas.width / 7, canvas.height / 7)
+    ctx.stroke()
+    ctx.closePath()
   }, [mainCanvasRef, props.adjacentColors])
 
   return (
