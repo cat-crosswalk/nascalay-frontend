@@ -20,7 +20,7 @@ const AvatarSelect = () => {
   const colorId = getRandomInt(palletColor.length)
   const [color, setColor] = useState<string>(palletColor[colorId].hex)
   const [anim, setAnim] = useState([45, -45])
-  const [avatarId, setAvatarId] = useState(0)
+  const [avatarId, setAvatarId] = useState(getRandomInt(maxAvatarId))
   const dispatch = useAppDispatch()
 
   const colorChange = useCallback(
