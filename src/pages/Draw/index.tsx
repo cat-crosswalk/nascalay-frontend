@@ -154,6 +154,7 @@ const Draw = () => {
           margin-top: 32px;
         `}
         onKeyDown={shortcut}
+        tabIndex={-1}
       >
         <div
           css={css`
