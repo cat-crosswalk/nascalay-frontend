@@ -91,6 +91,13 @@ class WsSend {
     }
     ws.send(message)
   }
+  returnRoom(): void {
+    const message: WsClientSendMessage = {
+      type: WsEvent.ReturnRoom,
+      body: {},
+    }
+    ws.send(message)
+  }
 }
 
 export const wsSend = new WsSend()

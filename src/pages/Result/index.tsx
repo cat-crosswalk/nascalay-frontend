@@ -6,7 +6,6 @@ import ShowCanvasCard from './ShowCanvasCard'
 import ShowAnswerCard from './ShowAnswerCard'
 import FlatButton from '/@/components/FlatButton'
 import { useAppSelector, useAppDispatch } from '/@/store/hooks'
-import { useNavigate } from 'react-router-dom'
 import { wsSend } from '/@/websocket'
 import { setBgColor } from '/@/store/slice/status'
 
@@ -14,7 +13,6 @@ import { setBgColor } from '/@/store/slice/status'
 const Result = () => {
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#96A0C0'))
-  const navigate = useNavigate()
   const [btnText, setBtnText] = useState('次へ')
   const hostId = useAppSelector((state) => state.room.hostId)
   const myId = useAppSelector((state) => state.user.userId)
@@ -22,12 +20,12 @@ const Result = () => {
   const btnNext = useCallback(() => {
     if (showNext === 'end') {
       // goto robby
-      navigate('/lobby', { replace: true })
+      wsSend.returnRoom()
     } else {
       // send next
       wsSend.showNext()
     }
-  }, [navigate, showNext])
+  }, [showNext])
   useEffect(() => {
     if (showNext === 'end') {
       setBtnText('ロビーへ')
