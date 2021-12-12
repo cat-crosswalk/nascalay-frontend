@@ -6,6 +6,7 @@ import { Avatar } from '/@/utils/apis'
 type Props = {
   avatar: Avatar
   size: number
+  borderColor?: `#${string}` | `rgb(${number}, ${number}, ${number})`
 }
 
 const AvatarIcon = (props: Props) => {
@@ -13,7 +14,7 @@ const AvatarIcon = (props: Props) => {
     background-color: ${props.avatar.color};
     width: ${props.size}px;
     height: ${props.size}px;
-    border: 3px solid ${colorToRgb.black};
+    border: 3px solid ${props.borderColor ?? colorToRgb.black};
   `
   return (
     <img
