@@ -13,10 +13,11 @@ import { setBgColor } from '/@/store/slice/status'
 const Result = () => {
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#96A0C0'))
-  const [btnText, setBtnText] = useState('次へ')
+  const [btnText, setBtnText] = useState('結果を見る')
   const hostId = useAppSelector((state) => state.room.hostId)
   const myId = useAppSelector((state) => state.user.userId)
   const showNext = useAppSelector((state) => state.status.showNext)
+  const showNow = useAppSelector((state) => state.status.showNow)
   const btnNext = useCallback(() => {
     if (showNext === 'end') {
       // goto robby
@@ -30,9 +31,10 @@ const Result = () => {
     if (showNext === 'end') {
       setBtnText('ロビーへ')
     } else {
+      if (showNow === '') return
       setBtnText('次へ')
     }
-  }, [showNext])
+  }, [showNext, showNow])
   return (
     <div css={pageContainer}>
       <ShowOdaiCard />
@@ -56,7 +58,7 @@ const pageContainer = css`
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding-right: 290px;
+  padding-right: 310px;
   padding-left: 100px;
   padding-top: 1%;
 `
