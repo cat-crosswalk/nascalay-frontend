@@ -22,7 +22,7 @@ const PreviewCanvas = (props: Props) => {
           .fill(0)
           .map((): boolean[] => [...Array(5)].fill(false))
         props.drawnArea.forEach(([x, y]) => {
-          result[y][x] = true
+          result[x][y] = true
         })
         return result
       }
@@ -31,7 +31,7 @@ const PreviewCanvas = (props: Props) => {
           .fill(0)
           .map((): boolean[] => [...Array(4)].fill(false))
         props.drawnArea.forEach(([x, y]) => {
-          result[y][x] = true
+          result[x][y] = true
         })
         return result
       }
