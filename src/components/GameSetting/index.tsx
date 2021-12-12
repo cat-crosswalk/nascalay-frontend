@@ -76,10 +76,9 @@ const GameSetting = () => {
             marks={marks}
             value={time}
             onChange={handleChange}
-            css={css`
-              cursor: url('../src/assets/cursors/slideBarOnHover.png') 22 0,
-                auto;
-            `}
+            // css={css`
+            //   cursor: url('../src/assets/cursors/slideBarOnHover.png') 22 0, auto;
+            // `}
           />
         </div>
       </div>
@@ -142,8 +141,9 @@ const inviteWrapStyle = css`
     width: 100%;
     padding:0px 18px;
     margin-right: 20px;
-    &:hover {
-      cursor: url('../src/assets/cursors/onTextBox.png') 20 20, auto;
+    // &:hover {
+    //   cursor: url('../src/assets/cursors/onTextBox.png') 20 20, auto;
+    // }
   }
 `
 
