@@ -75,6 +75,7 @@ const LineTimer = (props: Props) => {
           animation: ${decrementKeyframes(`calc(${props.width} - 6px)`)}
             ${props.maxValueMs}ms linear both running;
           height: 100%;
+          background-color: #4356ff;
         `}
         onAnimationEnd={onAnimEnd}
       />

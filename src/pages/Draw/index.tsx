@@ -24,6 +24,7 @@ const Draw = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(image)
   const [drawnArea, setDrawnArea] = useState<[number, number][]>([])
   const [targetArea, setTargetArea] = useState<[number, number]>([2, 2])
+  const [isTimer, setIsTimer] = useState<boolean>(false)
 
   const canvasRef = React.useRef<MainCanvasHandler>(null)
   const clearCanvas = useCallback(() => {
@@ -70,6 +71,7 @@ const Draw = () => {
 
   const drawData = useAppSelector((state) => state.draw)
   useEffect(() => {
+    setIsTimer(false)
     setIsDone(false)
     if (canvasRef.current) {
       canvasRef.current.clear()
@@ -92,6 +94,7 @@ const Draw = () => {
   useEffect(() => {
     if (requestBase64 !== 'aaa') return
     setRequestBase64('')
+    setIsTimer(true)
     const mainBase64 = canvasRef.current?.exportDataURL() as string
     const tmpCanvas = document.createElement('canvas')
     tmpCanvas.width = 600
@@ -174,7 +177,11 @@ const Draw = () => {
             grid-column: 2 / 4;
           `}
         >
-          <LineTimerCard maxValueMs={maxTimeMs} width="100%" />
+          <LineTimerCard
+            maxValueMs={maxTimeMs}
+            width="100%"
+            isReset={isTimer}
+          />
         </div>
         <div
           css={css`

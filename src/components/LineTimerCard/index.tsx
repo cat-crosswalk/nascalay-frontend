@@ -5,6 +5,7 @@ import React from 'react'
 import LineTimer from '../LineTimer'
 
 type Props = {
+  isReset?: boolean
   width: string
   maxValueMs: number
   onFinish?: () => void
@@ -52,12 +53,16 @@ const LineTimerCard = (props: Props) => {
         path={mdiTimerSand}
         size="54px"
       />
-      <LineTimer
-        width="100%"
-        maxValueMs={props.maxValueMs}
-        onFinish={props.onFinish}
-        height="16px"
-      />
+      {!props.isReset ? (
+        <LineTimer
+          width="100%"
+          maxValueMs={props.maxValueMs}
+          onFinish={props.onFinish}
+          height="16px"
+        />
+      ) : (
+        <></>
+      )}
     </div>
   )
 }
