@@ -25,6 +25,7 @@ const MainCanvas: React.ForwardRefRenderFunction<Handler, Props> = (
     if (canvas === null) return
     const ctx = canvas.getContext('2d')
     if (ctx === null) return
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     if (props.adjacentColors !== undefined) {
       props.adjacentColors.forEach((adjacentColor, i) => {
         adjacentColor.forEach((color, j) => {
