@@ -3,23 +3,23 @@ import { css } from '@emotion/react'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import AvatarIcon from '/@/components/AvatarIcon'
 import { User, WsShowAnswerEventBody } from '/@/utils/apis'
-
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 import { wsListener, WsEvent } from '/@/websocket'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
+import { complementEmpty } from '/@/utils/complementEmpty'
 
 const ShowAnswerCard = () => {
   const dispatch = useAppDispatch()
   const showNow = useAppSelector((state) => state.status.showNow)
-  const [answer, setAnswer] = useState('')
+  const [answer, setAnswer] = useState<string | null>(null)
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     const getAnswer = (e: CustomEvent<WsShowAnswerEventBody>) => {
       const body = e.detail
-      setAnswer(body.answer)
-      setUser(body.answerer)
+      setAnswer(body.answer ?? '')
+      setUser(body.answerer ?? null)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('answer'))
     }
@@ -35,7 +35,7 @@ const ShowAnswerCard = () => {
 
   useEffect(() => {
     if (showNow === 'odai') {
-      setAnswer('')
+      setAnswer(null)
       setUser(null)
     }
   }, [showNow])
@@ -43,7 +43,13 @@ const ShowAnswerCard = () => {
   return (
     <div css={[answerContainer, card]}>
       <div css={answerStyle}>
-        <p css={!answer ? noAnswer : undefined}>{answer ? answer : '空'}</p>
+        <p
+          css={css`
+            ${answer ? '' : 'opacity: 0.2;'}
+          `}
+        >
+          {complementEmpty(answer)}
+        </p>
       </div>
       <div css={userStyle}>
         <AvatarIcon avatar={user?.avatar} size={72} />
@@ -61,13 +67,9 @@ const answerContainer = css`
   font-size: 1.5rem;
 }`
 
-const noAnswer = css`
-  opacity: 0.2;
-`
-
 const answerStyle = css`
   position: relative;
-  height: 80px;
+  height: 88px;
   flex-grow: 1;
   background: ${colorToRgb.white};
   padding: 10px;
@@ -120,6 +122,9 @@ const answerStyle = css`
 const userStyle = css`
   flex-shrink: 0;
   text-align: center;
+  & p {
+    height: 1.5rem;
+  }
 `
 
 export default ShowAnswerCard
