@@ -20,7 +20,7 @@ export const roomSlice = createSlice({
       state.capacity = action.payload.capacity
       state.members = action.payload.members
       state.hostId = action.payload.hostId
-      return state
+      return { ...state, ...action.payload }
     },
   },
 })
