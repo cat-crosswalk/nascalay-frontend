@@ -188,7 +188,7 @@ const Draw = () => {
             grid-row: 1 / 2;
           `}
         >
-          {`${nowPhase+1}ターン目/${maxPhase}`}
+          {`${nowPhase + 1}ターン目/${maxPhase}`}
         </div>
         <div
           css={css`

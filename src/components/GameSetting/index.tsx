@@ -44,10 +44,9 @@ const GameSetting = () => {
   const requestGameStart = useCallback(() => {
     wsSend.requestGameStart()
   }, [])
-  const handleCopy = () => {
-    inputField.current?.select()
-    document.execCommand('copy')
-  }
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(shortUrl)
+  }, [shortUrl])
 
   const members = useAppSelector((state) => state.room.members)
   const isOnlyHost = useMemo(() => members.length <= 1, [members])
