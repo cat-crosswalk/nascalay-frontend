@@ -115,7 +115,8 @@ const answerStyle = css`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: hidden;
+    word-break: break-word;
+    font-weight: 500;
   }
 `
 
