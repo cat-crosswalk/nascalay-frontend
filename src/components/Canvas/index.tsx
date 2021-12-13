@@ -234,11 +234,14 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     },
     [draw, erase, getPos, props.penType]
   )
-  const mouseEnter = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (e.buttons !== 1) return
-    if (props.penType === 'bucket') return
-    saveCanvas()
-  }, [saveCanvas, props.penType])
+  const mouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (e.buttons !== 1) return
+      if (props.penType === 'bucket') return
+      saveCanvas()
+    },
+    [saveCanvas, props.penType]
+  )
 
   return (
     <canvas
