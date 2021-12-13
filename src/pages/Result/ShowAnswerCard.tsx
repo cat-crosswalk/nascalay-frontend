@@ -43,7 +43,7 @@ const ShowAnswerCard = () => {
   return (
     <div css={[answerContainer, card]}>
       <div css={answerStyle}>
-        <p>{answer}</p>
+        <p css={!answer ? noAnswer : undefined}>{answer ? answer : '空'}</p>
       </div>
       <div css={userStyle}>
         <AvatarIcon avatar={user?.avatar} size={72} />
@@ -60,6 +60,10 @@ const answerContainer = css`
   background-color: ${colorToRgb.red};
   font-size: 1.5rem;
 }`
+
+const noAnswer = css`
+  opacity: 0.2;
+`
 
 const answerStyle = css`
   position: relative;
