@@ -16,7 +16,7 @@ const Theme = () => {
     return () => {
       removeBeforeUnload()
     }
-  })
+  }, [])
 
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#96A0C0'))

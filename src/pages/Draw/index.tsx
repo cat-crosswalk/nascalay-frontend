@@ -26,7 +26,7 @@ const Draw = () => {
     return () => {
       removeBeforeUnload()
     }
-  })
+  }, [])
 
   const boardSize = 4 // TODO
   const [previewImage, setPreviewImage] = useState<string | null>(image)

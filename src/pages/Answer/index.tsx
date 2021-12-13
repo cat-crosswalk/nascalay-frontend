@@ -17,7 +17,7 @@ const Answer = () => {
     return () => {
       removeBeforeUnload()
     }
-  })
+  }, [])
 
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#D1A9A9'))

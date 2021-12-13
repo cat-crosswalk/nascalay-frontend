@@ -17,7 +17,7 @@ const Lobby = () => {
     return () => {
       removeBeforeUnload()
     }
-  })
+  }, [])
 
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#DCCCA2'))
