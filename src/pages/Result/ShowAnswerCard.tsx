@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { css } from '@emotion/react'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import AvatarIcon from '/@/components/AvatarIcon'
-import { User } from '/@/utils/apis'
+import { User, WsShowAnswerEventBody } from '/@/utils/apis'
 
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
@@ -10,25 +10,17 @@ import { wsListener, WsEvent } from '/@/websocket'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
 
 const ShowAnswerCard = () => {
-  const userInit: User = {
-    userId: '',
-    username: '',
-    avatar: {
-      type: 0,
-      color: '#fff',
-    },
-  }
   const dispatch = useAppDispatch()
   const showNow = useAppSelector((state) => state.status.showNow)
   const [answer, setAnswer] = useState('')
-  const [user, setUser] = useState(userInit)
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    const getAnswer = (e: CustomEvent) => {
+    const getAnswer = (e: CustomEvent<WsShowAnswerEventBody>) => {
       const body = e.detail
-      setAnswer(body.answer ?? '')
-      setUser(body.answerer ?? userInit)
-      dispatch(setShowNext(body.next ?? ''))
+      setAnswer(body.answer)
+      setUser(body.answerer)
+      dispatch(setShowNext(body.next))
       dispatch(setShowNow('answer'))
     }
     wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)
@@ -44,9 +36,8 @@ const ShowAnswerCard = () => {
   useEffect(() => {
     if (showNow === 'odai') {
       setAnswer('')
-      setUser(userInit)
+      setUser(null)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showNow])
 
   return (
@@ -55,8 +46,8 @@ const ShowAnswerCard = () => {
         <p>{answer}</p>
       </div>
       <div css={userStyle}>
-        <AvatarIcon avatar={user.avatar} size={72} />
-        <p>{user.username}</p>
+        <AvatarIcon avatar={user?.avatar} size={72} />
+        <p>{user?.username ?? ''}</p>
       </div>
     </div>
   )
