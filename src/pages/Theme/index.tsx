@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
@@ -7,17 +7,9 @@ import ThemeInput from './ThemInput'
 import LineTimerCard from '/@/components/LineTimerCard'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { setBgColor } from '/@/store/slice/status'
-import { removeBeforeUnload, setBeforeUnload } from '/@/utils/beforeunload'
 
 // お題を入力するページ(ODAI)
 const Theme = () => {
-  useEffect(() => {
-    setBeforeUnload()
-    return () => {
-      removeBeforeUnload()
-    }
-  }, [])
-
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#96A0C0'))
   const maxTimeMs = useAppSelector((state) => state.theme.timeLimit * 1000)

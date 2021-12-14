@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
 import AnswerCanvas from './AnswerCanvas'
@@ -8,17 +8,9 @@ import { card } from '/@/utils/card'
 import LineTimerCard from '/@/components/LineTimerCard'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { setBgColor } from '/@/store/slice/status'
-import { setBeforeUnload, removeBeforeUnload } from '/@/utils/beforeunload'
 
 // 絵を見てお題を当てるページ
 const Answer = () => {
-  useEffect(() => {
-    setBeforeUnload()
-    return () => {
-      removeBeforeUnload()
-    }
-  }, [])
-
   const dispatch = useAppDispatch()
   dispatch(setBgColor('#D1A9A9'))
   const maxTimeMs = useAppSelector((state) => state.answer.timeLimit) * 1000

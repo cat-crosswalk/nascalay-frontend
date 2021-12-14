@@ -1,5 +1,5 @@
 import emotionReset from 'emotion-reset'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Global, css } from '@emotion/react'
 import './App.css'
@@ -7,16 +7,27 @@ import Router from '/@/router/index'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import { addPageEventListener } from '/@/scripts/changePageEvent'
 import bgImage from '/@/assets/bg.svg'
+import { removeBeforeUnload, setBeforeUnload } from './utils/beforeunload'
 
 const App = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { pathname } = useLocation()
   useEffect(() => {
     // wsEventを監視して画面遷移する
     // HACK: navigateとdispatchを渡してる実装やばそう
     addPageEventListener(navigate, dispatch)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  useEffect(() => {
+    if (pathname !== '/') {
+      setBeforeUnload()
+      return () => {
+        removeBeforeUnload()
+      }
+    }
+  }, [pathname])
+
   const bgColor = useAppSelector((state) => state.status.bgColor)
   return (
     <div>
