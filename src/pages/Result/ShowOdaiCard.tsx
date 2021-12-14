@@ -40,7 +40,7 @@ const ShowOdaiCard = () => {
           text={complementEmpty(theme) ?? ''}
           width={'100%'}
           height={'88px'}
-          isGray={user === null}
+          inActive={user === null}
         />
       </div>
     </div>
