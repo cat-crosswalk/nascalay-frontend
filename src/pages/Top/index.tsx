@@ -5,7 +5,6 @@ import { card } from '/@/utils/card'
 
 import PlayerName from './PlayerName'
 import AvatarSelect from './AvatarSelect'
-import { Link } from 'react-router-dom'
 
 // TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 // 招待リンク ?c=xxxxxroomIdxxxxx
