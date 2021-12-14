@@ -38,7 +38,7 @@ const PlayerName = () => {
       const request: CreateRoomRequest = {
         username: userName,
         avatar: avatar,
-        capacity: 6,
+        capacity: 17,
       }
       const { data } = await api.createRoom(request)
       dispatch(setUser({ avatar, username: userName, userId: data.userId }))
