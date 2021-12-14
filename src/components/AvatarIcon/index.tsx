@@ -16,7 +16,7 @@ const AvatarIcon = (props: Props) => {
     height: ${props.size}px;
     border: 3px solid ${props.borderColor ?? colorToRgb.black};
   `
-  if (!props.avatar) {
+  if (props.avatar === undefined) {
     return <div css={imageStyle} />
   }
   return (
