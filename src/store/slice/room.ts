@@ -17,9 +17,6 @@ export const roomSlice = createSlice({
       return action.payload
     },
     setRoomNewMember(state, action: PayloadAction<WsRoomNewMemberEventBody>) {
-      state.capacity = action.payload.capacity
-      state.members = action.payload.members
-      state.hostId = action.payload.hostId
       return { ...state, ...action.payload }
     },
   },
