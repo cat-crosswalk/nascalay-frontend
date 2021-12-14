@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
 import { useAppSelector, useAppDispatch } from '/@/store/hooks'
-
+import { WsRoomNewMemberEventBody } from '/@/utils/apis/generated'
 import { card } from '/@/utils/card'
 import { colorToRgb } from '/@/utils/color'
 import { WsEvent, wsListener } from '/@/websocket'
 import Member from './member'
-import { setRoom } from '/@/store/slice/room'
+import { setRoomNewMember } from '/@/store/slice/room'
 
 const MemberList = () => {
   const memberList = useAppSelector((state) => state.room.members)
@@ -14,8 +14,8 @@ const MemberList = () => {
   const hostId = useAppSelector((state) => state.room.hostId)
 
   useEffect(() => {
-    const joinNewMember = (e: CustomEvent) => {
-      dispatch(setRoom(e.detail))
+    const joinNewMember = (e: CustomEvent<WsRoomNewMemberEventBody>) => {
+      dispatch(setRoomNewMember(e.detail))
     }
     wsListener.addEventListener(
       WsEvent.RoomNewMember,

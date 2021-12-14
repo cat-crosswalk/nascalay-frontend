@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Room } from '/@/utils/apis/generated'
+import { Room, WsRoomNewMemberEventBody } from '/@/utils/apis/generated'
 
 const initialState: Room = {
   roomId: '',
@@ -16,8 +16,14 @@ export const roomSlice = createSlice({
     setRoom: (state, action: PayloadAction<Room>) => {
       return action.payload
     },
+    setRoomNewMember(state, action: PayloadAction<WsRoomNewMemberEventBody>) {
+      state.capacity = action.payload.capacity
+      state.members = action.payload.members
+      state.hostId = action.payload.hostId
+      return { ...state, ...action.payload }
+    },
   },
 })
 
-export const { setRoom } = roomSlice.actions
+export const { setRoom, setRoomNewMember } = roomSlice.actions
 export default roomSlice.reducer
