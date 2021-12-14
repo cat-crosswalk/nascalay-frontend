@@ -48,7 +48,7 @@ const ShowAnswerCard = () => {
             ${answer ? '' : 'opacity: 0.2;'}
           `}
         >
-          {complementEmpty(answer)}
+          {complementEmpty(answer) ?? ''}
         </p>
       </div>
       <div css={userStyle}>

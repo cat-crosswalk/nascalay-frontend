@@ -37,7 +37,7 @@ const ShowOdaiCard = () => {
       </div>
       <div css={odaiBoardStyle}>
         <OdaiBoard
-          text={complementEmpty(theme)}
+          text={complementEmpty(theme) ?? ''}
           width={'100%'}
           height={'88px'}
           isGray={user === null}
