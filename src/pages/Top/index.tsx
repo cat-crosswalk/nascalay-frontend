@@ -13,7 +13,6 @@ const Top = () => {
   // TODO: アバター
   return (
     <div css={pageContainer}>
-      <Link to="/draw">to draw</Link>
       <div css={[card, title]}>
         <p>ゲームを始める</p>
       </div>
