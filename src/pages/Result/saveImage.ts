@@ -44,7 +44,6 @@ const drawResultString = (
   y: number,
   inActive = false
 ) => {
-  // TODO: 色とフォント
   ctx.font = '24px "Kiwi Maru"'
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
