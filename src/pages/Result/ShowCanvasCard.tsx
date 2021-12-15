@@ -5,6 +5,8 @@ import { colorToRgb } from '/@/utils/color'
 import { WsEvent, wsListener } from '/@/websocket'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
 import { card } from '/@/utils/card'
+import { setResultImage } from '/@/store/slice/result'
+import { WsShowCanvasEventBody } from '/@/utils/apis'
 
 const ShowCanvasCard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -32,10 +34,12 @@ const ShowCanvasCard = () => {
   }, [imageData])
 
   useEffect(() => {
-    const getImageData = (e: CustomEvent) => {
+    const getImageData = (e: CustomEvent<WsShowCanvasEventBody>) => {
       setImageData(e.detail.img)
       dispatch(setShowNext(e.detail.next))
       dispatch(setShowNow('canvas'))
+      // 画像保存用
+      dispatch(setResultImage(e.detail.img ?? null))
     }
     wsListener.addEventListener(
       WsEvent.ShowCanvas,
@@ -52,8 +56,9 @@ const ShowCanvasCard = () => {
   useEffect(() => {
     if (showNow === 'odai') {
       setImageData('')
+      dispatch(setResultImage(null))
     }
-  }, [showNow])
+  }, [dispatch, showNow])
 
   // TODO: ?キャンバスアニメーション
   return (

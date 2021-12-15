@@ -9,6 +9,7 @@ import { setShowNext, setShowNow } from '/@/store/slice/status'
 import { wsListener, WsEvent } from '/@/websocket'
 import { complementEmpty } from '/@/utils/complementEmpty'
 import OdaiBoard from '/@/components/OdaiBoard'
+import { setResultOdai, setResultSender } from '/@/store/slice/result'
 
 const ShowOdaiCard = () => {
   const [theme, setTheme] = useState<string | null>(null)
@@ -17,10 +18,13 @@ const ShowOdaiCard = () => {
   useEffect(() => {
     const getOdai = (e: CustomEvent<WsShowOdaiEventBody>) => {
       const body = e.detail
-      setTheme(body.odai ?? '')
+      setTheme(body.odai ?? '') // 空 を表示する
       setUser(body.sender ?? null)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('odai'))
+      // 画像保存用
+      dispatch(setResultOdai(body.odai ?? '')) // 空 を表示する
+      dispatch(setResultSender(body.sender ?? null))
     }
     wsListener.addEventListener(WsEvent.ShowOdai, getOdai as EventListener)
 

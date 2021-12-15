@@ -8,6 +8,7 @@ import { colorToRgb } from '/@/utils/color'
 import { wsListener, WsEvent } from '/@/websocket'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
 import { complementEmpty } from '/@/utils/complementEmpty'
+import { setResultAnswer, setResultAnswerer } from '/@/store/slice/result'
 
 const ShowAnswerCard = () => {
   const dispatch = useAppDispatch()
@@ -18,10 +19,13 @@ const ShowAnswerCard = () => {
   useEffect(() => {
     const getAnswer = (e: CustomEvent<WsShowAnswerEventBody>) => {
       const body = e.detail
-      setAnswer(body.answer ?? '')
+      setAnswer(body.answer ?? '') // 空 という文字を表示する
       setUser(body.answerer ?? null)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('answer'))
+      // 画像保存用
+      dispatch(setResultAnswer(body.answer ?? '')) // 空 という文字を表示する
+      dispatch(setResultAnswerer(body.answerer ?? null))
     }
     wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)
 
@@ -37,8 +41,11 @@ const ShowAnswerCard = () => {
     if (showNow === 'odai') {
       setAnswer(null)
       setUser(null)
+      // 保存データ初期化
+      dispatch(setResultAnswer(null))
+      dispatch(setResultAnswerer(null))
     }
-  }, [showNow])
+  }, [dispatch, showNow])
 
   return (
     <div css={[answerContainer, card]}>
