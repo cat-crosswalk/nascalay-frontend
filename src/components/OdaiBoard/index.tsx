@@ -6,6 +6,7 @@ type Props = {
   width: string
   height: string
   text: string
+  inActive?: boolean
 }
 
 const OdaiBoard = (props: Props) => {
@@ -58,6 +59,7 @@ const OdaiBoard = (props: Props) => {
           css={css`
             word-wrap: break-word;
             width: 250px;
+            ${props.inActive ? 'opacity: 0.2;' : ''}
           `}
         >
           {props.text}
