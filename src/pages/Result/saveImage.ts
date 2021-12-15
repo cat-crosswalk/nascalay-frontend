@@ -117,7 +117,7 @@ export const saveResultAsImage = async (result: Result) => {
     complementEmpty(result.answer) ?? '',
     AnswerX,
     AnswerY,
-    result.odai === ''
+    result.answer === ''
   )
 
   // 回答者
