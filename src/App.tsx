@@ -1,17 +1,22 @@
 import emotionReset from 'emotion-reset'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Global, css } from '@emotion/react'
 import './App.css'
 import Router from '/@/router/index'
-import { useAppDispatch, useAppSelector } from '/@/store/hooks'
+import { useAppDispatch } from '/@/store/hooks'
 import { addPageEventListener } from '/@/scripts/changePageEvent'
-import bgImage from '/@/assets/bg.svg'
+import bgYellow from '/@/assets/bg/bgYellow.svg'
+import bgBlue from '/@/assets/bg/bgBlue.svg'
+import bgRed from '/@/assets/bg/bgRed.svg'
+
 import { removeBeforeUnload, setBeforeUnload } from './utils/beforeunload'
 
 const App = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const [bgImage, setBgImage] = useState(bgYellow)
+  const [bgColor, setBgColor] = useState('#DCCCA2')
   const { pathname } = useLocation()
   useEffect(() => {
     // wsEventを監視して画面遷移する
@@ -28,7 +33,27 @@ const App = () => {
     }
   }, [pathname])
 
-  const bgColor = useAppSelector((state) => state.status.bgColor)
+  // 背景画像の変更
+  useEffect(() => {
+    const path = pathname.toLowerCase()
+    switch (path) {
+      case '/':
+        setBgImage(bgYellow)
+        setBgColor('#DCCCA2')
+        break
+      case '/lobby':
+      case '/theme':
+      case '/draw':
+      case '/result':
+        setBgImage(bgBlue)
+        setBgColor('#96A0C0')
+        break
+      case '/answer':
+        setBgImage(bgRed)
+        setBgColor('#D1A9A9')
+        break
+    }
+  }, [pathname])
   return (
     <div>
       <Global
