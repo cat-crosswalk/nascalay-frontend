@@ -3,14 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 interface Status {
   showNext: string
   showNow: string
-  bgColor: string
   boardType: string
 }
 
 const initialState: Status = {
   showNext: '',
   showNow: '',
-  bgColor: '#DCCCA2',
   boardType: '4x4',
 }
 
@@ -26,10 +24,6 @@ export const statusSlice = createSlice({
       state.showNow = action.payload
       return state
     },
-    setBgColor: (state, action: PayloadAction<string>) => {
-      state.bgColor = action.payload
-      return state
-    },
     setBoardType: (state, action: PayloadAction<string>) => {
       state.boardType = action.payload
       return state
@@ -37,5 +31,5 @@ export const statusSlice = createSlice({
   },
 })
 
-export const { setShowNext, setShowNow, setBgColor } = statusSlice.actions
+export const { setShowNext, setShowNow, setBoardType } = statusSlice.actions
 export default statusSlice.reducer
