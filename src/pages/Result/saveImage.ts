@@ -54,9 +54,7 @@ const drawUser = async (
 ) => {
   const ImgSize = 72 // px
   const LineHeight = 25 // px
-  if (!user) {
-    return
-  }
+  if (user === null) return
   ctx.fillStyle = user.avatar.color
   ctx.fillRect(x, y, ImgSize, ImgSize)
   const img = await loadImage(`avatar/avatar${user.avatar.type}.svg`)
@@ -92,7 +90,7 @@ export const saveResultAsImage = async (result: Result) => {
   await drawUser(ctx, result.sender, OdaiSenderX, OdaiSenderY)
 
   // 画像
-  if (result.img) {
+  if (result.img !== null) {
     const mainImage = await loadImage(result.img)
     ctx.drawImage(
       mainImage,
