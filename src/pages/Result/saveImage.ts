@@ -72,7 +72,8 @@ export const saveResultAsImage = async (result: Result) => {
   const canvas = document.createElement('canvas')
   canvas.width = ImageWidth
   canvas.height = ImageHeight
-  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D
+  const ctx = canvas.getContext('2d')
+  if (ctx === null) return
   // 背景画像
   const bgImage = await loadImage(ResultBg)
   ctx.drawImage(bgImage, 0, 0, ImageWidth, ImageHeight)
