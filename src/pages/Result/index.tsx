@@ -12,6 +12,7 @@ import { wsSend } from '/@/websocket'
 import { setBgColor } from '/@/store/slice/status'
 import { colorToRgb } from '/@/utils/color'
 import { saveResultAsImage } from './saveImage'
+import { card } from '/@/utils/card'
 
 // 回答表示するページ(SHOW)
 const Result = () => {
@@ -52,7 +53,7 @@ const Result = () => {
       <ShowAnswerCard />
       <div css={nextBtnStyle}>
         <div css={downloadWrap}>
-          <button onClick={exportResultImage} css={downloadButtonStyle}>
+          <button onClick={exportResultImage} css={[downloadButtonStyle, card]}>
             <Icon path={mdiTrayArrowDown} size={1.5} />
           </button>
         </div>
@@ -61,6 +62,7 @@ const Result = () => {
           text={btnText}
           onClick={btnNext}
           disabled={hostId !== myId}
+          hasShadow
         />
       </div>
     </div>
@@ -91,7 +93,6 @@ const downloadWrap = css`
 
 const downloadButtonStyle = css`
   background-color: ${colorToRgb.yellow};
-  border: solid 3px ${colorToRgb.black};
   width: 64px;
   height: 64px;
   &::after {
