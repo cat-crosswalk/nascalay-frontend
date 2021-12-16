@@ -12,18 +12,21 @@ import OdaiBoard from '/@/components/OdaiBoard'
 import { setResultOdai, setResultSender } from '/@/store/slice/result'
 
 const ShowOdaiCard = () => {
+  // theme === null : なにも表示しない（データ受信前を表す）
+  // theme === '' : 空文字列を受信したとして 空 を表示する
   const [theme, setTheme] = useState<string | null>(null)
   const [user, setUser] = useState<User | null>(null)
+
   const dispatch = useAppDispatch()
   useEffect(() => {
     const getOdai = (e: CustomEvent<WsShowOdaiEventBody>) => {
       const body = e.detail
-      setTheme(body.odai ?? '') // 空 を表示する
+      setTheme(body.odai ?? '')
       setUser(body.sender ?? null)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('odai'))
       // 画像保存用
-      dispatch(setResultOdai(body.odai ?? '')) // 空 を表示する
+      dispatch(setResultOdai(body.odai ?? ''))
       dispatch(setResultSender(body.sender ?? null))
     }
     wsListener.addEventListener(WsEvent.ShowOdai, getOdai as EventListener)

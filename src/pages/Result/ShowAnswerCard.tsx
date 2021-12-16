@@ -13,18 +13,21 @@ import { setResultAnswer, setResultAnswerer } from '/@/store/slice/result'
 const ShowAnswerCard = () => {
   const dispatch = useAppDispatch()
   const showNow = useAppSelector((state) => state.status.showNow)
+
+  // answer === null : なにも表示しない（データ受信前を表す）
+  // answer === '' : 空文字列を受信したとして 空 を表示する
   const [answer, setAnswer] = useState<string | null>(null)
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     const getAnswer = (e: CustomEvent<WsShowAnswerEventBody>) => {
       const body = e.detail
-      setAnswer(body.answer ?? '') // 空 という文字を表示する
+      setAnswer(body.answer ?? '')
       setUser(body.answerer ?? null)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('answer'))
       // 画像保存用
-      dispatch(setResultAnswer(body.answer ?? '')) // 空 という文字を表示する
+      dispatch(setResultAnswer(body.answer ?? ''))
       dispatch(setResultAnswerer(body.answerer ?? null))
     }
     wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)

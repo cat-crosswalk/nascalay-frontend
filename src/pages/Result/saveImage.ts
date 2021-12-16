@@ -16,7 +16,7 @@ const OdaiY = 92
 const OdaiSenderX = 335
 const OdaiSenderY = 38
 
-// メイン画像
+// メイン画像描画位置
 const MainImageX = 384
 const MainImageY = 199
 const MainImageSize = 610
