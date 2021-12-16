@@ -5,14 +5,11 @@ import ShowOdaiCard from './ShowOdaiCard'
 import ShowCanvasCard from './ShowCanvasCard'
 import ShowAnswerCard from './ShowAnswerCard'
 import FlatButton from '/@/components/FlatButton'
-import { useAppSelector, useAppDispatch } from '/@/store/hooks'
+import { useAppSelector } from '/@/store/hooks'
 import { wsSend } from '/@/websocket'
-import { setBgColor } from '/@/store/slice/status'
 
 // 回答表示するページ(SHOW)
 const Result = () => {
-  const dispatch = useAppDispatch()
-  dispatch(setBgColor('#96A0C0'))
   const [btnText, setBtnText] = useState('結果を見る')
   const hostId = useAppSelector((state) => state.room.hostId)
   const myId = useAppSelector((state) => state.user.userId)
