@@ -25,7 +25,7 @@ const PlayerName = (props: Props) => {
   }, [])
 
   const goRobby = useCallback(async () => {
-    if (props.roomId) {
+    if (props.roomId !== null && props.roomId.length !== 0) {
       // 招待リンクを踏んだ場合
       const request: JoinRoomRequest = {
         roomId: props.roomId,
@@ -60,7 +60,7 @@ const PlayerName = (props: Props) => {
       />
       <div css={goLobbyStyle}>
         <FlatButton
-          text={props.roomId ? '参加' : '部屋を作る'}
+          text={props.roomId !== null && props.roomId.length !== 0 ? '参加' : '部屋を作る'}
           color="yellow"
           onClick={goRobby}
           disabled={userName === ''}

@@ -19,7 +19,7 @@ const Top = () => {
     const id = new URLSearchParams(search).get('c')
     setRoomId(id)
     // 招待リンクを踏んだ場合は，部屋ホストのユーザー名を取得する
-    if (id) {
+    if (id !== null && id.length !== 0) {
       ;(async () => {
         const res = await api.getRoom(id)
         if (res.status !== 200) return
