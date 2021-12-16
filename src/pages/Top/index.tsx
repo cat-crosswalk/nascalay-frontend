@@ -11,7 +11,7 @@ import AvatarSelect from './AvatarSelect'
 // TODO:クエリがある場合は，招待リンクを踏んだパターンとして表示を変える
 // 招待リンク ?c=xxxxxroomIdxxxxx
 const Top = () => {
-  const search = useLocation().search
+  const { search } = useLocation()
   const [roomId, setRoomId] = useState<string | null>(null)
   const [hostName, setHostName] = useState<string | null>(null)
 
