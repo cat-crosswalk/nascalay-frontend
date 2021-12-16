@@ -20,14 +20,15 @@ const Top = () => {
     setRoomId(id)
     // 招待リンクを踏んだ場合は，部屋ホストのユーザー名を取得する
     if (id !== null && id.length !== 0) {
-      ;(async () => {
+      const getHostName = async () => {
         const res = await api.getRoom(id)
         if (res.status !== 200) return
         const name =
           res.data.members.find((m) => m.userId === res.data.hostId)
             ?.username ?? null
         setHostName(name)
-      })()
+      }
+      getHostName()
     }
   }, [search])
 
