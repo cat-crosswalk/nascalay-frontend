@@ -1,12 +1,12 @@
 import emotionReset from 'emotion-reset'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Global, css } from '@emotion/react'
 import './App.css'
 import Router from '/@/router/index'
-import { useAppDispatch, useAppSelector } from '/@/store/hooks'
+import { useAppDispatch } from '/@/store/hooks'
 import { addPageEventListener } from '/@/scripts/changePageEvent'
-import bgImage from '/@/assets/bg.svg'
+import { bgImageData, PageNames } from '/@/scripts/bgImage'
 import { removeBeforeUnload, setBeforeUnload } from './utils/beforeunload'
 
 const App = () => {
@@ -27,8 +27,6 @@ const App = () => {
       }
     }
   }, [pathname])
-
-  const bgColor = useAppSelector((state) => state.status.bgColor)
   return (
     <div>
       <Global
@@ -43,8 +41,12 @@ const App = () => {
           }
 
           body {
-            background-image: url(${bgImage});
-            background-color: ${bgColor};
+            background-image: url(${bgImageData[
+              pathname.toLocaleLowerCase() as PageNames
+            ].image});
+            background-color: ${bgImageData[
+              pathname.toLocaleLowerCase() as PageNames
+            ].color};
           }
 
           body,

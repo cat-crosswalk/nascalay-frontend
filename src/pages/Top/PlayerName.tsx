@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { css } from '@emotion/react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '/@/store/hooks'
 import api, { JoinRoomRequest, CreateRoomRequest } from '/@/utils/apis'
 import { setRoom } from '/@/store/slice/room'
@@ -10,23 +10,25 @@ import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
 import FlatButton from '/@/components/FlatButton'
 
-const PlayerName = () => {
+interface Props {
+  roomId: string | null
+}
+
+const PlayerName = (props: Props) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const [userName, setUserName] = useState('')
-  const search = useLocation().search
-  const roomId = new URLSearchParams(search).get('c')
   const avatar = useAppSelector((state) => state.user.avatar)
   const playerNameHandler = useCallback((e) => {
     setUserName(e.target.value.trim())
   }, [])
 
   const goRobby = useCallback(async () => {
-    if (roomId) {
+    if (props.roomId !== null && props.roomId.length !== 0) {
       // 招待リンクを踏んだ場合
       const request: JoinRoomRequest = {
-        roomId: roomId,
+        roomId: props.roomId,
         username: userName,
         avatar: avatar,
       }
@@ -45,7 +47,7 @@ const PlayerName = () => {
       dispatch(setRoom(data))
     }
     navigate('/lobby', { replace: false })
-  }, [avatar, userName, dispatch, roomId, navigate])
+  }, [props.roomId, navigate, userName, avatar, dispatch])
   return (
     <div css={[containerStyle, card]}>
       <h2 css={titleStyle}>プレイヤー名</h2>
@@ -58,7 +60,7 @@ const PlayerName = () => {
       />
       <div css={goLobbyStyle}>
         <FlatButton
-          text={roomId ? '参加' : '部屋を作る'}
+          text={props.roomId !== null && props.roomId.length !== 0 ? '参加' : '部屋を作る'}
           color="yellow"
           onClick={goRobby}
           disabled={userName === ''}
