@@ -1,6 +1,7 @@
 import { User } from '/@/utils/apis'
 import { Result } from '/@/store/slice/result'
 import { complementEmpty } from '/@/utils/complementEmpty'
+import { loadImage } from '/@/utils/image'
 import ResultBg from '/@/assets/resultBg.png'
 
 // 出力画像サイズ
@@ -27,15 +28,6 @@ const AnswerY = 920
 // 回答者描画位置
 const AnswererX = 963
 const AnswererY = 864
-
-const loadImage = (src: string) => {
-  return new Promise<HTMLImageElement>((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => resolve(img)
-    img.onerror = (e) => reject(e)
-    img.src = src
-  })
-}
 
 const drawResultString = (
   ctx: CanvasRenderingContext2D,
