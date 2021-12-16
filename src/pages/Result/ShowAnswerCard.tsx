@@ -8,10 +8,14 @@ import { colorToRgb } from '/@/utils/color'
 import { wsListener, WsEvent } from '/@/websocket'
 import { setShowNext, setShowNow } from '/@/store/slice/status'
 import { complementEmpty } from '/@/utils/complementEmpty'
+import { setResultAnswer, setResultAnswerer } from '/@/store/slice/result'
 
 const ShowAnswerCard = () => {
   const dispatch = useAppDispatch()
   const showNow = useAppSelector((state) => state.status.showNow)
+
+  // answer === null : なにも表示しない（データ受信前を表す）
+  // answer === '' : 空文字列を受信したとして 空 を表示する
   const [answer, setAnswer] = useState<string | null>(null)
   const [user, setUser] = useState<User | null>(null)
 
@@ -22,6 +26,9 @@ const ShowAnswerCard = () => {
       setUser(body.answerer ?? null)
       dispatch(setShowNext(body.next))
       dispatch(setShowNow('answer'))
+      // 画像保存用
+      dispatch(setResultAnswer(body.answer ?? ''))
+      dispatch(setResultAnswerer(body.answerer ?? null))
     }
     wsListener.addEventListener(WsEvent.ShowAnswer, getAnswer as EventListener)
 
@@ -37,8 +44,11 @@ const ShowAnswerCard = () => {
     if (showNow === 'odai') {
       setAnswer(null)
       setUser(null)
+      // 保存データ初期化
+      dispatch(setResultAnswer(null))
+      dispatch(setResultAnswerer(null))
     }
-  }, [showNow])
+  }, [dispatch, showNow])
 
   return (
     <div css={[answerContainer, card]}>
