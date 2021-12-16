@@ -51,8 +51,8 @@ const Result = () => {
       <ShowCanvasCard />
       <ShowAnswerCard />
       <div css={nextBtnStyle}>
-        <div css={inviteButtonStyle}>
-          <button onClick={exportResultImage}>
+        <div css={downloadWrap}>
+          <button onClick={exportResultImage} css={downloadButtonStyle}>
             <Icon path={mdiTrayArrowDown} size={1.5} />
           </button>
         </div>
@@ -84,37 +84,38 @@ const nextBtnStyle = css`
   right: 0;
 `
 
-const inviteButtonStyle = css`
+const downloadWrap = css`
   position: relative;
   margin: 12px 0px;
-  & button {
-    background-color: ${colorToRgb.yellow};
-    border: solid 3px ${colorToRgb.black};
+`
+
+const downloadButtonStyle = css`
+  background-color: ${colorToRgb.yellow};
+  border: solid 3px ${colorToRgb.black};
+  width: 64px;
+  height: 64px;
+  &::after {
+    position: absolute;
+    content: '';
     width: 64px;
     height: 64px;
-    &::after {
-      position: absolute;
-      content: '';
-      width: 64px;
-      height: 64px;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      background-color: rgba(255, 255, 255, 0);
-      transition: all 0.2s ease-out;
-    }
-    &:hover::after {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
-    &:active::after {
-      background-color: rgba(0, 0, 0, 0.15);
-    }
-    :before {
-      position: absolute;
-      content: '';
-      transition: all 0.2s ease-out;
-    }
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0);
+    transition: all 0.2s ease-out;
+  }
+  &:hover::after {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  &:active::after {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+  :before {
+    position: absolute;
+    content: '';
+    transition: all 0.2s ease-out;
   }
 `
 
