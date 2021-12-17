@@ -117,6 +117,8 @@ export const saveResultAsImage = async (result: Result) => {
   // 保存・出力
   const link = document.createElement('a')
   link.href = canvas.toDataURL('image/png')
-  link.download = 'result.png'
+  link.download = `${
+    result.odai !== null && result.odai.length !== 0 ? result.odai : 'result'
+  }.png`
   link.click()
 }
