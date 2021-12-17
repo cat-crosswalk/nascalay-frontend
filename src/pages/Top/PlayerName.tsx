@@ -60,7 +60,11 @@ const PlayerName = (props: Props) => {
       />
       <div css={goLobbyStyle}>
         <FlatButton
-          text={props.roomId !== null && props.roomId.length !== 0 ? '参加' : '部屋を作る'}
+          text={
+            props.roomId !== null && props.roomId.length !== 0
+              ? '参加'
+              : '部屋を作る'
+          }
           color="yellow"
           onClick={goRobby}
           disabled={userName === ''}
