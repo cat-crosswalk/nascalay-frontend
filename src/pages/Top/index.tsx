@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { css } from '@emotion/react'
 import { colorToRgb } from '/@/utils/color'
 import { card } from '/@/utils/card'
+import { closeWebSocket } from '/@/websocket'
 import api from '/@/utils/apis'
 
 import PlayerName from './PlayerName'
@@ -16,6 +17,7 @@ const Top = () => {
   const [hostName, setHostName] = useState<string | null>(null)
 
   useEffect(() => {
+    closeWebSocket()
     const id = new URLSearchParams(search).get('c')
     setRoomId(id)
     // 招待リンクを踏んだ場合は，部屋ホストのユーザー名を取得する
