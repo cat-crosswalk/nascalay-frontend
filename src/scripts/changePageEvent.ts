@@ -4,6 +4,7 @@ import { AppDispatch } from '/@/store/store'
 import { setTheme } from '/@/store/slice/theme'
 import { setDraw } from '/@/store/slice/draw'
 import { setAnswer } from '/@/store/slice/answer'
+import { setShowNext, setShowNow } from '/@/store/slice/status'
 
 export const addPageEventListener = (
   navigate: NavigateFunction,
@@ -25,6 +26,8 @@ export const addPageEventListener = (
   }
 
   const startResult = () => {
+    dispatch(setShowNext(''))
+    dispatch(setShowNow(''))
     navigate('/result', { replace: true })
   }
 
