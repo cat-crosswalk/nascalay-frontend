@@ -13,6 +13,7 @@ export type Props = {
   penType: 'pen' | 'eraser' | 'bucket'
   width: number
   height: number
+  isInactive?: boolean
 }
 export interface Handler {
   clear(): void
@@ -47,6 +48,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
     setRedoList([])
   }, [])
   const undo = useCallback(() => {
+    if (props.isInactive === true) return
     if (undoList.length === 0) return
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
@@ -61,8 +63,9 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       0,
       0
     )
-  }, [undoList])
+  }, [props.isInactive, undoList])
   const redo = useCallback(() => {
+    if (props.isInactive === true) return
     if (redoList.length === 0) return
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
@@ -77,15 +80,16 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       0,
       0
     )
-  }, [redoList])
+  }, [props.isInactive, redoList])
   const clear = useCallback(() => {
+    if (props.isInactive === true) return
     saveCanvas()
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const canvas = canvasRef.current!
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const ctx = canvasRef.current!.getContext('2d')!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-  }, [saveCanvas])
+  }, [props.isInactive, saveCanvas])
   const shortcut = useCallback(
     (e: React.KeyboardEvent) => {
       // shift 押してる状態だと key が 大文字になるから toLowerCase してる
@@ -157,6 +161,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
   }, [])
   const draw = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (props.isInactive === true) return
       if (e.buttons !== 1) return
       const pos = getPos(e)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -175,10 +180,11 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       ctx.stroke()
       ctx.closePath()
     },
-    [props.color, props.penSize, getPos, lastPos]
+    [props.isInactive, props.penSize, props.color, getPos, lastPos]
   )
   const erase = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (props.isInactive === true) return
       if (e.buttons !== 1) return
       const pos = getPos(e)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -196,16 +202,17 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       ctx.stroke()
       ctx.closePath()
     },
-    [getPos, props.penSize, lastPos]
+    [props.isInactive, props.penSize, getPos, lastPos]
   )
   const bucket = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
+      if (props.isInactive === true) return
       if (e.buttons !== 1) return
       const { x, y } = getPos(e)
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       bucketFill(canvasRef.current!, x, y, props.color)
     },
-    [getPos, props.color]
+    [getPos, props.color, props.isInactive]
   )
   const mouseDown = useCallback(
     (e: React.MouseEvent<HTMLCanvasElement>) => {
