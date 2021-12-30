@@ -15,7 +15,7 @@ $ yarn dev
 ```sh
 $ yarn lint
 ```
-### enviroment
+### environment
 ```sh
 $ yarn gen-api
 ```
