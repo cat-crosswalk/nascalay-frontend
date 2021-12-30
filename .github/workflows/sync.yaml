@@ -23,4 +23,4 @@ jobs:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
         run: |
           git fetch --unshallow origin
-          git push -f ssh://git@git.trap.jp:2200/hackathon21_Spring_02/front-end.git
+          git push -f ssh://git@git.trap.jp:2200/cat-crosswalk/nascalay-frontend.git
