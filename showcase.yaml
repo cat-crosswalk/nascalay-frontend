@@ -1,0 +1,21 @@
+type: runtime
+
+work_dir: .
+entrypoint: yarn start
+http_proxy: 8080
+
+https: "hard"
+cname: "nascalay.trap.games"
+
+
+branch:
+  main:
+    startup: |
+      npm i -g npm n
+      n 17.3.0
+      PATH="$PATH"
+      npm install -g yarn
+      yarn --frozen-lockfile
+      yarn gen-api
+      yarn build
+    envs: { VITE_STAGE: 'production' }
