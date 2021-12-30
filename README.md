@@ -5,7 +5,7 @@
 ### Run dev-server
 
 ```sh
-$ yarn install
+$ yarn
 $ yarn gen-api
 $ yarn dev
 ```
