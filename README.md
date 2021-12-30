@@ -20,15 +20,20 @@ with fix
 $ yarn fix
 ```
 
-### environment
+### Environment
+Requires java
 ```sh
 $ yarn gen-api
 ```
-にはjava環境が必要です。
 ## Production
 
-### Building
+### Build
 
 ```sh
 $ yarn build
+```
+
+### Start
+```sh
+$ yarn start
 ```
