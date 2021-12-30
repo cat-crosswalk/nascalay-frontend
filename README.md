@@ -11,10 +11,15 @@ $ yarn dev
 ```
 
 ### Lint
-
 ```sh
 $ yarn lint
 ```
+
+with fix
+```sh
+$ yarn fix
+```
+
 ### environment
 ```sh
 $ yarn gen-api
