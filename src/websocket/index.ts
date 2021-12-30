@@ -6,7 +6,7 @@ const baseUrl =
   // @ts-ignore
   VITE_ENV_STAGE === 'development'
     ? BASE_URL
-    : location.protocol + '//api.nascalay.trasta.dev'
+    : location.protocol + '//nascalay-backend.trap.games'
 
 const absoluteWebsocketEndpoint = new URL(WEBSOCKET_ENDPOINT, baseUrl)
 absoluteWebsocketEndpoint.protocol =

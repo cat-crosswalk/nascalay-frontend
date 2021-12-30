@@ -5,25 +5,35 @@
 ### Run dev-server
 
 ```sh
-$ yarn install
+$ yarn
 $ yarn gen-api
 $ yarn dev
 ```
 
 ### Lint
-
 ```sh
 $ yarn lint
 ```
-### enviroment
+
+with fix
+```sh
+$ yarn fix
+```
+
+### Environment
+Requires java
 ```sh
 $ yarn gen-api
 ```
-にはjava環境が必要です。
 ## Production
 
-### Building
+### Build
 
 ```sh
 $ yarn build
+```
+
+### Start
+```sh
+$ yarn start
 ```
