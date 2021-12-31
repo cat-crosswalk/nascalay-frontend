@@ -286,6 +286,7 @@ const Draw = () => {
               box-shadow: 8px 8px 0px #000000;
               border: 3px solid #000;
               flex-grow: 1;
+              position: relative;
             `}
           >
             <div
@@ -316,6 +317,20 @@ const Draw = () => {
               </div>
               <SizeSlider value={penSize} onChange={setPenSize} />
             </div>
+            <div
+              css={css`
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: ${colorToRgb.black};
+                opacity: ${isDone ? 0.3 : 0};
+                ${!isDone ? 'pointer-events: none;' : ''}
+                z-index: 16;
+                transition: opacity 0.2s ease-out;
+              `}
+            ></div>
           </div>
           <div
             css={css`
