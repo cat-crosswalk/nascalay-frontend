@@ -19,7 +19,7 @@ export interface Handler {
   clear(): void
   undo(): void
   redo(): void
-  clearURList(): void
+  resetCanvas(): void
   shortcut(e: React.KeyboardEvent): void
   exportImage(): ImageData | null
   exportDataURL(): string
@@ -34,7 +34,12 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
 
   const [undoList, setUndoList] = useState<Uint8ClampedArray[]>([])
   const [redoList, setRedoList] = useState<Uint8ClampedArray[]>([])
-  const clearURList = useCallback(() => {
+  const resetCanvas = useCallback(() => {
+    const canvas = canvasRef.current
+    if (canvas === null) return
+    const ctx = canvas.getContext('2d')
+    if (ctx === null) return
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     setUndoList([])
     setRedoList([])
   }, [])
@@ -135,8 +140,8 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
       redo() {
         redo()
       },
-      clearURList() {
-        clearURList()
+      resetCanvas() {
+        resetCanvas()
       },
       shortcut(e) {
         shortcut(e)
@@ -148,7 +153,7 @@ const Canvas: React.ForwardRefRenderFunction<Handler, Props> = (
         return exportDataURL()
       },
     }),
-    [clear, undo, redo, clearURList, shortcut, exportImage, exportDataURL]
+    [clear, undo, redo, resetCanvas, shortcut, exportImage, exportDataURL]
   )
 
   const getPos = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {

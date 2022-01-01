@@ -92,8 +92,7 @@ const Draw = () => {
     setIsTimer(false)
     setIsDone(false)
     if (canvasRef.current) {
-      canvasRef.current.clear()
-      canvasRef.current.clearURList()
+      canvasRef.current.resetCanvas()
     }
     setPreviewImage(drawData.img)
     setNowPhase(drawData.drawPhaseNum)
