@@ -262,7 +262,7 @@ const Draw = () => {
             height={512}
             adjacentColors={adjacentColors}
             hasShadow
-            isInactive={isDone}
+            isLocked={isDone}
           />
         </div>
         <div
