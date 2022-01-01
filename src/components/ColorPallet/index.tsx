@@ -71,6 +71,7 @@ export const palletColor: { hex: `#${string}`; whiteLike?: boolean }[] = [
 type Props = {
   value?: number
   onChange?: (color: typeof palletColor[number]['hex']) => void
+  disabled?: boolean
 }
 
 const ColorPallet = (props: Props) => {
@@ -135,6 +136,7 @@ const ColorPallet = (props: Props) => {
                 css={css`
                   display: none;
                 `}
+                disabled={props.disabled}
               />
               <label
                 htmlFor={hex}

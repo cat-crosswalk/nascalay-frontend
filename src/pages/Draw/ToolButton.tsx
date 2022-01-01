@@ -16,6 +16,7 @@ export type Props = {
   type: MainCanvasProps['penType'] | 'undo' | 'redo' | 'clear'
   isSelected?: boolean
   color?: `#${string}` | `rgb(${number}, ${number}, ${number})`
+  disabled?: boolean
 }
 
 const ToolButton = (props: Props) => {
@@ -51,6 +52,7 @@ const ToolButton = (props: Props) => {
         ${props.isSelected && ['pen', 'bucket'].includes(props.type)
           ? `background-color: ${props.color};`
           : 'background-color: #ffffff;'}
+        ${props.disabled ? 'pointer-events: none;' : ''}
         &:active {
           color: #646260;
         }

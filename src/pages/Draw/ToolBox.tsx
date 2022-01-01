@@ -7,12 +7,21 @@ export type Props = {
   onChange?: (tool: MainCanvasProps['penType']) => void
   penType: MainCanvasProps['penType']
   penColor: MainCanvasProps['color']
+  disabled?: boolean
   undo?: () => void
   redo?: () => void
   clear?: () => void
 }
 
-const ToolBox = ({ onChange, penType, penColor, undo, redo, clear }: Props) => {
+const ToolBox = ({
+  onChange,
+  penType,
+  penColor,
+  undo,
+  redo,
+  clear,
+  disabled,
+}: Props) => {
   return (
     <div>
       <div
@@ -32,12 +41,14 @@ const ToolBox = ({ onChange, penType, penColor, undo, redo, clear }: Props) => {
           id="pen"
           checked={penType === 'pen'}
           onChange={() => onChange?.('pen')}
+          disabled={disabled}
         />
         <label htmlFor="pen">
           <ToolButton
             type="pen"
             color={penColor}
             isSelected={penType === 'pen'}
+            disabled={disabled}
           />
         </label>
         <input
@@ -49,12 +60,14 @@ const ToolBox = ({ onChange, penType, penColor, undo, redo, clear }: Props) => {
           id="eraser"
           checked={penType === 'eraser'}
           onChange={() => onChange?.('eraser')}
+          disabled={disabled}
         />
         <label htmlFor="eraser">
           <ToolButton
             type="eraser"
             color={penColor}
             isSelected={penType === 'eraser'}
+            disabled={disabled}
           />
         </label>
         <input
@@ -66,18 +79,20 @@ const ToolBox = ({ onChange, penType, penColor, undo, redo, clear }: Props) => {
           id="bucket"
           checked={penType === 'bucket'}
           onChange={() => onChange?.('bucket')}
+          disabled={disabled}
         />
         <label htmlFor="bucket">
           <ToolButton
             type="bucket"
             color={penColor}
             isSelected={penType === 'bucket'}
+            disabled={disabled}
           />
         </label>
 
-        <ToolButton type="undo" onClick={undo} />
-        <ToolButton type="redo" onClick={redo} />
-        <ToolButton type="clear" onClick={clear} />
+        <ToolButton type="undo" onClick={undo} disabled={disabled} />
+        <ToolButton type="redo" onClick={redo} disabled={disabled} />
+        <ToolButton type="clear" onClick={clear} disabled={disabled} />
       </div>
     </div>
   )

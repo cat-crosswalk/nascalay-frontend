@@ -286,6 +286,19 @@ const Draw = () => {
               border: 3px solid #000;
               flex-grow: 1;
               position: relative;
+              &::after {
+                content: '';
+                pointer-events: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: ${colorToRgb.black};
+                opacity: ${isDone ? 0.3 : 0};
+                z-index: 16;
+                transition: opacity 0.2s ease-out;
+              }
             `}
           >
             <div
@@ -299,7 +312,7 @@ const Draw = () => {
                 gap: 16px;
               `}
             >
-              <ColorPallet onChange={setPenColor} />
+              <ColorPallet onChange={setPenColor} disabled={isDone} />
               <div
                 css={css`
                   margin-top: auto;
@@ -312,24 +325,15 @@ const Draw = () => {
                   undo={undo}
                   redo={redo}
                   clear={clearCanvas}
+                  disabled={isDone}
                 />
               </div>
-              <SizeSlider value={penSize} onChange={setPenSize} />
+              <SizeSlider
+                value={penSize}
+                onChange={setPenSize}
+                disabled={isDone}
+              />
             </div>
-            <div
-              css={css`
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: ${colorToRgb.black};
-                opacity: ${isDone ? 0.3 : 0};
-                ${!isDone ? 'pointer-events: none;' : ''}
-                z-index: 16;
-                transition: opacity 0.2s ease-out;
-              `}
-            ></div>
           </div>
           <div
             css={css`
