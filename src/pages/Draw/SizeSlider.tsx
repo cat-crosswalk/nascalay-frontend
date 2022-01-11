@@ -4,6 +4,7 @@ import React, { useCallback } from 'react'
 type Props = {
   value: number
   onChange?: (value: number) => void
+  disabled?: boolean
 }
 
 const SizeSlider = (props: Props) => {
@@ -31,6 +32,7 @@ const SizeSlider = (props: Props) => {
         step="5"
         value={props.value}
         onChange={onChange}
+        disabled={props.disabled}
         css={css`
           -webkit-appearance: none;
           width: 232px;
